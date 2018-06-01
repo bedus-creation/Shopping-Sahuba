@@ -1,0 +1,73 @@
+body{
+    background: #f7f7f7;
+}
+.bg-nav{
+	padding: 0;
+	background: #2196F3;
+}
+.navbar-brand img{
+	height: 40px;
+}
+p.navbar-cus{
+	margin-bottom: 0;
+	font-weight: 900;
+    margin-top: 0;
+    bottom: 0;
+	font-size: 20px;
+	color: #f32259;
+}
+.bg-nav-top{
+    background: #fff;
+}
+.nav-item{
+	border-left:#41a3ff 1px solid;
+	border-right:#1d7ac5 1px solid;
+	padding-left: 10px;
+	line-height: 30px;
+	padding-right: 10px;
+}
+.login-btn{
+    background-color: #2964a0;
+    color: #fff;
+    font-weight: 800;
+}
+.signup-btn{
+    color:#fff;
+    background-color: #fc8d3a;
+    background-image: none;
+    font-weight: 900;
+}
+a.signup-btn:hover{
+    color:#fff;
+}
+.fa{
+	font-size: 20px;
+	color:#fff;
+}
+.fa-user,.fa-key{
+    color: #3174b8;
+}
+.top-toggler{
+    font-size:18px;
+    padding: 12px;
+    border:1px solid #2964a0 !important;
+}
+.nav-item a{
+	padding-top: 10px;
+	font-weight: bolder;
+	font-size: 20px;
+	font-family: 'Khand', sans-serif;
+	color:#fff !important;
+}
+.nav-link {
+	padding: 0.5rem;
+}
+.input-group{
+    width:250px !important;
+}
+
+@media screen and (max-width: 768px){
+	a span{
+		font-size: 24px;
+	}
+}
