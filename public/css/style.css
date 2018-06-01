@@ -67,6 +67,9 @@ a.signup-btn:hover{
 }
 
 @media screen and (max-width: 768px){
+	.navbar-brand{
+		margin-right: 0;
+	}
 	a span{
 		font-size: 24px;
 	}
