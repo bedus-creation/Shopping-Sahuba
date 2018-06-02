@@ -19,6 +19,9 @@ p.navbar-cus{
 .bg-nav-top{
     background: #fff;
 }
+.bg-nav-top .nav-item{
+	border: none;
+}
 .nav-item{
 	border-left:#41a3ff 1px solid;
 	border-right:#1d7ac5 1px solid;
@@ -27,9 +30,13 @@ p.navbar-cus{
 	padding-right: 10px;
 }
 .login-btn{
-    background-color: #2964a0;
+	width: 100px;
+    background-color:#2296f3;
     color: #fff;
     font-weight: 800;
+}
+.login-btn i{
+	color: #fff;
 }
 .signup-btn{
     color:#fff;
@@ -44,13 +51,19 @@ a.signup-btn:hover{
 	font-size: 20px;
 	color:#fff;
 }
-.fa-user,.fa-key{
+.fa-user,.fa-th{
     color: #3174b8;
+}
+.fa-user{
+	border-radius: 50%;
+	color: #fff;
+	padding: 10px;
+	background: #3174b8;
 }
 .top-toggler{
     font-size:18px;
     padding: 12px;
-    border:1px solid #2964a0 !important;
+    border:1px solid #2296f3 !important;
 }
 .nav-item a{
 	padding-top: 10px;
@@ -63,10 +76,25 @@ a.signup-btn:hover{
 	padding: 0.5rem;
 }
 .input-group{
-    width:250px !important;
+    width:500px !important;
 }
 
 @media screen and (max-width: 768px){
+	.input-group{
+		width: 100% !important;
+	}
+	.login-btn{
+		width: 60px;
+	}
+	#searchInput{
+		width: calc(100% - 60px);
+	}
+	.fa-search{
+		color: #2296f3;
+	}
+	.bg-nav{
+		padding: 5px 0;
+	}
 	.navbar-brand{
 		margin-right: 0;
 	}
