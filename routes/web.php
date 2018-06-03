@@ -7,10 +7,10 @@ Route::get('/', function () {
 
 
 Route::get('shop/{slug}', function () {
-    return view('front/company/details');
+    return view('front/shop/details');
 });
-Route::get('jobs/{slug}', function () {
-    return view('front/jobs/details');
+Route::get('product/{slug}', function () {
+    return view('front/product/details');
 });
 
 Route::get('posts', function () {

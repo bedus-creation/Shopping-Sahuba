@@ -9,6 +9,13 @@
                     <div class="card-header"><strong>Featured Product</strong></div>
                 </div>
             </div>
+            @include('front.product.category.list.featured')
+            <div class="bg-white">
+                <div class="card">
+                    <div class="card-header"><strong>Latest Product</strong></div>
+                </div>
+            </div>
+            @include('front.product.category.list.featured')
         </div>
         <div class="col-md-4 pl-md-1">
             <div class="bg-white">

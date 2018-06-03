@@ -51,7 +51,7 @@
                         </p>
                     </div>
                     <div class="col-md-12 info mt-1">
-                        <strong class="section_title">Software Engineer</strong>
+                        <strong class="section_title">Samsung J2 PRO</strong>
                         <h6 class="float-right p-2 text-muted"><i class="fas fa-clock"></i>&nbsp;&nbsp;7 days Left</h6>
                         <hr>
                         <div class="row">

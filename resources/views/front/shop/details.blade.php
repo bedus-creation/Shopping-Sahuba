@@ -7,7 +7,7 @@
 @section('content')
 <div id="jobs">
     <div class="container mt-2">
-        @include('front.company.company-profile-cover')
+        @include('front.shop.company-profile-cover')
         <div class="row mt-1 mb-4">
             <div class="col-md-8">
                 <div class="row">
