@@ -6,7 +6,7 @@
             <span class="fas fa-search"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav mx-auto">
                 <form class="form-inline my-2 my-lg-0">
                     <div class="input-group">
                         <input type="text" id="searchInput" class="form-control" placeholder="Enter Search keywords">
