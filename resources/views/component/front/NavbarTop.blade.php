@@ -1,53 +1,42 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-nav-top">
     <div class="container">
-        <a class="navbar-brand" href="{{url('/')}}"><img class="" src="{{url('img/logo.png')}}"></a>
-        <p class="navbar-cus">Aammui Shopping&nbsp;</p>
-        <button class="navbar-toggler top-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <div class="dropdown">
+                    <a class="nav-link" href="#"  data-target="sidebar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-th"></i></a>
+                    @include('component.front.sidebar')
+                </div>
+            </li>
+        </ul>
+        <a class="navbar-brand" href="{{url('/')}}">
+            <p class="navbar-cus">Aammui Shopping&nbsp;</p>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#nav-search" aria-controls="nav-search" aria-expanded="false" aria-label="Toggle navigation">
             <span class="fas fa-search"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <div class="collapse navbar-collapse" id="nav-search">
             <ul class="navbar-nav mx-auto">
-                <form class="form-inline my-2 my-lg-0">
+                <form class="form-inline my-2 my-lg-0" method="GET" action="/">
                     <div class="input-group">
-                        <input type="text" id="searchInput" class="form-control" placeholder="Enter Search keywords">
+                        <input name="q" type="text" id="searchInput" class="form-control" placeholder="Enter Search keywords" onblur="$('#nav-search').removeClass('show');">
                         <div class="input-group-prepend">
-                            <button class="btn login-btn " type="submit"><i class="fas fa-search"></i></button>
+                            <button class="btn login-btn" type="submit"><i class="fas fa-search"></i></button>
                         </div>
                     </div>
                 </form>
             </ul>
-            <ul class="navbar-nav ml-auto flex-row">
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-th"></i></a>
-                </li>
-                <li class="nav-item pl-0">
-                    <a class="nav-link p-0" href="#">><i class="fas fa-user"></i></a>
-                </li>
-            </ul>
         </div>
+        <ul class="navbar-nav">
+            <li class="nav-item pl-0 pr-0 d-none d-inline">
+                <div class="dropdown dropleft">
+                    <a class="nav-link p-0" href="#" data-target="profileMenus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i></a>
+                    <div class="dropdown-menu" id="profileMenus" aria-labelledby="profileMenus">
+                        <a class="dropdown-item" href="{{url('/login')}}">Login</a>
+                        <a class="dropdown-item" href="{{url('/register')}}">Register</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
 </nav>
-<nav class="navbar navbar-expand-sm  navbar-dark bg-nav sticky-top">
-    <div class="container mx-auto d-sm-flex d-block flex-sm-nowrap">
-        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        &nbsp;
-        <a href="{{url('/')}}" class="d-inline d-md-none"><span style="color:rgb(255,255,255);">Aammui</span>&nbsp;
-            <span style="color:rgb(255,255,255);">Shopping</span></u>
-        </a>
-        <div class="collapse navbar-collapse text-center bg-nav" id="navbarCollapse">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link pl-4 pr-4 " href="{{url('/')}}">
-                        <i class="fa cfa fa-home" style="width:20px"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link"
-                    href="{{url('shop/kebar')}}">Shop</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+
