@@ -15,7 +15,7 @@
             <span class="fas fa-search"></span>
         </button>
         <div class="collapse navbar-collapse" id="nav-search">
-            <ul class="navbar-nav mx-auto">
+            <ul class="navbar-nav mr-auto">
                 <form class="form-inline my-2 my-lg-0" method="GET" action="/">
                     <div class="input-group">
                         <input name="q" type="text" id="searchInput" class="form-control" placeholder="Enter Search keywords" onblur="$('#nav-search').removeClass('show');">
