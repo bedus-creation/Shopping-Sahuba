@@ -35,8 +35,11 @@
                             <ul class="list-group">
                                 @guest
                                     <p class="section">Account</p>
-                                    <li>
-                                        <a class="dropdown-item" href="{{url('/register')}}">Register</a>    
+                                    <li class="list-group-item">
+                                        <a href="#">Login</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="#">Register</a>
                                     </li>
                                 @else
                                     <p class="section pt-3">Product</p>
