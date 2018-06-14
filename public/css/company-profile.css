@@ -55,8 +55,9 @@ p.section_info{
         height: 6rem;
     }
     .logo{
-        height: 8rem;
-        margin-top: -4rem;
+        width: 6rem;
+        height: 5.3rem;
+        margin-top: -3rem;
         margin-left: 0;
     }
     .basic{

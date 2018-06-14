@@ -1,5 +1,7 @@
-@extends('bend.common.app')
+@extends('theme.shop.app')
 
 @section('content')
+
+
 
 @endsection

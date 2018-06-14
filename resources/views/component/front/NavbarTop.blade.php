@@ -31,8 +31,42 @@
                 <div class="dropdown dropleft">
                     <a class="nav-link p-0" href="#" data-target="profileMenus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i></a>
                     <div class="dropdown-menu" id="profileMenus" aria-labelledby="profileMenus">
-                        <a class="dropdown-item" href="{{url('/login')}}">Login</a>
-                        <a class="dropdown-item" href="{{url('/register')}}">Register</a>
+                        <div class="container" id="menu">
+                            <ul class="list-group">
+                                @guest
+                                    <p class="section">Account</p>
+                                    <li>
+                                        <a class="dropdown-item" href="{{url('/register')}}">Register</a>    
+                                    </li>
+                                @else
+                                    <p class="section pt-3">Product</p>
+                                    <li class="list-group-item">
+                                        <a href="#">Add New Product</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="#">List Of All Product</a>
+                                    </li>
+                                    <p class="section pt-3">Shop</p>
+                                    <li class="list-group-item">
+                                        <a href="{{url('/shop/aammui')}}">Profile</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="#">Dashboard</a>
+                                    </li>
+                                    <p class="section pt-3">Settings</p>
+                                    <li class="list-group-item">
+                                        <a href="#">General</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="#">Security</a>
+                                    </li>
+                                    <div class="dropdown-divider" style="border-top:1px solid #568ab5"></div>
+                                    <li class="list-group-item">
+                                        <a href="#">Logout</a>
+                                    </li>
+                                @endguest
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </li>
