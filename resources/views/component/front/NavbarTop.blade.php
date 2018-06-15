@@ -36,10 +36,10 @@
                                 @guest
                                     <p class="section">Account</p>
                                     <li class="list-group-item">
-                                        <a href="#">Login</a>
+                                        <a href="{{url('/login')}}">Login</a>
                                     </li>
                                     <li class="list-group-item">
-                                        <a href="#">Register</a>
+                                        <a href="{{url('/register')}}">Register</a>
                                     </li>
                                 @else
                                     <p class="section pt-3">Product</p>
@@ -65,8 +65,13 @@
                                     </li>
                                     <div class="dropdown-divider" style="border-top:1px solid #568ab5"></div>
                                     <li class="list-group-item">
-                                        <a href="#">Logout</a>
+                                        <a  href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">Logout</a>
                                     </li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                                 @endguest
                             </ul>
                         </div>

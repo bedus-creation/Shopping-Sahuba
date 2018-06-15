@@ -9,6 +9,7 @@ Route::group(['namespace'=>'Utils'], function () {
     Route::get('/command/{command}', 'CommandController@command');
 });
 
+
 Route::get('shopping', function () {
     return view('bend.page.index');
 });

@@ -15,6 +15,11 @@ class CreateProductSpecificationDetailsTable extends Migration
     {
         Schema::create('product_specification_details', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('product_id');
+            $table->string('key');
+            $table->string('value');
+            $table->string('data_type');
+            $table->enum('display',[0,1])->default(1);
             $table->timestamps();
         });
     }

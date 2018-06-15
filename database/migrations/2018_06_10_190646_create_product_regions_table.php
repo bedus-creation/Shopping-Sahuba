@@ -13,8 +13,11 @@ class CreateProductRegionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_regions', function (Blueprint $table) {
+        Schema::create('product_region', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('region_id');
+            $table->string('exact_location');
             $table->timestamps();
         });
     }

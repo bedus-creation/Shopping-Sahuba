@@ -15,6 +15,8 @@ class CreateCategorySpecficDetailSchemasTable extends Migration
     {
         Schema::create('category_specfic_detail_schemas', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('category_id');
+            $table->text('specification');
             $table->timestamps();
         });
     }
