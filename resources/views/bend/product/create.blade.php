@@ -1,115 +1,130 @@
-@extends('bend.common.app')
+@extends('theme.shop.app')
 
+@section('css')
+<link rel="stylesheet" href="/css/bend-index.css">
+<link rel="stylesheet" href="/lib/bootstrap-select/css/bootstrap-select.css">
+@endsection
 
 @section('content')
-<main class="app-main">
-    <div class="wrapper">
-        <div class="page has-sidebar">
-            <div class="page-inner">
-              <header class="page-title-bar">
-                <h1 class="page-title"> Product Details Form </h1>
-              </header>
-              <div class="page-section">
-                <section class="card">
-                  <!-- .card-body -->
-                  <div class="card-body">
-                    <h3 class="card-title"> Feedback tooltip </h3>
-                    <!-- form .needs-validation -->
-                    <form class="needs-validation" novalidate="">
-                      <!-- .form-row -->
-                      <div class="form-row">
-                        <!-- form grid -->
-                        <div class="col-md-6 mb-3">
-                          <label for="validationTooltip01">First name
-                            <abbr title="Required">*</abbr>
-                          </label>
-                          <input type="text" class="form-control" id="validationTooltip01" placeholder="First name" value="Mark" required="">
-                          <div class="valid-tooltip"> Looks good! </div>
-                        </div>
-                        <!-- /form grid -->
-                        <!-- form grid -->
-                        <div class="col-md-6 mb-3">
-                          <label for="validationTooltip02">Last name
-                            <abbr title="Required">*</abbr>
-                          </label>
-                          <input type="text" class="form-control" id="validationTooltip02" placeholder="Last name" value="Otto" required="">
-                          <div class="valid-tooltip"> Looks good! </div>
-                        </div>
-                        <!-- /form grid -->
-                        <!-- form grid -->
-                        <div class="col-md-12 mb-3">
-                          <label for="validationTooltipUsername">Username
-                            <abbr title="Required">*</abbr>
-                          </label>
-                          <input type="text" class="form-control" id="validationTooltipUsername" placeholder="Username" aria-describedby="inputGroupPrepend" required="">
-                          <div class="invalid-tooltip"> Please choose a username. </div>
-                        </div>
-                        <!-- /form grid -->
-                      </div>
-                      <!-- /.form-row -->
-                      <!-- .form-row -->
-                      <div class="form-row">
-                        <!-- grid column -->
-                        <div class="col-md-5 mb-3">
-                          <label for="validationTooltipCountry">Country
-                            <abbr title="Required">*</abbr>
-                          </label>
-                          <select class="custom-select d-block w-100" id="validationTooltipCountry" required="">
-                            <option value=""> Choose... </option>
-                            <option> United States </option>
-                          </select>
-                          <div class="invalid-feedback"> Please select a valid country. </div>
-                        </div>
-                        <!-- /grid column -->
-                        <!-- grid column -->
-                        <div class="col-md-4 mb-3">
-                          <label for="validationTooltipState">State
-                            <abbr title="Required">*</abbr>
-                          </label>
-                          <select class="custom-select d-block w-100" id="validationTooltipState" required="">
-                            <option value=""> Choose... </option>
-                            <option> California </option>
-                          </select>
-                          <div class="invalid-feedback"> Please provide a valid state. </div>
-                        </div>
-                        <!-- /grid column -->
-                        <!-- grid column -->
-                        <div class="col-md-3 mb-3">
-                          <label for="validationTooltipZip">Zip
-                            <abbr title="Required">*</abbr>
-                          </label>
-                          <input type="text" class="form-control" id="validationTooltipZip" required="">
-                          <div class="invalid-feedback"> Zip code required. </div>
-                        </div>
-                        <!-- /grid column -->
-                      </div>
-                      <!-- /.form-row -->
-                      <!-- .form-group -->
-                      <div class="form-group">
-                        <div class="custom-control custom-checkbox mb-3">
-                          <input type="checkbox" class="custom-control-input" id="validationTooltip06" required="">
-                          <label class="custom-control-label" for="validationTooltip06">Agree to terms and conditions</label>
-                          <div class="invalid-tooltip"> You must agree before submitting. </div>
-                        </div>
-                      </div>
-                      <!-- /.form-group -->
-                      <!-- .form-actions -->
-                      <div class="form-actions">
-                        <button class="btn btn-primary" type="submit">Submit form</button>
-                      </div>
-                      <!-- /.form-actions -->
-                    </form>
-                    <!-- /form .needs-validation -->
-                  </div>
-                  <!-- /.card-body -->
-                </section>
-              </div>
-            </div>
-            
-          </div>
-          
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-3 d-none d-md-block">
+            @include('bend.common.sidebar')
         </div>
-        
-</main>
+        <div class="col-md-6">
+            <div class="bg-white">
+                <div class="card">
+                    <div class="card-body">
+                      <div class="card-title">
+                        <div>
+                          <span class="float-left"><strong class="btn font-weight-bold">Add New Product</strong></span>
+                          <span class="float-right"><a href="{{url('/shopping/products')}}" class="btn btn-info"><i class="fa fa-bars text-white"></i> <span class="d-none d-md-inline">&nbsp;List all Products</span></a></span>
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                      <hr>
+                      <form>
+                        @csrf
+                        <div class="row">
+                          <div class="col-md-12">
+                              <div class="form-group">
+                                <label>Product Name</label>
+                                <input type="text" class="form-control"  placeholder="Product Name">
+                              </div>
+                              <div class="form-group">
+                                  <label>Product Category</label>
+                                  <select class="selectpicker" data-width="100%" data-live-search="true">
+                                      <option>Mustard</option>
+                                      <option>Ketchup</option>
+                                      <option>Relish</option>
+                                  </select>
+                              </div>
+                              <div class="form-group">
+                                  <label>Condition</label>
+                                  <div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                      <label class="form-check-label" for="inlineRadio1">New </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                      <label class="form-check-label" for="inlineRadio2">Like New</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                      <label class="form-check-label" for="inlineRadio2">Excellent</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                      <label class="form-check-label" for="inlineRadio2">Not Working</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                      <label class="form-check-label" for="inlineRadio2">Cannot Described</label>
+                                    </div>
+                                  </div>
+                              </div>
+                              <div class="card-titlle">
+                                  <strong>Price</strong>
+                              </div>
+                              <hr>
+                              <div class="form-group">
+                                  <label>Amount &nbsp;<small class="text-success">In Rupeese</small></label>
+                                  <input type="text" class="form-control"  placeholder="In Nepali Rupeese">  
+                              </div>
+                              <div class="form-group">
+                                  <label>Negotiable</label>
+                                  <div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="negotiable" id="inlineRadio1" value="on">
+                                      <label class="form-check-label" for="inlineRadio1">Yes </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="negotiable" id="inlineRadio2" value="off">
+                                      <label class="form-check-label" for="inlineRadio2">NO</label>
+                                    </div>
+                                  </div>
+                              </div>
+                              <div class="card-titlle">
+                                  <strong> Warranty Details</strong>
+                              </div>
+                              <hr>
+                              <div class="form-group">
+                                  <label>Is Warranty ?</label>
+                                  <div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="negotiable" id="" value="on">
+                                      <label class="form-check-label" for="">Yes </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="negotiable" id="" value="off">
+                                      <label class="form-check-label" for="">NO</label>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
 
+        </div>
+    </div>
+</div>
+@endsection
+
+
+@section('scripts')
+<script src="/lib/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script>
+    $('#product').dropdown('toggle');
+    $('.selectpicker').selectpicker({
+      style: 'btn-info',
+      size: 4
+    });
+
+</script>
 @endsection

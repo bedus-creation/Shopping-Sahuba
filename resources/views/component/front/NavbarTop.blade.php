@@ -54,7 +54,7 @@
                                         <a href="{{url('/shop/aammui')}}">Profile</a>
                                     </li>
                                     <li class="list-group-item">
-                                        <a href="#">Dashboard</a>
+                                        <a href="{{url('shopping')}}">Dashboard</a>
                                     </li>
                                     <p class="section pt-3">Settings</p>
                                     <li class="list-group-item">

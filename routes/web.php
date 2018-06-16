@@ -10,12 +10,13 @@ Route::group(['namespace'=>'Utils'], function () {
 });
 
 
-Route::get('shopping', function () {
-    return view('bend.page.index');
+Route::group(['prefix'=>'shopping'],function(){
+    Route::get('/', function () {
+        return view('bend.page.index');
+    });
+    Route::resource('/products', 'ProductController');
 });
-Route::get('shopping/products/create', function () {
-    return view('bend.product.create');
-});
+
 
 
 
