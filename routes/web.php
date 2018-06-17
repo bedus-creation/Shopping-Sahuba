@@ -7,6 +7,7 @@ Route::get('/', function () {
 
 Route::group(['namespace'=>'Utils'], function () {
     Route::get('/command/{command}', 'CommandController@command');
+    Route::resource('media','MediaController');
 });
 
 

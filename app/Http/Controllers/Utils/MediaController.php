@@ -1,26 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Utils;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\ProductRequest;
-use App\Models\Product;
-use Illuminate\Support\Facades\DB;
-use App\Models\Price;
+use App\Http\Controllers\Controller;
 
-
-class ProductController extends Controller
+class MediaController extends Controller
 {
-
-    protected $repository;
-
-    public function __construct(Product $repository){
-
-        $this->repository = $repository;
-
-    }
-
-
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +14,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('bend.product.index');  
+        $files = \File::Files('uploads/images');
+		foreach($files as $file) {
+			$name[]=$file->getPath()."/".$file->getFilename();
+		}
+		return response()->json(["data"=>$name]);
     }
 
     /**
@@ -38,7 +28,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('bend.product.create');   
+        //
     }
 
     /**
@@ -47,28 +37,22 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductRequest $request)
+    public function store(Request $request)
     {
-        try {
-            DB::transaction(function() use ($request){
-                $price=Price::create([
-                    'type'=>'fixed',
-                    'min'=>$request->price,
-                ]);
-                $date = strtotime('%s +%d days'. date('Y-m-d h:i:s'), 30);
-                $date = date('Y-m-d h:i:s', $date);
-                $request->merge([
-                    'price_id'=>$price->id,
-                    'user_id'=>auth()->user()->id,
-                    'expiry_date'=>$date
-                ]);
-                $this->repository->create($request->all());
-            });
-            
-        }catch(\Exception $e){
-            
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $destination = 'uploads/images';
+            return $file->move($destination, $request->file('image'));
+            //$path=$request->file('image')->move(public_path().$destination, $request->file('image'));
+            //return $request->image->store('public/uploads/images/'.$file->getMimeType());
+            //return $file->store($destination);
+            /*return Storage::putFile($destination,$request->file('image'));
+            //$path = Storage::putFile('avatars', $request->file('image'));
+            //return $path;
+            */
+        } else {
+            return $request->file('image');
         }
-        return redirect()->back();
     }
 
     /**
@@ -113,6 +97,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }
