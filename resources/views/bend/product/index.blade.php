@@ -19,7 +19,7 @@
         <div class="col-md-3 d-none d-md-block">
             @include('bend.common.sidebar')
         </div>
-        <div class="col-md-9 pl-md-0">
+        <div class="col-md-9 pl-md-0 ">
             <div class="bg-white">
                 <div class="card">
                     <div class="card-body">
@@ -55,7 +55,7 @@
                                 <tr>
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->price}}</td>
-                                    <td><span class="{{($item->expiry_data<date('now'))? 'badge badge-danger':''}}">{{$item->expiry_date}}</span></td>
+                                    <td><span class="badge {{(date($item->expiry_date)<date("Y-m-d H:i:s"))? 'badge-danger':'badge-success'}}">{{$item->expiry_date}} </span></td>
                                     <td class="text-center">{{$item->views}}</td>
                                     <td class="text-center  text-nowrap" style="width:120px">
                                         <a href="#" class="btn btn-outline-info">

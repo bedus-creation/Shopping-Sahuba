@@ -1,5 +1,16 @@
 @extends('layouts.app-front')
 
+@section('css')
+<style>
+    .p-i{
+        height: 9rem;
+        background-color: #fff;
+        background-position: center !important;
+        background-size: cover !important;
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row mt-3">

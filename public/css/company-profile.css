@@ -67,4 +67,7 @@ p.section_info{
         padding: 0;
         font-size: 16px;
     }
+    .section_title{
+        font-size:24px;
+    }
 }

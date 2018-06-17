@@ -56,8 +56,11 @@ class ProductController extends Controller
                     'type'=>'fixed',
                     'min'=>$request->price,
                 ]);
-                $date = strtotime('%s +%d days'. date('Y-m-d h:i:s'), 30);
-                $date = date('Y-m-d h:i:s', $date);
+                
+                date_default_timezone_set('Asia/Kathmandu');
+                $date = date('Y-m-d');
+                $date = date('Y-m-d', strtotime($date. ' + 30 days'));
+
                 $request->merge([
                     'price_id'=>$price->id,
                     'user_id'=>auth()->user()->id,

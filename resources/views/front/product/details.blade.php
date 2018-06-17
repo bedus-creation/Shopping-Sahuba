@@ -51,44 +51,145 @@
                         </p>
                     </div>
                     <div class="col-md-12 info mt-1">
-                        <strong class="section_title">Samsung J2 PRO</strong>
-                        <h6 class="float-right p-2 text-muted"><i class="fas fa-clock"></i>&nbsp;&nbsp;7 days Left</h6>
+                        <div class="p-2 pl-3 mt-2 card">
+                            <strong class="section_title">{{$product->name}}</strong>
+                            <strong class="float-right text-muted"><i class="fas fa-clock"></i>&nbsp;&nbsp;                                                
+                                <strong class="text-danger">{{$product->expiry_date->diffForHumans()}}</strong>
+                            </strong>
+                        </div>
                         <hr>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12 mb-4">
                                 <ul class="list-group">
-                                    <li class="list-group-item font-weight-bold">Job Overview</li>
+                                    <li class="list-group-item font-weight-bold border-0">Product Overview</li>
                                     <li class="list-group-item">
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="pl-3 d-flex justify-content-start">
-                                                    <div><i class="fas fa-microchip"></i></div>
-                                                    <div class="pl-3">
-                                                        Category
+                                            <div class="col-5 pr-0">
+                                                <div class="pl-md-3 pl-0 d-flex justify-content-start">
+                                                    <div><i class="fas fa-barcode"></i></div>
+                                                    <div class="pl-md-3 pl-2">
+                                                        &nbsp;Product ID &nbsp;
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                : &nbsp; IT and Telecommunication
+                                            <div class="col-1 pl-0 pr-0">
+                                                : &nbsp; 
+                                            </div>
+                                            <div class="col-5 pl-0 pr-0">
+                                                {{$product->id}}
                                             </div>
                                         </div>
                                     </li>
                                     <li class="list-group-item">
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="pl-3 d-flex justify-content-start">
-                                                    <div><i class="fas fa-dollar-sign pl-1"></i></div>
-                                                    <div class="pl-3">
-                                                        &nbsp;Salary &nbsp;
+                                            <div class="col-5 pr-0">
+                                                <div class="pl-md-3 pl-0 d-flex justify-content-start">
+                                                    <div><i class="far fa-eye pl-0"></i></div>
+                                                    <div class="pl-md-3 pl-2">
+                                                        &nbsp;Ad Views &nbsp;
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                :  &nbsp; Rs, 20,000 per month
+                                            <div class="col-1 pl-0 pr-0">
+                                                : &nbsp; 
+                                            </div>
+                                            <div class="col-6 pl-0 pr-0">
+                                                {{$product->views}}
                                             </div>
                                         </div>
                                     </li>
-
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-5 pr-0">
+                                                <div class="pl-md-3 pl-0 d-flex justify-content-start">
+                                                    <div><i class="far fa-clock"></i></div>
+                                                    <div class="pl-md-3 pl-2">
+                                                        &nbsp;Ad Post Date &nbsp;
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-1 pl-0 pr-0">
+                                                : &nbsp; 
+                                            </div>
+                                            <div class="col-6  pl-0 pr-0">
+                                                {{$product->created_at->diffForHumans()}}
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-5 pr-0">
+                                                <div class="pl-md-3 pl-0 d-flex justify-content-start">
+                                                    <div><i class="fas fa-calendar-times"></i></div>
+                                                    <div class="pl-md-3 pl-2">
+                                                        &nbsp;Ad Expiry Date &nbsp;
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-1 pl-0 pr-0">
+                                                : &nbsp; 
+                                            </div>
+                                            <div class="col-6  pl-0 pr-0">
+                                                <strong class="text-danger">{{$product->expiry_date->diffForHumans()}}</strong>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul class="list-group mt-2">
+                                    <li class="list-group-item font-weight-bold border-0">Price & Condition</li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-5 pr-0">
+                                                <div class="pl-md-3 pl-0 d-flex justify-content-start">
+                                                    <div><i class="fas fa-money-bill-alt"></i></div>
+                                                    <div class="pl-md-3 pl-2">
+                                                        &nbsp;Price  &nbsp;
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-1 pl-0 pr-0">
+                                                : &nbsp; 
+                                            </div>
+                                            <div class="col-5 pl-0 pr-0">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-5 pr-0">
+                                                <div class="pl-md-3 pl-0 d-flex justify-content-start">
+                                                    <div><i class="fas fa-hand-holding-usd"></i></div>
+                                                    <div class="pl-md-3 pl-2">
+                                                        &nbsp;Price Negotiable &nbsp;
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-1 pl-0 pr-0">
+                                                : &nbsp; 
+                                            </div>
+                                            <div class="col-6 pl-0 pr-0">
+                                                {{($product->negotiable==1)?'yes':'no'}}
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-5 pr-0">
+                                                <div class="pl-md-3 pl-0 d-flex justify-content-start">
+                                                    <div><i class="fas fa-cog"></i></div>
+                                                    <div class="pl-md-3 pl-2">
+                                                        &nbsp;Condition &nbsp;
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-1 pl-0 pr-0">
+                                                : &nbsp; 
+                                            </div>
+                                            <div class="col-6  pl-0 pr-0">
+                                                    {{$product->condition}}
+                                            </div>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -97,7 +198,7 @@
             </div>
             <div class="col-md-4 info">
                 <ul class="list-group">
-                    <li class="list-group-item bg-secondary font-weight-bold text-white text-center">Comapany Overview</li>
+                    <li class="list-group-item bg-secondary font-weight-bold text-white text-center">Shop Overview</li>
                     <li class="list-group-item">
                         <div class="pl-3 d-flex justify-content-start">
                             <div><i class="far fa-clock"></i></div>

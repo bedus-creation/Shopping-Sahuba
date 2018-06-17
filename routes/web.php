@@ -1,9 +1,9 @@
 <?php
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PageController@index');
+Route::get('shop/{slug}', 'PageController@shop');
+Route::get('product/{id}','PageController@product');
 
 Route::group(['namespace'=>'Utils'], function () {
     Route::get('/command/{command}', 'CommandController@command');
@@ -21,12 +21,7 @@ Route::group(['prefix'=>'shopping'],function(){
 
 
 
-Route::get('shop/{slug}', function () {
-    return view('front/shop/details');
-});
-Route::get('product/{slug}', function () {
-    return view('front/product/details');
-});
+
 
 
 Route::get('posts', function () {

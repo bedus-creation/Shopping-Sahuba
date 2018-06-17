@@ -27,7 +27,11 @@
             </ul>
         </div>
         <ul class="navbar-nav">
-            <li class="nav-item pl-0 pr-0 d-none d-inline">
+            @guest
+            @else
+            <li class="nav-item pl-0 d-none d-md-inline" style="line-height:2.5"><strong>{{auth()->user()->name}}</strong></li>
+            @endguest
+            <li class="nav-item pl-0 pr-0 d-inline">
                 <div class="dropdown dropleft">
                     <a class="nav-link p-0" href="#" data-target="profileMenus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i></a>
                     <div class="dropdown-menu" id="profileMenus" aria-labelledby="profileMenus">

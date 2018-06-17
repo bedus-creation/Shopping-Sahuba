@@ -3,7 +3,7 @@
 @section('css')
 <link rel="stylesheet" href="/css/bend-index.css">
 <link rel="stylesheet" href="/lib/bootstrap-select/css/bootstrap-select.css">
-<link rel="stylesheet" type="text/css" href="http://movie.aammui.com/css/file.upload.css">
+<link rel="stylesheet" type="text/css" href="/css/file.upload.css">
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
         <div class="col-md-3 d-none d-md-block">
             @include('bend.common.sidebar')
         </div>
-        <div class="col-md-6 pl-md-0">
+        <div class="col-md-6 pl-md-0 pr-md-0">
             <div class="bg-white">
                 <div class="card">
                     <div class="card-body">
@@ -106,7 +106,6 @@
                                   </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary float-right">Save Product</button>
                         </div>
                       </div>
                       
@@ -116,10 +115,11 @@
         </div>
         <div class="col-md-3">
             <div class="form-group">
-              <div class="form-group text-center" style="height: 300px;">
+              <div class="form-group text-center" style="max-height: 200px; background:#fff;">
                 <div id="cover" class="w-100 btn btn-secondary">Add Product Photo</div>
               </div>
             </div>
+            <button type="submit" class="btn btn-primary float-right">Save Product</button>
         </div>
       </div>
     </div>
@@ -128,7 +128,7 @@
 
 
 @section('scripts')
-<script type="text/javascript" src="https://movie.aammui.com/js/file.upload.js"></script>
+<script type="text/javascript" src="/js/file.upload.js"></script>
 <script src="/lib/bootstrap-select/js/bootstrap-select.min.js"></script>
 <script>
     $('#product').dropdown('toggle');

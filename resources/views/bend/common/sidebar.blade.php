@@ -4,7 +4,7 @@
     <div class="logo"></div>
         <div class="basic">
             <ul class="list-group list-group-flush">
-                <li class="name list-group-item"><span style="color: red">Aammui Group of Company</span></li>
+                <li class="name list-group-item"><span style="color: red">{{auth()->user()->name}}</span></li>
             </ul>
         </div>
     </div>
