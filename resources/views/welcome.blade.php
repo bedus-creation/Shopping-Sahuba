@@ -6,7 +6,7 @@
         height: 9rem;
         background-color: #fff;
         background-position: center !important;
-        background-size: cover !important;
+        background-size: contain !important;
     }
 </style>
 @endsection
