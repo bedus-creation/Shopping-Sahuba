@@ -28,7 +28,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('bend.product.index');  
+        $data=$this->repository->all();
+        return view('bend.product.index',['data'=>$data]);  
     }
 
     /**
@@ -64,9 +65,9 @@ class ProductController extends Controller
                 ]);
                 $this->repository->create($request->all());
             });
-            
+            \Session::flash('success','Your Product Is added');
         }catch(\Exception $e){
-            
+            \Session::flash('success','Something went wrong');            
         }
         return redirect()->back();
     }

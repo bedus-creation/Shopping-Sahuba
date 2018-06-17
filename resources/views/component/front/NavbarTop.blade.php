@@ -44,10 +44,10 @@
                                 @else
                                     <p class="section pt-3">Product</p>
                                     <li class="list-group-item">
-                                        <a href="#">Add New Product</a>
+                                        <a href="{{url('shopping/products/create')}}">Add New Product</a>
                                     </li>
                                     <li class="list-group-item">
-                                        <a href="#">List Of All Product</a>
+                                        <a href="{{url('shopping/products')}}">List Of All Product</a>
                                     </li>
                                     <p class="section pt-3">Shop</p>
                                     <li class="list-group-item">

@@ -1,9 +1,9 @@
 @extends('theme.shop.app')
-
+@include('utils.success-error')
 @section('css')
 <link rel="stylesheet" href="/css/bend-index.css">
 <link rel="stylesheet" href="/lib/bootstrap-select/css/bootstrap-select.css">
-<link rel="stylesheet" type="text/css" href="https://movie.aammui.com/css/file.upload.css">
+<link rel="stylesheet" type="text/css" href="http://movie.aammui.com/css/file.upload.css">
 @endsection
 
 @section('content')
@@ -13,15 +13,11 @@
         <div class="col-md-3 d-none d-md-block">
             @include('bend.common.sidebar')
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 pl-md-0">
             <div class="bg-white">
                 <div class="card">
                     <div class="card-body">
-                      @if($errors->any())
-                        @foreach($errors->all() as $error)
-                          {{$error}}
-                        @endforeach
-                      @endif
+                      @yield('success-error')
                       <div class="card-title">
                         <div>
                           <span class="float-left"><strong class="btn font-weight-bold">Add New Product</strong></span>
