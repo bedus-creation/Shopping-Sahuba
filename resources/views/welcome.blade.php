@@ -8,6 +8,11 @@
         background-position: center !important;
         background-size: contain !important;
     }
+    @media screen and (max-width:768px){
+        .p-i{
+            height: 4rem;
+        }
+    }
 </style>
 @endsection
 
