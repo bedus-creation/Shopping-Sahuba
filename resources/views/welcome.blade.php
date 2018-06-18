@@ -46,6 +46,7 @@
             font-size: 10px;
         }
         .text-box:after{
+            margin: 0;
             border-left: 40px solid transparent;
             border-top: 40px solid #fff;
         }
