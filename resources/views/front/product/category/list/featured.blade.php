@@ -2,10 +2,12 @@
     @foreach($data as $item)
     <div class="col-md-3 col-4 p-0">
         <a href="{{url('/product/'.$item->id)}}">
-            <div class="card">
-                <div class="p-i" style="background:url('{{$item->cover}}') no-repeat"></div>
-                <div class="card-body">
-                    <h6 class="card-title text-center">{{$item->name}}</h6>
+            <div class="card box text-box">
+                <div class="p-i" style="background:url('{{$item->cover}}') no-repeat">
+                    <span class="float-right text"></span>
+                </div>
+                <div class="card-body p-1">
+                    <h6 class="card-title text-center f-85">{{$item->name}}</h6>
                 </div>
             </div>
         </a>
