@@ -74,7 +74,7 @@
                             <hr>
                             <div class="form-group">
                                 <label>Amount &nbsp;<small class="text-success">In Rupeese</small></label>
-                              <input type="text" name="price" value="{{old('price')}}" class="form-control"  placeholder="In Nepali Rupeese">  
+                              <input name="price" value="{{old('price')}}" type="number" class="form-control"  placeholder="In Nepali Rupeese (Only Number)">  
                             </div>
                             <div class="form-group">
                                 <label>Negotiable</label>
@@ -115,12 +115,14 @@
         </div>
         <div class="col-md-3">
             <div class="form-group">
-              <div class="form-group text-center" style="max-height: 200px; background:#fff;">
+              <div class="form-group text-center" style="background:#fff;">
                 <div id="cover" class="w-100 btn btn-secondary">Add Product Photo</div>
               </div>
             </div>
-            <button type="submit" class="btn btn-primary float-right">Save Product</button>
-        </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary float-right">Save Product</button>
+            </div>
+          </div>
       </div>
     </div>
   </form>
