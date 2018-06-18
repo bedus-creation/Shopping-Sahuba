@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 class PageController extends Controller
 {
     public function index(){
+        $user= \App\User::all();
         $data=\App\Models\Product::OrderBy('id','desc')->get();
-        return view('welcome',['data'=>$data]);
+        return view('welcome',['data'=>$data,'users'=>$user]);
     }
 
     public function shop(){

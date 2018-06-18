@@ -60,7 +60,7 @@
 @section('content')
 <div class="container">
     <div class="row mt-3">
-        <div class="col-md-8 pr-md-0">
+        <div class="col-md-9 pr-md-0">
             <div class="bg-white">
                 <div class="card">
                     <div class="card-header"><strong>Featured Product</strong></div>
@@ -74,10 +74,41 @@
             </div>
             @include('front.product.category.list.featured')
         </div>
-        <div class="col-md-4 pl-md-1">
+        <div class="col-md-3 pl-md-1">
             <div class="bg-white">
                 <div class="card">
-                    <div class="card-header"><strong>Top Shop</strong></div>
+                    <div class="card-header mb-2"><strong>Top Shop</strong></div>
+                        <div class="container">
+                            @foreach($users as $user)
+                            <div class="media">
+                                <div class="mr-3">
+                                    <a href="{{$user->profile_image}}" data-popup="lightbox">
+                                        <img src="{{$user->profile_image}}" style="width:60px;height:60px;" class="rounded-circle img-fluid" alt="">
+                                    </a>
+                                </div>
+
+                                <div class="media-body">
+                                    <h5 class="mt-0">{{$user->name}}</h5>
+                                    <span class="text-muted">Chief officer</span>
+                                </div>
+
+                                <div class="">
+                                    <ul class="list-unstyled">
+                                        <li class="dropdown">
+                                            <a href="#" data-toggle="dropdown"><i class="fas fa-bars"></i></i></a>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <hr>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
