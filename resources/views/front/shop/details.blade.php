@@ -14,7 +14,19 @@
                     <div class="col-md-12 info">
                         <strong class="section_title">Info</strong>
                         <p class="section_info">
-                                Established in 2006, UBA Solutions as a Software Research & Development Company looking for exceptionally bright and motivated programmers to join our team. We pride ourselves in our research and development programs, providing comprehensive solution to our world-class clients. If you are looking for an opportunity to use your skills in innovative ways in an environment that promotes free thinking, presented with creative challenges and makes real impact- UBA Solutions is the place for you. We partner with renowned Companies from Silicon Valley, as well as additional countries around the world.
+                            Established in 2006, UBA Solutions as a Software Research
+                            & Development Company looking for exceptionally bright and
+                            motivated programmers to join our team. We pride ourselves 
+                        </p>
+                        <button type="button" class="btn btn-secondary">Read More....</button>
+                        <p class="section_info">
+                            in our research and development programs, providing comprehensive
+                            solution to our world-class clients. If you are looking for an 
+                            opportunity to use your skills in innovative ways in an environment
+                            that promotes free thinking, presented with creative challenges
+                            and makes real impact- UBA Solutions is the place for you. We 
+                            partner with renowned Companies from Silicon Valley, as well
+                            as additional countries around the world.
                         </p>
                     </div>
                     <div class="col-md-12 info mt-1">

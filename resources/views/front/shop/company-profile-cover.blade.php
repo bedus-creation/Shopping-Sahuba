@@ -1,13 +1,17 @@
 <div class="row">
-    <div class="col-md-12" id="profile">   
-    </div>
     <div class="col-md-12">
-        <div class="info row">
+        <div id="profile">
+            <div class="profile-inner">
+            </div>   
+        </div>
+    </div>
+    <div class="col-md-12" id="c-info">
+        <div class="row">
             <div class="col-md-8 d-flex">
                 <div class="logo"></div>
                 <div class="basic">
                     <ul class="list-group list-group-flush">
-                        <li class="name list-group-item"><span style="color: red">Aammui Group of Company</span></li>
+                        <li class=" list-group-item name"><span style="color: #fff;">Aammui Group of Company</span></li>
                     </ul>
                 </div>
             </div>
