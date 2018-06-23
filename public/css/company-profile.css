@@ -68,6 +68,12 @@ p.section_info{
 }
 
 @media screen and (max-width:768px){
+    #jobs{
+        font-size: 14px;
+    }
+    #jobs .far{
+        font-size:14px;
+    }
     #c-info{
         margin-top: -2rem;
     }

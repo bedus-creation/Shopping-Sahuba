@@ -107,7 +107,7 @@
                                                 <div class="pl-md-3 pl-0 d-flex justify-content-start">
                                                     <div><i class="fas fa-calendar-times"></i></div>
                                                     <div class="pl-md-3 pl-2">
-                                                        &nbsp;Ad Expiry Date &nbsp;
+                                                        &nbsp;Expiry Date &nbsp;
                                                     </div>
                                                 </div>
                                             </div>
