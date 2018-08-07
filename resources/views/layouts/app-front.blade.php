@@ -45,7 +45,7 @@
         @include('component.front.NavbarTop')
         @yield('content')
     </div>
-    <script src="{{url('/js/app.js')}}"></script>
+    @include('component.front.scripts')
     @yield('scripts')
 </body>
 </html>
