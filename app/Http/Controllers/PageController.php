@@ -16,8 +16,8 @@ class PageController extends Controller
         return view('front/shop/details');
     }
     
-    public function product($id){
-        $data=\App\Models\Product::where(['id'=>$id])->OrderBy('id','desc')->first();
+    public function product($name,$id){
+        $data=\App\Models\Product::where(['id'=>$id])->first();
         return view('front/product/details',['product'=>$data]);
     }
 }

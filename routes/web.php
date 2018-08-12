@@ -3,7 +3,7 @@
 
 Route::get('/', 'PageController@index');
 Route::get('shop/{slug}', 'PageController@shop');
-Route::get('product/{id}','PageController@product');
+Route::get('product/{slug}/{id}','PageController@product');
 
 Route::group(['namespace'=>'Utils'], function () {
     Route::get('/command/{command}', 'CommandController@command');

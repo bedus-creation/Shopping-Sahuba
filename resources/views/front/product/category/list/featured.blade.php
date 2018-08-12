@@ -1,7 +1,7 @@
 <div class="row m-0">
     @foreach($data as $item)
     <div class="col-md-3 col-4 p-0">
-        <a href="{{url('/product/'.$item->id)}}">
+        <a href="{{url('/product/'.str_slug($item->name,'-').'/'.$item->id)}}">
             <div class="card box text-box h-100">
                 <div class="p-i" style="background:url('{{$item->cover}}') no-repeat">
                     <span class="float-right text"></span>
