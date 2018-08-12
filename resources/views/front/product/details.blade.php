@@ -2,6 +2,34 @@
 @section('css')
 <link href="{{url('css/company-profile.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="{{url('js_slider/css/style.css')}}">
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org/",
+        "@type": "Product",
+        "name": "{{$product->name}}",
+        "image": [
+            @foreach($product->medias as $item)
+            '{{$item->base_url.json_decode($item->in_json)->images->small}}',
+            @endforeach
+        ],
+        "brand": {
+            "@type": "Thing",
+            "name": "ACME"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.4",
+            "ratingCount": "89"
+        },
+        "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "119.99",
+            "highPrice": "199.99",
+            "priceCurrency": "USD"
+        }
+    }
+</script>
+
 @endsection
 @section('content')
 <div id="jobs">
