@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Utils;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Media;
 
 class MediaController extends Controller
 {
@@ -39,20 +41,26 @@ class MediaController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $destination = 'uploads/images';
-            return $file->move($destination, $request->file('image'));
-            //$path=$request->file('image')->move(public_path().$destination, $request->file('image'));
-            //return $request->image->store('public/uploads/images/'.$file->getMimeType());
-            //return $file->store($destination);
-            /*return Storage::putFile($destination,$request->file('image'));
-            //$path = Storage::putFile('avatars', $request->file('image'));
-            //return $path;
-            */
-        } else {
-            return $request->file('image');
+        // $request->validate([
+        //     'file' => 'required|file|max:5000|mimes:' . $this->getAllowedFileTypes()
+        // ]);
+    
+        if ( $fileUid = $request->file->store('/upload', 'public') ) {
+            return Media::create([
+                'type'=>'image',
+                'base_url'=>url('/'),
+                'in_json'=>json_encode([
+                    'images'=>[
+                        'small'=>Storage::url($fileUid),
+                        'medium'=>Storage::url($fileUid),
+                        'big'=>Storage::url($fileUid),
+                    ]
+                ]),
+            ]);
+
         }
+    
+        return response(['msg' => 'Unable to upload your file.'], 400);
     }
 
     /**
@@ -95,8 +103,8 @@ class MediaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Media $media)
     {
-        
+        return (string) $media->delete();
     }
 }

@@ -7,7 +7,7 @@ Route::get('product/{slug}/{id}','PageController@product');
 
 Route::group(['namespace'=>'Utils'], function () {
     Route::get('/command/{command}', 'CommandController@command');
-    Route::resource('media','MediaController');
+    Route::resource('medias','MediaController');
     Route::get('sitemap.xml','SitemapController@generate');
 });
 

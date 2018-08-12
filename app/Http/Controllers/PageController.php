@@ -8,7 +8,7 @@ class PageController extends Controller
 {
     public function index(){
         $user= \App\User::all();
-        $data=\App\Models\Product::OrderBy('id','desc')->get();
+        $data=\App\Models\Product::with('medias')->OrderBy('id','desc')->get();
         return view('welcome',['data'=>$data,'users'=>$user]);
     }
 

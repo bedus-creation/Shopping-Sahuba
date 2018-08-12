@@ -13,7 +13,7 @@
         <div class="col-md-3 d-none d-md-block">
             @include('bend.common.sidebar')
         </div>
-        <div class="col-md-6 pl-md-0 pr-md-0">
+        <div class="col-md-9 pl-md-0">
             <div class="bg-white">
                 <div class="card">
                     <div class="card-body">
@@ -29,19 +29,10 @@
                     
                       @csrf
                       <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                               <label>Product Name</label>
                               <input name="name" value="{{old('name')}}" type="text" class="form-control"  placeholder="Product Name">
-                            </div>
-                            <div class="form-group">
-                                <label>Product Category</label>
-                                <select name="category_id" value="{{old('category_id')}}" class="selectpicker" data-width="100%" data-live-search="true">
-                                    <option value="1">Mobile</option>
-                                    <option value="4">Bike</option>
-                                    <option value="2">Laptop</option>
-                                    <option value="3">Land</option>
-                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Condition</label>
@@ -68,14 +59,6 @@
                                   </div>
                                 </div>
                             </div>
-                            <div class="card-titlle">
-                                <strong>Price</strong>
-                            </div>
-                            <hr>
-                            <div class="form-group">
-                                <label>Amount &nbsp;<small class="text-success">In Rupeese</small></label>
-                              <input name="price" value="{{old('price')}}" type="number" class="form-control"  placeholder="In Nepali Rupeese (Only Number)">  
-                            </div>
                             <div class="form-group">
                                 <label>Negotiable</label>
                                 <div>
@@ -89,10 +72,21 @@
                                   </div>
                                 </div>
                             </div>
-                            <div class="card-titlle">
-                                <strong> Warranty Details</strong>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Product Category</label>
+                                <select name="category_id" value="{{old('category_id')}}" class="selectpicker" data-width="100%" data-live-search="true">
+                                    <option value="1">Mobile</option>
+                                    <option value="4">Bike</option>
+                                    <option value="2">Laptop</option>
+                                    <option value="3">Land</option>
+                                </select>
                             </div>
-                            <hr>
+                            <div class="form-group">
+                                <label>Amount &nbsp;<small class="text-success">In Rupeese</small></label>
+                              <input name="price" value="{{old('price')}}" type="number" class="form-control"  placeholder="In Nepali Rupeese (Only Number)">  
+                            </div>
                             <div class="form-group">
                                 <label>Is Warranty ?</label>
                                 <div>
@@ -108,21 +102,31 @@
                             </div>
                         </div>
                       </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                              <input type="hidden" name="media_id">
+                              <div id="dropZone" class="dropzone">
+                                  <div class="dz-default dz-message">
+                                      <h3>{{ $title or  'Drop files here or click to upload.'}}</h3>
+                                      <p class="text-muted">{{ $desc or 'Any related files you can upload' }} <br>
+                                          <small>One file can be max {{ config('attachment.max_size', 0) / 1000 }} MB</small>
+                                      </p>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary float-right">Save Product</button>
+                            </div>
+                        </div>
+                      </div>
                       
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="form-group">
-              <div class="form-group text-center" style="background:#fff;">
-                <div id="cover" class="w-100 btn btn-secondary">Add Product Photo</div>
-              </div>
-            </div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary float-right">Save Product</button>
-            </div>
-          </div>
       </div>
     </div>
   </form>
@@ -138,12 +142,83 @@
       style: 'btn-info',
       size: 4
     });
-    $('#cover').fileupload({
-      baseUrl:'{{url('/')}}/',
-      input:"cover",
-      serverUploadUrl:'/media',
-      serverAllFileUrl:'/media'
+
+    Dropzone.autoDiscover = false;
+
+    $("#dropZone").dropzone({
+        addRemoveLinks: true,
+        url: "{{ route('medias.store') }}",
+        maxFilesize: {{ isset($maxFileSize) ? $maxFileSize : config('attachment.max_size', 1000) / 1000 }},
+        acceptedFiles: "{!! isset($acceptedFiles) ? $acceptedFiles : config('media.allowed') !!}",
+        headers: {'X-CSRF-TOKEN': "{{ csrf_token() }}"},
+        init: function () {  
+            
+            this.on("maxfilesexceeded", function(file){
+                
+            });
+
+            
+            var uploadedFiles = [];
+
+            this.on("success", function(file, responseText) {
+                console.log(responseText);
+                uploadedFiles.push(responseText);
+                addToInput(responseText.id);
+            });
+
+        
+            this.on("removedfile", function (file) {
+                var found = uploadedFiles.find(function (item) {
+                    return (item.id==JSON.parse(file.xhr.response).id);
+                })
+                // If got the file lets make a delete request by id
+                if( found ) {
+                    $.ajax({
+                        url: "/medias/" + found.id,
+                        type: 'POST',
+                        data:{
+                            _method:'delete'
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                        },
+                        success: function(response) {
+                            if(response==1){
+                                removeFromInput(found.id);
+                            }
+                        }
+                    });
+                }
+            });
+
+            // Handle errors
+            this.on('error', function(file, response) {
+                var errMsg = response;
+
+                if( response.message ) errMsg = response.message;
+                if( response.file ) errMsg = response.file[0];
+
+                $(file.previewElement).find('.dz-error-message').text(errMsg);
+            });
+        }
+
     });
+    function addToInput(id) {
+        if($('input[name="media_id"]').val()==''){
+            $('input[name="media_id"]').val(id);
+        }else{
+            data=$('input[name="media_id"]').val();
+            $('input[name="media_id"]').val(data+','+id);
+        }
+    }
+    function removeFromInput(id) {
+        data=$('input[name="media_id"]').val().split(",")
+                .filter(function(v){
+                    return v!=id;
+                });
+            
+        $('input[name="media_id"]').val(data.join(","));
+    }
 
 </script>
 @endsection

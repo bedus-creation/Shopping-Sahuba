@@ -28,7 +28,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $data=$this->repository->all();
+        $data=$this->repository->where('user_id',auth()->user()->id)->get();
         return view('bend.product.index',['data'=>$data]);  
     }
 
@@ -50,29 +50,25 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        try {
-            DB::transaction(function() use ($request){
-                $price=Price::create([
-                    'type'=>'fixed',
-                    'min'=>$request->price,
-                ]);
-                
-                date_default_timezone_set('Asia/Kathmandu');
-                $date = date('Y-m-d');
-                $date = date('Y-m-d', strtotime($date. ' + 30 days'));
+        $price=Price::create([
+            'type'=>'fixed',
+            'min'=>$request->price,
+        ]);
+        
+        date_default_timezone_set('Asia/Kathmandu');
+        $date = date('Y-m-d');
+        $date = date('Y-m-d', strtotime($date. ' + 30 days'));
 
-                $request->merge([
-                    'price_id'=>$price->id,
-                    'user_id'=>auth()->user()->id,
-                    'expiry_date'=>$date
-                ]);
-                $this->repository->create($request->all());
-            });
-            \Session::flash('success','Your Product Is added');
-        }catch(\Exception $e){
-            \Session::flash('success','Something went wrong');            
-        }
-        return redirect()->back();
+        $request->merge([
+            'price_id'=>$price->id,
+            'user_id'=>auth()->user()->id,
+            'expiry_date'=>$date
+        ]);
+        $product=$this->repository->create($request->all());
+
+        $product->medias()->attach(explode(',',$request->media_id));
+            
+        return redirect()->back()->with('success','Your Product Is added');
     }
 
     /**

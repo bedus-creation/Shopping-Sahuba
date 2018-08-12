@@ -20,6 +20,12 @@ class CreateMediaTable extends Migration
             $table->enum('type',['image','video']);
             $table->timestamps();
         });
+
+        Schema::create('media_product', function (Blueprint $table) {
+            $table->unsignedInteger('media_id');
+            $table->unsignedInteger('product_id');
+            $table->unique(['media_id','product_id']);
+        });
     }
 
     /**
@@ -30,5 +36,6 @@ class CreateMediaTable extends Migration
     public function down()
     {
         Schema::dropIfExists('media');
+        Schema::dropIfExists('media_product');
     }
 }

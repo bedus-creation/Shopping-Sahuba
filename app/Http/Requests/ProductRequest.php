@@ -26,8 +26,7 @@ class ProductRequest extends FormRequest
         return [
             'name'=>'required',
             'condition'=>'required',
-            'negotiable'=>'required',
-            'cover'=>'required'
+            'negotiable'=>'required'
         ];
     }
 }

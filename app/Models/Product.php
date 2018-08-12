@@ -13,4 +13,8 @@ class Product extends Model
     ];
 
     protected $dates = ['created_at', 'updated_at', 'expiry_date'];
+
+    public function medias(){
+        return $this->belongsToMany('App\Models\Media');
+    }
 }
