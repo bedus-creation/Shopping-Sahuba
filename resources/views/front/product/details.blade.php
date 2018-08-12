@@ -8,8 +8,8 @@
         "@type": "Product",
         "name": "{{$product->name}}",
         "image": [
-            @foreach($product->medias as $item)
-            '{{$item->base_url.json_decode($item->in_json)->images->small}}',
+            @foreach($product->medias as $key => $item)
+            "{{$item->base_url.json_decode($item->in_json)->images->small}}" {{ $key==(count($product->medias) - 1 ) ? '':',' }}
             @endforeach
         ],
         "brand": {
