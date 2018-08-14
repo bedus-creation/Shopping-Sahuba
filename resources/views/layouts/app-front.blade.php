@@ -12,33 +12,6 @@
         <link href="{{url('css/style.css')}}" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Khand" rel="stylesheet">
         @yield('css')
-        <script type="application/ld+json">
-        {
-        "@context": "http://schema.org/",
-        "@type": "Product",
-        "name": "Executive Anvil",
-        "image": [
-            "https://example.com/photos/1x1/photo.jpg",
-            "https://example.com/photos/4x3/photo.jpg",
-            "https://example.com/photos/16x9/photo.jpg"
-        ],
-        "brand": {
-            "@type": "Thing",
-            "name": "ACME"
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.4",
-            "ratingCount": "89"
-        },
-        "offers": {
-            "@type": "AggregateOffer",
-            "lowPrice": "119.99",
-            "highPrice": "199.99",
-            "priceCurrency": "USD"
-        }
-        }
-        </script>
     </head>
 <body>
     <div id="app">
