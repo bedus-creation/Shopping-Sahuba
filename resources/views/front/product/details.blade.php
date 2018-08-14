@@ -277,6 +277,10 @@
 <script src="{{url('/js_slider/js/jssor.slider-27.1.0.min.js')}}"></script>
 <script src="{{url('js_slider/js/script.js')}}"></script>
 <script>
-    jssor_1_slider_init();
+    var options = {
+            $FillMode: 1
+    };
+    // jssor_1_slider_init();
+    var jssor_slider1 = new $JssorSlider$("jssor_1", options);
 </script>
 @endsection

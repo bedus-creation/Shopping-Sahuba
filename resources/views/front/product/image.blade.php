@@ -1,10 +1,13 @@
+<div style="position: relative; width: 100%; overflow: hidden;">
+    <div style="position: relative; left: 50%; width: 5000px; text-align: center; margin-left: -2500px;background:#fff">
+       
 <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:980px;height:480px;overflow:hidden;visibility:hidden;">
-    <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
+    <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:#fff;">
         <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="img/spin.svg" />
     </div>
-    <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:380px;overflow:hidden;">
+    <div data-u="slides" style="cursor:default;position:absolute;top:0px;left:0px;width:980px; margin:0 auto;height:380px;overflow:hidden;">
         @foreach($product->medias as $item)
-        <div data-p="170.00">
+        <div data-p="170.00" class="text-center">
             <img data-u="image" src="{{$item->base_url.json_decode($item->in_json)->images->big}}" />
             <img data-u="thumb" src="{{$item->base_url.json_decode($item->in_json)->images->small}}" />
         </div>
@@ -37,5 +40,7 @@
             <polyline class="a" points="8069.6,5495.7 10573.9,8000 8069.6,10504.3 "></polyline>
             <line class="a" x1="5426.1" y1="8000" x2="10573.9" y2="8000"></line>
         </svg>
+    </div>
+</div>
     </div>
 </div>
