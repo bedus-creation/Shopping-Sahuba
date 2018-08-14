@@ -1,6 +1,7 @@
 @extends('layouts.app-front')
 @section('css')
 <link href="{{url('css/company-profile.css')}}" rel="stylesheet">
+<link rel="stylesheet" href="{{url('js_slider/css/style.css')}}">
 <script type="application/ld+json">
     {
         "@context": "http://schema.org/",
@@ -71,7 +72,7 @@
                     </div>
                     <div class="col-md-12">                    
                         <div class="row">
-                            <div class="col-md-12 mb-2">
+                            <div class="col-md-12 mb-4">
                                 <ul class="list-group">
                                     <li class="list-group-item font-weight-bold border-0">Product Overview</li>
                                     <li class="list-group-item">
@@ -204,18 +205,6 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="col-md-12">                    
-                                <div class="row">
-                                    <div class="col-md-12 mb-4">
-                                        <ul class="list-group">
-                                            <strong class="list-group-item font-weight-bold border-0">Product Detail</strong>
-                                            <li class="list-group-item">
-                                            {{$product->details}}
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -286,8 +275,67 @@
 
 @section('scripts')
 <script src="{{url('/js_slider/js/jssor.slider-27.1.0.min.js')}}"></script>
-<script src="{{url('js_slider/js/script.js')}}"></script>
+<script src="{{url('/js_slider/js/script.js')}}"></script>
 <script>
-    
+var jssor_1_SlideshowTransitions = [
+  {$Duration:1200,x:0.3,$During:{$Left:[0.3,0.7]},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+  {$Duration:1200,x:-0.3,$SlideOut:true,$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+  {$Duration:1200,x:-0.3,$During:{$Left:[0.3,0.7]},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+  {$Duration:1200,x:0.3,$SlideOut:true,$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+  {$Duration:1200,y:0.3,$During:{$Top:[0.3,0.7]},$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+  {$Duration:1200,y:-0.3,$SlideOut:true,$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+  {$Duration:1200,y:-0.3,$During:{$Top:[0.3,0.7]},$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+  {$Duration:1200,y:0.3,$SlideOut:true,$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+  {$Duration:1200,x:0.3,$Cols:2,$During:{$Left:[0.3,0.7]},$ChessMode:{$Column:3},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+  {$Duration:1200,x:0.3,$Cols:2,$SlideOut:true,$ChessMode:{$Column:3},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+  {$Duration:1200,y:0.3,$Rows:2,$During:{$Top:[0.3,0.7]},$ChessMode:{$Row:12},$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+  {$Duration:1200,y:0.3,$Rows:2,$SlideOut:true,$ChessMode:{$Row:12},$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+  {$Duration:1200,y:0.3,$Cols:2,$During:{$Top:[0.3,0.7]},$ChessMode:{$Column:12},$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+  {$Duration:1200,y:-0.3,$Cols:2,$SlideOut:true,$ChessMode:{$Column:12},$Easing:{$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+  {$Duration:1200,x:0.3,$Rows:2,$During:{$Left:[0.3,0.7]},$ChessMode:{$Row:3},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+  {$Duration:1200,x:-0.3,$Rows:2,$SlideOut:true,$ChessMode:{$Row:3},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+  {$Duration:1200,x:0.3,y:0.3,$Cols:2,$Rows:2,$During:{$Left:[0.3,0.7],$Top:[0.3,0.7]},$ChessMode:{$Column:3,$Row:12},$Easing:{$Left:$Jease$.$InCubic,$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+  {$Duration:1200,x:0.3,y:0.3,$Cols:2,$Rows:2,$During:{$Left:[0.3,0.7],$Top:[0.3,0.7]},$SlideOut:true,$ChessMode:{$Column:3,$Row:12},$Easing:{$Left:$Jease$.$InCubic,$Top:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+  {$Duration:1200,$Delay:20,$Clip:3,$Assembly:260,$Easing:{$Clip:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+  {$Duration:1200,$Delay:20,$Clip:3,$SlideOut:true,$Assembly:260,$Easing:{$Clip:$Jease$.$OutCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+  {$Duration:1200,$Delay:20,$Clip:12,$Assembly:260,$Easing:{$Clip:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
+  {$Duration:1200,$Delay:20,$Clip:12,$SlideOut:true,$Assembly:260,$Easing:{$Clip:$Jease$.$OutCubic,$Opacity:$Jease$.$Linear},$Opacity:2}
+];
+
+    var jssor_1_options = {
+  $AutoPlay: 1,
+  $FillMode: 1,
+  $SlideshowOptions: {
+    $Class: $JssorSlideshowRunner$,
+    $Transitions: jssor_1_SlideshowTransitions,
+    $TransitionsOrder: 1
+  },
+  $ArrowNavigatorOptions: {
+    $Class: $JssorArrowNavigator$
+  },
+  $ThumbnailNavigatorOptions: {
+    $Class: $JssorThumbnailNavigator$,
+    $SpacingX: 5,
+    $SpacingY: 5
+  }
+};
+var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+var MAX_WIDTH = 980;
+function ScaleSlider() {
+    var containerElement = jssor_1_slider.$Elmt.parentNode;
+    var containerWidth = containerElement.clientWidth;
+    if (containerWidth) {
+        var expectedWidth = Math.min(MAX_WIDTH || containerWidth, containerWidth);
+        jssor_1_slider.$ScaleWidth(expectedWidth);
+    }
+    else {
+        window.setTimeout(ScaleSlider, 30);
+    }
+}
+ScaleSlider();
+$(window).bind("load", ScaleSlider);
+$(window).bind("resize", ScaleSlider);
+$(window).bind("orientationchange", ScaleSlider);
+
 </script>
 @endsection
