@@ -39,7 +39,6 @@ return array(
     'App\\Models\\ShopProfile' => $baseDir . '/app/Models/ShopProfile.php',
     'App\\Models\\SocialMedia' => $baseDir . '/app/Models/SocialMedia.php',
     'App\\ProductCondition' => $baseDir . '/app/Models/ProductCondition.php',
-    'App\\ProductMedia' => $baseDir . '/app/Models/ProductMedia.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
