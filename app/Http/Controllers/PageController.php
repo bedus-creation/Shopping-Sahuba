@@ -18,6 +18,7 @@ class PageController extends Controller
     
     public function product($name,$id){
         $data=\App\Models\Product::where(['id'=>$id])->first();
+        // dd($data);
         return view('front/product/details',['product'=>$data]);
     }
 }

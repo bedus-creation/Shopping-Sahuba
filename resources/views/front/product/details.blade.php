@@ -72,7 +72,7 @@
                     </div>
                     <div class="col-md-12">                    
                         <div class="row">
-                            <div class="col-md-12 mb-4">
+                            <div class="col-md-12 mb-2">
                                 <ul class="list-group">
                                     <li class="list-group-item font-weight-bold border-0">Product Overview</li>
                                     <li class="list-group-item">
@@ -204,6 +204,18 @@
                                         </div>
                                     </li>
                                 </ul>
+                            </div>
+                            <div class="col-md-12">                    
+                                <div class="row">
+                                    <div class="col-md-12 mb-4">
+                                        <ul class="list-group">
+                                            <strong class="list-group-item font-weight-bold border-0">Product Detail</strong>
+                                            <li class="list-group-item">
+                                            {{$product->details}}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

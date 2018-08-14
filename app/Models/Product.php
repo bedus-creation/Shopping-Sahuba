@@ -9,7 +9,7 @@ class Product extends Model
     //
 
     protected $fillable=[
-        'name','condition','negotiable','cover','expiry_date','price_id','user_id','category_id'
+        'name','condition','negotiable','cover','expiry_date','price_id','user_id','category_id','details'
     ];
 
     protected $dates = ['created_at', 'updated_at', 'expiry_date'];

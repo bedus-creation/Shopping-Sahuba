@@ -105,7 +105,10 @@
                       <div class="row">
                         <div class="col-md-12">
                           <div class="form-group">
+                            <label>Describe Your Product</label>
+                            <textarea name="details" value="{{old('details')}}" type="text" class="form-control"  placeholder="Product Discription"></textarea>
                               <input type="hidden" name="media_id">
+                              <br>
                               <div id="dropZone" class="dropzone">
                                   <div class="dz-default dz-message">
                                       <h3>{{ $title or  'Drop files here or click to upload.'}}</h3>
