@@ -2,7 +2,7 @@
 
 
 Route::get('/', 'PageController@index');
-Route::get('shop/{slug}', 'PageController@shop');
+Route::get('shop/{slug}/', 'PageController@shop');
 Route::get('product/{slug}/{id}','PageController@product');
 
 Route::group(['namespace'=>'Utils'], function () {
@@ -25,9 +25,8 @@ Route::group(['prefix'=>'shopping'],function(){
 
 
 
-Route::get('posts', function () {
-    $data= ["hekki"];
-    return $data;
+Route::get('test', function () {
+   return view('test');
 });
 
 Auth::routes();

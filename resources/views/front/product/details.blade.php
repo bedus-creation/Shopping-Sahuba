@@ -1,7 +1,6 @@
 @extends('layouts.app-front')
 @section('css')
 <link href="{{url('css/company-profile.css')}}" rel="stylesheet">
-<link rel="stylesheet" href="{{url('js_slider/css/style.css')}}">
 <script type="application/ld+json">
     {
         "@context": "http://schema.org/",
@@ -289,10 +288,6 @@
 <script src="{{url('/js_slider/js/jssor.slider-27.1.0.min.js')}}"></script>
 <script src="{{url('js_slider/js/script.js')}}"></script>
 <script>
-    var options = {
-            $FillMode: 1
-    };
-    // jssor_1_slider_init();
-    var jssor_slider1 = new $JssorSlider$("jssor_1", options);
+    
 </script>
 @endsection
