@@ -413,7 +413,6 @@ class ComposerStaticInit99085b8a5cf53c7055283fef0b57d909
         'App\\Models\\ShopProfile' => __DIR__ . '/../..' . '/app/Models/ShopProfile.php',
         'App\\Models\\SocialMedia' => __DIR__ . '/../..' . '/app/Models/SocialMedia.php',
         'App\\ProductCondition' => __DIR__ . '/../..' . '/app/Models/ProductCondition.php',
-        'App\\ProductMedia' => __DIR__ . '/../..' . '/app/Models/ProductMedia.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
