@@ -14,7 +14,7 @@ class AlterTableProducts extends Migration
     public function up()
     {
         Schema::table("products",function(Blueprint $table){
-            $table->boolean('status')->default(true);
+            $table->boolean('status')->default(true);   
             $table->longText('details')->nullable();
         });
     }

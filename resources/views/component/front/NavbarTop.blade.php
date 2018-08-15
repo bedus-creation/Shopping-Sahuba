@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-nav-top">
     <div class="container">
         <ul class="navbar-nav">
-            <li class="nav-item">
+            <li class="nav-item pl-0">
                 <div class="dropdown">
-                    <a class="nav-link" href="#"  data-target="sidebar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-th"></i></a>
+                    <a class="nav-link pl-0" href="#"  data-target="sidebar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-th"></i></a>
                     @include('component.front.sidebar')
                 </div>
             </li>
