@@ -1,5 +1,4 @@
- /* jssor slider loading skin spin css */
- .jssorl-009-spin img {
+.jssorl-009-spin img {
     animation-name: jssorl-009-spin;
     animation-duration: 1.6s;
     animation-iteration-count: infinite;
@@ -14,7 +13,7 @@
     }
 }
 .jssora106 {display:block;position:absolute;cursor:pointer;}
-.jssora106 .c {fill:#fff;opacity:.3;}
+.jssora106 .c {fill:#d7d7d7;opacity:.3;}
 .jssora106 .a {fill:none;stroke:#000;stroke-width:350;stroke-miterlimit:10;}
 .jssora106:hover .c {opacity:.5;}
 .jssora106:hover .a {opacity:.8;}
