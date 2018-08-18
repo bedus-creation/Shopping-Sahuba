@@ -209,6 +209,10 @@
                                         </div>
                                     </li>
                                 </ul>
+                                <ul class="list-group mt-2">
+                                    <li class="list-group-item font-weight-bold border-0">Product Details</li>
+                                    <span class="bg-white p-2">{{$product->details}}</span>
+                                </ul>
                             </div>
                         </div>
                     </div>
