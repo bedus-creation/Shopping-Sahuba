@@ -71,7 +71,7 @@
                                             <label class="float-right mb-0 pt-1 pb-1">Shop Established Date</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="date" placeholder="Shop Established Date" name="established_at" value="20{{optional(auth()->user()->profile)->established_at ? auth()->user()->profile->established_at->format('y-m-d'):'20'.date('y-m-d')}}" class="form-control">
+                                            <input type="date" placeholder="Shop Established Date" name="established_at" value="20{{optional(auth()->user()->profile)->established_at ? auth()->user()->profile->established_at->format('y-m-d'):date('y-m-d')}}" class="form-control">
                                         </div>
                                     </div>
                                 </div>

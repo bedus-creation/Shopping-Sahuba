@@ -49,7 +49,7 @@
                         <div class="pl-3 d-flex justify-content-start">
                             <div><i class="far fa-clock"></i></div>
                             <div class="pl-3">
-                                Opening Hours :{{optional($shop->profile)->opening_hours ?? 'Not Available'}}
+                                Opening H. :{{optional($shop->profile)->opening_hours ?? 'Not Available'}}
                             </div>
                         </div>
                     </li>
