@@ -90,9 +90,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {   $data= Product::where(['id'=>$id])
-        ->with('price')->first();
-
-            // dd($data);
+            ->with('medias')
+            ->with('price')->first();
 
       return view('bend.product.edit', ['product'=>$data]);   
     }
@@ -106,9 +105,28 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+
+        
+
+        Price::find($product->id)->update([
+            'type'=>'fixed',
+            'min'=>$request->price,
+        ]);
+
+        $date = date('Y-m-d');
+        $date = date('Y-m-d', strtotime($date. ' + 30 days'));
+
+        $request->merge([
+            'user_id'=>auth()->user()->id,
+            'expiry_date'=>$date
+        ]);
+
         $product->update($request->all());
-        session()->flash('success', 'edited successfully');
-        return redirect()->back();
+
+        $product->medias()->sync(explode(',',$request->media_id));
+
+        return redirect()->back()->with('success', 'edited successfully');
+
     }
 
     /**

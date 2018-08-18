@@ -110,7 +110,12 @@
                           <div class="form-group">
                             <label>Describe Your Product</label>
                           <textarea name="details" value="{{old('details')}}" type="text" class="form-control"  placeholder="Product Discription">{{$product->details}}</textarea>
-                              <input type="hidden" name="media_id">
+                            <?php
+                                foreach ($product->medias as $key => $value) {
+                                    $media_id[]=$value->id;
+                                }
+                            ?>
+                            <input type="hidden" name="media_id" value="{{implode(',',$media_id)}}">
                               <br>
                               <div id="dropZone" class="dropzone">
                                   <div class="dz-default dz-message">
@@ -158,13 +163,25 @@
         acceptedFiles: "{!! isset($acceptedFiles) ? $acceptedFiles : config('media.allowed') !!}",
         headers: {'X-CSRF-TOKEN': "{{ csrf_token() }}"},
         init: function () {  
+
+            var uploadedFiles = [];
+
+            @foreach($product->medias as $item)
+                var mockFile = { name: "{{$item->id}}", id:"{{$item->id}}",size: {{rand(1000,10000)}}, type: 'image/jpeg' };       
+                this.options.addedfile.call(this, mockFile);
+                this.options.thumbnail.call(this, mockFile, "{{$item->link()}}");
+                mockFile.previewElement.classList.add('dz-success');
+                mockFile.previewElement.classList.add('dz-complete');
+
+                uploadedFiles.push(mockFile);
+
+            @endforeach
             
             this.on("maxfilesexceeded", function(file){
                 
             });
 
             
-            var uploadedFiles = [];
 
             this.on("success", function(file, responseText) {
                 console.log(responseText);
@@ -175,26 +192,19 @@
         
             this.on("removedfile", function (file) {
                 var found = uploadedFiles.find(function (item) {
-                    return (item.id==JSON.parse(file.xhr.response).id);
-                })
-                // If got the file lets make a delete request by id
-                if( found ) {
-                    $.ajax({
-                        url: "/medias/" + found.id,
-                        type: 'POST',
-                        data:{
-                            _method:'delete'
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                        },
-                        success: function(response) {
-                            if(response==1){
-                                removeFromInput(found.id);
-                            }
+                    if (typeof file.id !== 'undefined') {
+                        if(item.id==file.id){
+                           removeFromInput(item.id);
+
                         }
-                    });
-                }
+                    }else if(item.id==JSON.parse(file.xhr.response).id){
+                        deleteFileFromServer(item);
+                        return true;
+                    }
+
+                    return false;
+
+                });
             });
 
             // Handle errors
@@ -209,6 +219,25 @@
         }
 
     });
+    function deleteFileFromServer(found){
+        $.ajax({
+            url: "/medias/" + found.id,
+            type: 'POST',
+            data:{
+                _method:'delete'
+            },
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+            },
+            success: function(response) {
+                if(response==1){
+                    removeFromInput(found.id);
+                }else{
+                    alert('SOmething went Wrong');
+                }
+            }
+        });
+    }
     function addToInput(id) {
         if($('input[name="media_id"]').val()==''){
             $('input[name="media_id"]').val(id);

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Models\ShopProfile;
 
 class SettingController extends Controller
 {
@@ -12,6 +14,23 @@ class SettingController extends Controller
     }
 
     public function store(Request $request){
+
+        
+        User::find(auth()->user()->id)
+            ->update([
+                'name'=>request('name'),
+                'email'=>request('email')
+            ]);
+        ShopProfile::updateOrCreate(
+            ['user_id'=>auth()->user()->id],
+            [
+                'info'=>$request->info,
+                'address'=>$request->address,
+                'opening_hours'=>$request->opening_hours,
+                'established_at'=>$request->established_at,
+                'sologon'=>$request->sologon
+            ]);
+
         return redirect()->back()->with('success','Changes are Saved.');
     }
 }

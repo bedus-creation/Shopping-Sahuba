@@ -51,7 +51,7 @@
                                             <label class="float-right mb-0 pt-1 pb-1">Login Email</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="text" name="name" value="{{auth()->user()->email}}" class="form-control">
+                                            <input type="text" name="email" value="{{auth()->user()->email}}" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -61,7 +61,7 @@
                                             <label class="float-right mb-0 pt-1 pb-1">Address</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="text" placeholder="Enter Address" name="name" value="{{auth()->user()->profile->address ?? ''}}" class="form-control">
+                                            <input type="text" placeholder="Enter Address" name="address" value="{{auth()->user()->profile->address ?? ''}}" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -71,7 +71,7 @@
                                             <label class="float-right mb-0 pt-1 pb-1">Shop Established Date</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="date" placeholder="Shop Established Date" name="name" value="{{auth()->user()->profile->established_at ?? ''}}" class="form-control">
+                                            <input type="date" placeholder="Shop Established Date" name="established_at" value="20{{optional(auth()->user()->profile)->established_at ? auth()->user()->profile->established_at->format('y-m-d'):'20'.date('y-m-d')}}" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@
                                             <label class="float-right mb-0 pt-1 pb-1">Sologon</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="text" placeholder="Shop Sologon" name="name" value="{{auth()->user()->profile->sologon ?? ''}}" class="form-control">
+                                            <input type="text" placeholder="Shop Sologon" name="sologon" value="{{auth()->user()->profile->sologon ?? ''}}" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +91,7 @@
                                             <label class="float-right mb-0 pt-1 pb-1">Opening Hours</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="text" placeholder="10:00 am to 5:00 pm" name="name" value="{{auth()->user()->profile->opening_hours ?? ''}}" class="form-control">
+                                            <input type="text" placeholder="10:00 am to 5:00 pm" name="opening_hours" value="{{auth()->user()->profile->opening_hours ?? ''}}" class="form-control">
                                         </div>
                                     </div>
                                 </div>

@@ -17,8 +17,8 @@ class CreatePricesTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->enum('type',['fixed','range']);
-            $table->float('min')->default(0.00);
-            $table->float('max')->default(0.00);
+            $table->float('min',12,2)->default(0.00);
+            $table->float('max',12,2)->default(0.00);
             $table->enum('display',[0,1])->default(1);
         });
     }

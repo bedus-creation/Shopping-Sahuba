@@ -17,4 +17,8 @@ class Media extends Model
             Storage::disk('public')->delete(json_decode($media->in_json)->images->small);
         });
     }
+
+    public function link(){
+        return $this->base_url.json_decode($this->in_json)->images->small;
+    }
 }

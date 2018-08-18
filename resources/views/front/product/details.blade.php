@@ -39,22 +39,9 @@
             <div class="col-md-8">
                 <div class="row">
                     <div class="col-md-12">
-                        <strong class="section_title">Company Info</strong>
+                        <strong class="section_title">Shop Info</strong>
                         <p class="section_info">
-                            Established in 2006, UBA Solutions as a Software Research
-                            & Development Company looking for exceptionally bright and
-                            motivated programmers to join our team. &nbsp;&nbsp;
-                            <button type="button" class="btn btn-sm btn-transparent" data-toggle="collapse" data-target="#info_more">Read More....</button>
-                        </p>
-                        
-                        <p class="section_info collapse" id="info_more">
-                            We pride ourselves  in our research and development programs, providing comprehensive
-                            solution to our world-class clients. If you are looking for an 
-                            opportunity to use your skills in innovative ways in an environment
-                            that promotes free thinking, presented with creative challenges
-                            and makes real impact- UBA Solutions is the place for you. We 
-                            partner with renowned Companies from Silicon Valley, as well
-                            as additional countries around the world.
+                            {{optional($product->user->profile)->info ?? ''}}
                         </p>
                     </div>
                     <div class="col-md-12 mt-1">
@@ -221,59 +208,38 @@
             <div class="col-md-4">
                 <div class="info">
                     <ul class="list-group">
-                        <li class="list-group-item bg-secondary font-weight-bold text-white text-center">Shop Overview</li>
-                        <li class="list-group-item">
-                            <div class="pl-3 d-flex justify-content-start">
-                                <div><i class="far fa-clock"></i></div>
-                                <div class="pl-3">
-                                    10.00 Am to 5:30 PM
+                            <li class="list-group-item bg-secondary font-weight-bold text-white text-center">Shop Overview</li>
+                            <li class="list-group-item">
+                                <div class="pl-3 d-flex justify-content-start">
+                                    <div><i class="far fa-clock"></i></div>
+                                    <div class="pl-3">
+                                        Opening Hours :{{optional($product->user->profile)->opening_hours ?? 'Not Available'}}
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="pl-3 d-flex justify-content-start">
-                                <div><i class="far fa-bookmark"></i></div>
-                                <div class="pl-3">
-                                    Kupondole 32, Kathmandu
+                            </li>
+                            <li class="list-group-item">
+                                <div class="pl-3 d-flex justify-content-start">
+                                    <div><i class="far fa-bookmark"></i></div>
+                                    <div class="pl-3">
+                                        Address : {{optional($product->user->profile)->address ?? 'Not Available'}}
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="pl-3 d-flex justify-content-start">
-                                <div><i class="fas fa-chalkboard-teacher"></i></div>
-                                <div class="pl-3">
-                                    OwnerShip Type: Private
+                            </li>
+                            <li class="list-group-item">
+                                <div class="pl-3 d-flex justify-content-start">
+                                    <div><i class="fas fa-chalkboard-teacher"></i></div>
+                                    <div class="pl-3">
+                                        Established at: {{optional($product->user->profile)->established_at ? '20'.optional($product->user->profile)->established_at->format('y-m-d'):'Not Available'}}
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="pl-3 d-flex justify-content-start">
-                                <div><i class="fas fa-briefcase-medical"></i></div>
-                                <div class="pl-3">
-                                    Medical Plan: NO
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="pl-3 d-flex justify-content-start">
-                                <div><i class="fas fa-chart-bar"></i></div>
-                                <div class="pl-3">
-                                    Employee Size: 200-300
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="pl-3 d-flex justify-content-start">
-                                <div><i class="fas fa-eye"></i></div>
-                                <div class="pl-3">
-                                    Total Profile Views: 200
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul class="list-group mt-2">
-                        <li class="list-group-item bg-secondary font-weight-bold text-white text-center">Advertisement</li>
-                    </ul>
+                            </li>
+                        </ul>
+                        <ul class="list-group mt-2">
+                            <li class="list-group-item bg-secondary font-weight-bold text-white text-center">Advertisement</li>
+                        </ul>
+        
+            
+            
                 </div>
             </div>
         </div>
