@@ -34,7 +34,7 @@
 @section('content')
 <div id="jobs">
     <div class="container mt-2">
-        @include('front.shop.company-profile-cover')
+        @include('front.product.company-profile-cover')
         <div class="row mt-1 mb-4">
             <div class="col-md-8">
                 <div class="row">
@@ -211,7 +211,7 @@
                                 </ul>
                                 <ul class="list-group mt-2">
                                     <li class="list-group-item font-weight-bold border-0">Product Details</li>
-                                    <span class="bg-white p-2">{{$product->details}}</span>
+                                    <li class="list-group-item">{{$product->details}}</li>
                                 </ul>
                             </div>
                         </div>

@@ -22,8 +22,6 @@ class CreateProductsTable extends Migration
             $table->dateTime('expiry_date');
             $table->integer('views')->default(0);
 
-            $table->string('cover')->nullable();
-
             $table->unsignedInteger("category_id");
             $table->unsignedInteger("price_id");
             $table->unsignedInteger("user_id");
