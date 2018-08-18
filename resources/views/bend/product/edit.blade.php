@@ -7,7 +7,10 @@
 @endsection
 
 @section('content')
-<form action="{{url('/shopping/products')}}" method="POST">
+<form action='{{url("/shopping/products/".$product->id)}}' method="POST">
+    <input type="hidden" name="_method" value="PUT">
+
+    @csrf
 <div class="container mt-3">
     <div class="row">
         <div class="col-md-3 d-none d-md-block">
@@ -20,7 +23,7 @@
                       @yield('success-error')
                       <div class="card-title">
                         <div>
-                          <span class="float-left"><strong class="btn font-weight-bold">Add New Product</strong></span>
+                          <span class="float-left"><strong class="btn font-weight-bold">Edit Product</strong></span>
                           <span class="float-right"><a href="{{url('/shopping/products')}}" class="btn btn-info"><i class="fa fa-bars text-white"></i> <span class="d-none d-md-inline">&nbsp;List all Products</span></a></span>
                         </div>
                       </div>
@@ -32,29 +35,29 @@
                         <div class="col-md-6">
                             <div class="form-group">
                               <label>Product Name</label>
-                              <input name="name" value="{{old('name')}}" type="text" class="form-control"  placeholder="Product Name">
+                              <input name="name" value="{{$product->name}}" type="text" class="form-control"  placeholder="Product Name">
                             </div>
                             <div class="form-group">
                                 <label>Condition</label>
                                 <div>
                                   <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="condition" id="condition1" value="5">
+                                    <input class="form-check-input" type="radio" name="condition" id="condition1" {{($product->condition == '5')?'checked':''}} value="5">
                                     <label class="form-check-label" for="condition1">New </label>
                                   </div>
                                   <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="condition" id="condition2" value="4">
+                                    <input class="form-check-input" type="radio" name="condition" id="condition2" {{($product->condition == '4')?'checked':''}} value="4">
                                     <label class="form-check-label" for="condition2">Like New</label>
                                   </div>
                                   <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="condition" id="condition3" value="3">
+                                    <input class="form-check-input" type="radio" name="condition" id="condition3"  {{($product->condition =='3')?'checked':''}} value="3">
                                     <label class="form-check-label" for="condition3">Excellent</label>
                                   </div>
                                   <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="condition" id="condition4" value="2">
+                                    <input class="form-check-input" type="radio" name="condition" id="condition4" {{($product->condition =='2')?'checked':''}} value="2">
                                     <label class="form-check-label" for="condition4">Not Working</label>
                                   </div>
                                   <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="condition" id="condition5" value="1">
+                                    <input class="form-check-input" type="radio" name="condition" id="condition5" {{($product->condition =='1')?'checked':''}} value="1">
                                     <label class="form-check-label" for="condition5">Cannot Described</label>
                                   </div>
                                 </div>
@@ -63,11 +66,11 @@
                                 <label>Negotiable</label>
                                 <div>
                                   <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="negotiable" id="negotiable1" value="1">
+                                    <input class="form-check-input" type="radio" name="negotiable" id="negotiable1" {{($product->negotiable =='1')?'checked':''}} value="1">
                                     <label class="form-check-label" for="negotiable1">Yes </label>
                                   </div>
                                   <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="negotiable" id="negotiable2" value="0">
+                                    <input class="form-check-input" type="radio" name="negotiable" id="negotiable2" {{($product->negotiable =='0')?'checked':''}} value="0">
                                     <label class="form-check-label" for="negotiable2">NO</label>
                                   </div>
                                 </div>
@@ -85,7 +88,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Amount &nbsp;<small class="text-success">In Rupeese</small></label>
-                              <input name="price" value="{{old('price')}}" type="number" class="form-control"  placeholder="In Nepali Rupeese (Only Number)">  
+                              <input name="price" value="{{$product->price->min}}" type="number" class="form-control"  placeholder="In Nepali Rupeese (Only Number)">  
                             </div>
                             <div class="form-group">
                                 <label>Is Warranty ?</label>
@@ -106,7 +109,7 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label>Describe Your Product</label>
-                            <textarea name="details" value="{{old('details')}}" type="text" class="form-control"  placeholder="Product Discription"></textarea>
+                          <textarea name="details" value="{{old('details')}}" type="text" class="form-control"  placeholder="Product Discription">{{$product->details}}</textarea>
                               <input type="hidden" name="media_id">
                               <br>
                               <div id="dropZone" class="dropzone">
