@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Models\Product;
 
 class PageController extends Controller
 {
     public function index(){
         $user= \App\User::all();
-        $data=\App\Models\Product::with('medias')->OrderBy('id','desc')->get();
+        $data=Product::with('medias')->OrderBy('id','desc')->get();
         return view('welcome',['data'=>$data,'users'=>$user]);
     }
 

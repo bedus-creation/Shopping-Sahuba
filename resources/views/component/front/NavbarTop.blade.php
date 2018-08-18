@@ -62,7 +62,7 @@
                                     </li>
                                     <p class="section pt-3">Settings</p>
                                     <li class="list-group-item">
-                                        <a href="#">General</a>
+                                        <a href="{{url('shopping/settings')}}">General</a>
                                     </li>
                                     <li class="list-group-item">
                                         <a href="#">Security</a>

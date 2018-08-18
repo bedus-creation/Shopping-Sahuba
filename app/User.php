@@ -31,6 +31,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Product');
     }
 
+    public function profile(){
+        return $this->hasOne('App\Models\ShopProfile','user_id');
+    }
+
     public function profile_link(){
         return "/shop/".str_slug($this->name,'-').'/'.$this->id;
     }

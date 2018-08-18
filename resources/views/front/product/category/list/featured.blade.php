@@ -3,7 +3,7 @@
     <div class="col-md-3 col-4 p-0">
         <a href="{{url('/product/'.str_slug($item->name,'-').'/'.$item->id)}}">
             <div class="card box text-box h-100">
-                <div class="p-i" style="background:url('{{$item->medias()->first()->base_url.json_decode($item->medias->first()->in_json)->images->small}}') no-repeat">
+                <div class="p-i" style="background:url('{{$item->medias->first()->base_url.json_decode($item->medias->first()->in_json)->images->small}}') no-repeat">
                     <span class="float-right text"></span>
                 </div>
                 <div class="card-body p-1">

@@ -18,6 +18,7 @@ Route::group(['prefix'=>'shopping'],function(){
     });
     Route::resource('/products', 'ProductController');
     Route::get('settings','SettingController@general');
+    Route::post('settings','SettingController@store');
 });
 
 
