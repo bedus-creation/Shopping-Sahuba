@@ -89,8 +89,12 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {   $data= Product::where(['id'=>$id])
+        ->with('price')->first();
+
+            // dd($data);
+
+      return view('bend.product.edit', ['product'=>$data]);   
     }
 
     /**
@@ -100,9 +104,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $product->update($request->all());
+        session()->flash('success', 'edited successfully');
+        return redirect()->back();
     }
 
     /**
