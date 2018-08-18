@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class PageController extends Controller
 {
@@ -12,8 +13,9 @@ class PageController extends Controller
         return view('welcome',['data'=>$data,'users'=>$user]);
     }
 
-    public function shop(){
-        return view('front/shop/details');
+    public function shop($slug,$id){
+        $shop=User::find($id)->with('products')->firstOrFail();
+        return view('front/shop/details',compact('shop'));
     }
     
     public function product($name,$id){

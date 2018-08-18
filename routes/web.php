@@ -2,7 +2,7 @@
 
 
 Route::get('/', 'PageController@index');
-Route::get('shop/{slug}/', 'PageController@shop');
+Route::get('shop/{slug}/{id}', 'PageController@shop');
 Route::get('product/{slug}/{id}','PageController@product');
 
 Route::group(['namespace'=>'Utils'], function () {

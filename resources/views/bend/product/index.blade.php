@@ -54,7 +54,7 @@
                                 @foreach($data as $item)
                                 <tr>
                                     <td>{{$item->name}}</td>
-                                    <td>{{$item->price}}</td>
+                                    <td>{{$item->price->min ?? 'No Price Available' }}</td>
                                     <td><span class="badge {{(date($item->expiry_date)<date("Y-m-d H:i:s"))? 'badge-danger':'badge-success'}}">{{$item->expiry_date}} </span></td>
                                     <td class="text-center">{{$item->views}}</td>
                                     <td class="text-center  text-nowrap" style="width:120px">

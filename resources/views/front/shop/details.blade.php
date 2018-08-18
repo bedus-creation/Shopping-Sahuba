@@ -11,7 +11,7 @@
         <div class="row mt-1 mb-4">
             <div class="col-md-8">
                 <div class="row">
-                    <div class="col-md-12 info">
+                    <div class="col-md-12">
                         <strong class="section_title">Info</strong>
                         <p class="section_info">
                             Established in 2006, UBA Solutions as a Software Research

@@ -11,7 +11,7 @@
                 <div class="logo"></div>
                 <div class="basic">
                     <ul class="list-group list-group-flush">
-                        <li class=" list-group-item name"><span style="color: #fff;">{{$product->user->name}}</span></li>
+                        <li class="list-group-item name"><a href="{{url('shop/'.str_slug($shop->name,'-').'/'.$shop->id)}}"><span style="color: #fff;">{{$shop->name}}</span></a></li>
                     </ul>
                 </div>
             </div>
