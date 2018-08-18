@@ -17,6 +17,7 @@ Route::group(['prefix'=>'shopping'],function(){
         return view('bend.page.index');
     });
     Route::resource('/products', 'ProductController');
+    Route::get('settings','SettingController@general');
 });
 
 

@@ -17,4 +17,12 @@ class Product extends Model
     public function medias(){
         return $this->belongsToMany('App\Models\Media');
     }
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
+
+    public function price(){
+        return $this->belongsTo('App\Models\Price');
+    }
 }

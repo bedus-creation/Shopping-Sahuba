@@ -17,9 +17,11 @@ class PageController extends Controller
     }
     
     public function product($name,$id){
-        $data=\App\Models\Product::where(['id'=>$id])->first();
+        $data=\App\Models\Product::where(['id'=>$id])
+            ->with('price')->first();
         $data->views+=1;
         $data->save();
+
         return view('front/product/details',['product'=>$data]);
     }
 }

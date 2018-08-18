@@ -11,7 +11,7 @@
                 <div class="logo"></div>
                 <div class="basic">
                     <ul class="list-group list-group-flush">
-                        <li class=" list-group-item name"><span style="color: #fff;">Aammui Group of Company</span></li>
+                        <li class=" list-group-item name"><span style="color: #fff;">{{$product->user->name}}</span></li>
                     </ul>
                 </div>
             </div>

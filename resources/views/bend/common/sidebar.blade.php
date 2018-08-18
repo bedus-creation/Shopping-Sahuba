@@ -82,18 +82,18 @@
             </div>
         </li>
         <li class="list-group-item">
-            <div class="dropdown">
-                <a class="d-flex flex-row justify-content-between" id="settings" href="#"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="dropdown" id="setting">
+                <a class="d-flex flex-row justify-content-between" href="#"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="d-flex flex-row justify-content-start">
                         <div class=""><i class="fa fa-cog"></i></div>
                         <div class="pl-3" style="cursor: pointer;">Settings</div>
                     </div>
                     <div class=""><i class="fa fa-angle-right"></i></div>
                 </a> 
-                <div class="dropdown-menu dropdown-menu-side" aria-labelledby="settings">
+                <div class="dropdown-menu dropdown-menu-side" aria-labelledby="setting">
                     <ul class="list">
                         <li>
-                            <a href="#" class="d-flex flex-row justify-content-between">
+                            <a href="{{url('shopping/settings')}}" class="d-flex flex-row justify-content-between">
                                 <div class="d-flex flex-row justify-content-start">
                                     <div class=""><i class="fa fa-cog"></i></div>
                                     <div class="pl-3" style="cursor: pointer;">General</div>

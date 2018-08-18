@@ -164,6 +164,7 @@
                                                 : &nbsp; 
                                             </div>
                                             <div class="col-5 pl-0 pr-0">
+                                                Rs. {{$product->price->min}}
                                             </div>
                                         </div>
                                     </li>
@@ -199,7 +200,11 @@
                                                 : &nbsp; 
                                             </div>
                                             <div class="col-6  pl-0 pr-0">
-                                                    {{$product->condition}}
+                                                {{$product->condition=='1' ? 'Cannot Described':'' }}
+                                                {{$product->condition=='2' ? 'Not Working':'' }}
+                                                {{$product->condition=='3' ? 'Excellent':'' }}
+                                                {{$product->condition=='4' ? 'Like New':'' }}
+                                                {{$product->condition=='5' ? 'New':'' }}
                                             </div>
                                         </div>
                                     </li>
