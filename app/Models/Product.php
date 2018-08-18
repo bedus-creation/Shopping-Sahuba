@@ -25,4 +25,8 @@ class Product extends Model
     public function price(){
         return $this->belongsTo('App\Models\Price');
     }
+
+    public function product_link(){
+        return '/product/'.str_slug($this->name,'-').'/'.$this->id;
+    }
 }

@@ -14,7 +14,7 @@ class PageController extends Controller
     }
 
     public function shop($slug,$id){
-        $shop=User::find($id)->with('products')->firstOrFail();
+        $shop=User::where('id',$id)->with('products')->firstOrFail();
         return view('front/shop/details',compact('shop'));
     }
     

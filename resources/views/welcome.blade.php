@@ -2,6 +2,10 @@
 
 @section('css')
 <style>
+    .alert-alert{
+        background-color: #0876ce;
+        color: #f7f1f1;
+    }
     .f-85{
         font-size:0.85rem;
     }
@@ -62,9 +66,14 @@
     <div class="row mt-3">
         <div class="col-md-9 pr-md-0">
             <div class="bg-white">
-                <div class="card">
-                    <div class="card-header"><strong>Featured Product</strong></div>
+                <div class="alert alert-alert alert-dismissible fade show" role="alert">
+                    <strong>Free Service ! </strong> Create Your Shop online & sell Any number of Products for Free Forever. <strong> Yes Forever </strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+            </div>
+            <div class="bg-white">
             </div>
             @include('front.product.category.list.featured')
             <div class="bg-white">

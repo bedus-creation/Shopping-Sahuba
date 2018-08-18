@@ -55,7 +55,7 @@
                                     </li>
                                     <p class="section pt-3">Shop</p>
                                     <li class="list-group-item">
-                                        <a href="{{url('/shop/aammui')}}">Profile</a>
+                                        <a href="{{auth()->user()->profile_link()}}">Profile</a>
                                     </li>
                                     <li class="list-group-item">
                                         <a href="{{url('shopping')}}">Dashboard</a>
