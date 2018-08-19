@@ -10,7 +10,7 @@ gtag('config', 'UA-106586554-5');
 </script>
 
 <script>
-    if($('searchInput').val!==''){
+    if($('#searchInput').val()!==''){
         $('#nav-search').addClass('show');
     }
 </script>
