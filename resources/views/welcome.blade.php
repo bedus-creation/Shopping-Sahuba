@@ -74,6 +74,9 @@
                 </div>
             </div>
             <div class="bg-white">
+                <div class="card">
+                    <div class="card-header"><strong> Featured Product</strong></div>
+                </div>
             </div>
             @include('front.product.category.list.featured')
             <div class="bg-white">
@@ -91,14 +94,14 @@
                             @foreach($users as $user)
                             <div class="media">
                                 <div class="mr-3">
-                                    <a href="{{$user->profile_image}}" data-popup="lightbox">
+                                    <a href="{{$user->profile_link()}}" data-popup="lightbox">
                                         <img src="{{$user->profile_image}}" style="width:60px;height:60px;" class="rounded-circle img-fluid" alt="">
                                     </a>
                                 </div>
 
                                 <div class="media-body">
-                                    <h5 class="mt-0">{{$user->name}}</h5>
-                                    <span class="text-muted">Chief officer</span>
+                                    <h6 class="mt-0 mb-0">{{$user->name}}</h6>
+                                    <span class="text-muted small">{{optional($user->profile)->address ?? ''}}</span>
                                 </div>
 
                                 <div class="">
@@ -106,9 +109,7 @@
                                         <li class="dropdown">
                                             <a href="#" data-toggle="dropdown"><i class="fas fa-bars"></i></i></a>
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <a class="dropdown-item" href="#">Something else here</a>
+                                                <a class="dropdown-item" href="{{$user->profile_link()}}">Profile</a>
                                             </div>
                                         </li>
                                     </ul>

@@ -47,24 +47,12 @@ a:hover{
     width: 100%;
    padding: 10px 5px;
 }
-.section_title{
-    font-size:30px;
-}
-p.section_info{
-    text-align: justify;
-}
+
 .far{
     font-size:18px;
 }
 .p-img{
     width:100%;
-}
-.j-p-i{
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    background-size: contain !important;
-    background-color: #000 !important;
-    height: 8rem;
 }
 
 @media screen and (max-width:768px){

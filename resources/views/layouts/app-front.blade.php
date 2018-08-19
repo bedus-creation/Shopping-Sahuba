@@ -10,8 +10,21 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href="{{url('css/style.css')}}" rel="stylesheet">
+        <link rel="stylesheet" href="{{url('css/app.css')}}">
         <link href="https://fonts.googleapis.com/css?family=Khand" rel="stylesheet">
         @yield('css')
+        <script type="application/ld+json">
+            {
+              "@context": "http://schema.org",
+              "@type": "WebSite",
+              "url": "{{url('/')}}",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "{{url('/')}}/search?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            }
+        </script>
     </head>
 <body>
     <div id="app">

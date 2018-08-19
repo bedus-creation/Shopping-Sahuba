@@ -4,6 +4,7 @@
 Route::get('/', 'PageController@index');
 Route::get('shop/{slug}/{id}', 'PageController@shop');
 Route::get('product/{slug}/{id}','PageController@product');
+Route::get('search/','SearchController@search');
 
 Route::group(['namespace'=>'Utils'], function () {
     Route::get('/command/{command}', 'CommandController@command');

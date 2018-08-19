@@ -8,3 +8,9 @@ gtag('js', new Date());
 
 gtag('config', 'UA-106586554-5');
 </script>
+
+<script>
+    if($('searchInput').val!==null){
+        $('#nav-search').addClass('show');
+    }
+</script>

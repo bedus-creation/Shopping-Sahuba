@@ -13,6 +13,27 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+.section_title{
+  font-size:30px;
+}
+p.section_info{
+  text-align: justify;
+}
+.j-p-i{
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+  background-color: #000 !important;
+  height: 8rem;
+  width: 8rem;
+}
+
+@media screen and (max-width:768px){
+  .j-p-i{
+    height: 4rem;
+    width: 4rem;  
+  }
+}
 
 @mixin keyframes($name) {
   @-webkit-keyframes #{$name} {
