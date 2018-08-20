@@ -3,6 +3,8 @@
         Options -MultiViews -Indexes
     </IfModule>
 
+    php_value short_open_tag 0
+
     RewriteEngine On
 
     RewriteCond %{HTTPS} !=on
