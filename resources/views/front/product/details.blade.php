@@ -2,16 +2,30 @@
 @section('css')
 <link href="{{url('css/company-profile.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="{{url('js_slider/css/style.css')}}">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# product: http://ogp.me/ns/product#">
+<meta property="fb:app_id"                content="1622291221319152" /> 
+<meta property="og:type"                  content="product.item" /> 
+<meta property="og:url"                   content="{{url($product->product_link())}}" /> 
+<meta property="og:title"                 content="{{$product->name}}" /> 
+<meta property="og:image"                 content="{{$product->medias->first()->link()}}" /> 
+<meta property="og:image:width" content="{{$product->medias->first()->size()->{'0'} ?? 300}}">
+<meta property="og:image:height"  content="{{$product->medias->first()->size()->{'1'} ?? 300}}">
+<meta property="product:retailer_item_id" content="{{$product->id}}" /> 
+<meta property="product:price:amount"     content="{{$product->price->min ?? 0}}" /> 
+<meta property="product:price:currency"   content="NRS" /> 
+<meta property="product:availability"     content="Yes" /> 
+<meta property="product:condition"        content="New" /> 
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:domain" content="{{url('/')}}"/>
+<meta name="twitter:site" content="@sahuba.com" />
+<meta name="twitter:description" property="og:description" itemprop="description" content="{{$product->details}}" />
+
 <script type="application/ld+json">
     {
         "@context": "http://schema.org/",
         "@type": "Product",
         "name": "{{$product->name}}",
-        "image": [
-            @foreach($product->medias as $key => $item)
-            "{{$item->base_url.json_decode($item->in_json)->images->small}}" {{ $key==(count($product->medias) - 1 ) ? '':',' }}
-            @endforeach
-        ],
+        "image": "{{$product->medias->first()->link()}}",
         "brand": {
             "@type": "Thing",
             "name": "ACME"
@@ -23,9 +37,9 @@
         },
         "offers": {
             "@type": "AggregateOffer",
-            "lowPrice": "119.99",
-            "highPrice": "199.99",
-            "priceCurrency": "USD"
+            "lowPrice": "{{$product->price->min ?? 0}}",
+            "highPrice": "{{$product->price->min ?? 0}}",
+            "priceCurrency": "NRS"
         }
     }
 </script>

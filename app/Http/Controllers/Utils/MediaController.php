@@ -50,6 +50,11 @@ class MediaController extends Controller
                 'type'=>'image',
                 'base_url'=>url('/'),
                 'in_json'=>json_encode([
+                    'sizes'=>[
+                        'small'=>getimagesize($request->file),
+                        'medium'=>getimagesize($request->file),
+                        'big'=>getimagesize($request->file),
+                    ],
                     'images'=>[
                         'small'=>Storage::url($fileUid),
                         'medium'=>Storage::url($fileUid),

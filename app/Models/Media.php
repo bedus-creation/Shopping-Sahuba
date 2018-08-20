@@ -18,6 +18,11 @@ class Media extends Model
         });
     }
 
+    public function size(){
+        return optional(json_decode($this->in_json))->sizes->small ?? optional();
+    }
+
+
     public function link(){
         return $this->base_url.json_decode($this->in_json)->images->small;
     }
