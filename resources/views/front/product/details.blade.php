@@ -1,4 +1,9 @@
 @extends('layouts.app-front')
+
+@section('title')
+{{$product->name}}
+@endsection
+
 @section('css')
 <link href="{{url('css/company-profile.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="{{url('js_slider/css/style.css')}}">

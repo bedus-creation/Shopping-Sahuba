@@ -13,7 +13,7 @@
     @foreach($products as $item)
     <url>
         <loc>{{url($item->product_link())}}</loc>
-        <lastmod>{{$item->updated_at}}+5:45</lastmod>
+        <lastmod>20{{$item->updated_at->format('y-m-d')}}T{{$item->updated_at->format('h:i:s')}}+05:45</lastmod>
         @foreach($item->medias as $media)
         <image:image>
             <image:loc>{{$media->link()}}</image:loc>

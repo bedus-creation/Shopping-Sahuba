@@ -1,8 +1,16 @@
 @extends('layouts.app-front')
+
+@section('title')
+{{$shop->name}}
+@endsection
+
+
 @section('css')
 <link href="{{url('css/company-profile.css')}}" rel="stylesheet">
 
 @endsection
+
+
 
 @section('content')
 <div id="jobs">
