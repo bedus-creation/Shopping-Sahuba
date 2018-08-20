@@ -10,4 +10,16 @@
             <image:caption>Sahuba Logo</image:caption>
         </image:image>
     </url>
+    @foreach($products as $item)
+    <url>
+        <loc>{{url($item->product_link())}}</loc>
+        <lastmod>{{$item->updated_at}}+(GMT+5:45)</lastmod>
+        @foreach($item->medias as $media)
+        <image:image>
+            <image:loc>{{$media->link()}}</image:loc>
+            <image:caption>{{$item->name}}</image:caption>
+        </image:image>
+        @endforeach
+    </url> 
+    @endforeach
 </urlset>
