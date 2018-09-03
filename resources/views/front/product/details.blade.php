@@ -25,7 +25,7 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:domain" content="{{url('/')}}"/>
 <meta name="twitter:site" content="@sahuba.com" />
-<meta name="twitter:description" property="og:description" itemprop="description" content="{{$product->details}}" />
+<meta name="twitter:description" property="og:description" itemprop="description" content="{{strip_tags($product->details)}}" />
 
 <script type="application/ld+json">
     {
