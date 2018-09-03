@@ -18,7 +18,7 @@
             <ul class="navbar-nav mx-auto">
                 <form class="form-inline my-2 my-lg-0" method="GET" action="/search">
                     <div class="input-group">
-                        <input name="q" value="{{request()->q}}" type="text" id="searchInput" class="form-control" placeholder="Enter Search keywords" onblur="$('#nav-search').removeClass('show');">
+                        <input name="q" value="{{request()->q}}" type="text" id="searchInput" class="form-control" placeholder="Enter Search keywords">
                         <div class="input-group-prepend">
                             <button class="btn login-btn" type="submit"><i class="fas fa-search"></i></button>
                         </div>
@@ -63,9 +63,6 @@
                                     <p class="section pt-3">Settings</p>
                                     <li class="list-group-item">
                                         <a href="{{url('shopping/settings')}}">General</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <a href="#">Security</a>
                                     </li>
                                     <div class="dropdown-divider" style="border-top:1px solid #568ab5"></div>
                                     <li class="list-group-item">

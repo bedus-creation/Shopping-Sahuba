@@ -13,4 +13,15 @@ gtag('config', 'UA-106586554-5');
     if($('#searchInput').val()!==''){
         $('#nav-search').addClass('show');
     }
+
+    $(document).mouseup(function(e) 
+    {
+        var container = $("#searchInput");
+
+        if (!container.is(e.target) && container.has(e.target).length === 0) 
+        {
+            $('#nav-search').removeClass('show');
+        }
+    });
+        
 </script>
