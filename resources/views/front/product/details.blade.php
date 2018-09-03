@@ -234,9 +234,25 @@
                             <li class="list-group-item bg-secondary font-weight-bold text-white text-center">Shop Overview</li>
                             <li class="list-group-item">
                                 <div class="pl-3 d-flex justify-content-start">
+                                    <div><i class="fas fa-phone"></i></div>
+                                    <div class="pl-3">
+                                        Contact :{{$product->user->mobile ?? 'Not Available'}}
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="pl-3 d-flex justify-content-start">
+                                    <div><i class="fas fa-phone-volume"></i></div>
+                                    <div class="pl-3">
+                                        Telephone :{{$product->user->telephone ?? 'Not Available'}}
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="pl-3 d-flex justify-content-start">
                                     <div><i class="far fa-clock"></i></div>
                                     <div class="pl-3">
-                                        Opening H. :{{optional($product->user->profile)->opening_hours ?? 'Not Available'}}
+                                        Opening :{{optional($product->user->profile)->opening_hours ?? 'Not Available'}}
                                     </div>
                                 </div>
                             </li>

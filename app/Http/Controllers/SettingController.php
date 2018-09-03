@@ -19,7 +19,9 @@ class SettingController extends Controller
         User::find(auth()->user()->id)
             ->update([
                 'name'=>request('name'),
-                'email'=>request('email')
+                'email'=>request('email'),
+                'mobile'=>request('mobile'),
+                'telephone'=>request('telephone')
             ]);
         ShopProfile::updateOrCreate(
             ['user_id'=>auth()->user()->id],

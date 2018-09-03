@@ -58,6 +58,26 @@
                                 <div class="col-md-12">
                                     <div class="form-group row">
                                         <div class="col-md-3">
+                                            <label class="float-right mb-0 pt-1 pb-1">Mobile</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="text" placeholder="Mobile Number" name="mobile" value="{{auth()->user()->mobile ?? ''}}" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <label class="float-right mb-0 pt-1 pb-1">Telephone</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="text" placeholder="Telephone" name="telephone" value="{{auth()->user()->telephone ?? '' }}" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
                                             <label class="float-right mb-0 pt-1 pb-1">Address</label>
                                         </div>
                                         <div class="col-md-9">

@@ -57,7 +57,7 @@ class ProductController extends Controller
         
         date_default_timezone_set('Asia/Kathmandu');
         $date = date('Y-m-d');
-        $date = date('Y-m-d', strtotime($date. ' + 30 days'));
+        $date = date('Y-m-d', strtotime($date. ' + 90 days'));
 
         $request->merge([
             'price_id'=>$price->id,
