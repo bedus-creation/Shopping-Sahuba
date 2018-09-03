@@ -100,14 +100,6 @@
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="#" class="d-flex flex-row justify-content-between">
-                                <div class="d-flex flex-row justify-content-start">
-                                    <div class=""><i class="fa fa-chart-bar"></i></div>
-                                    <div class="pl-3" style="cursor: pointer;">Security</div>
-                                </div>
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>
