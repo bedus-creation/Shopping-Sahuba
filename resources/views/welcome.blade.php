@@ -95,7 +95,7 @@
                             <div class="media">
                                 <div class="mr-3">
                                     <a href="{{$user->profile_link()}}" data-popup="lightbox">
-                                        <img src="{{optional($user->coverImage)->link()}}" style="width:50px;height:50px;" class="rounded-circle img-fluid" alt="">
+                                        <img src="{{optional($user->profileImage)->link()}}" style="width:50px;height:50px;" class="rounded-circle img-fluid" alt="">
                                     </a>
                                 </div>
 
