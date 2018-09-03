@@ -19,8 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('mobile',20)->nullable();
             $table->string('password');
-            $table->string('profile_image')->nullable();
-            $table->string('cover_image')->nullable();
+            $table->unsignedInteger('profile_image')->nullable();
+            $table->unsignedInteger('cover_image')->nullable();
 
             $table->string('provider', 20)->nullable();
             $table->string('provider_id')->nullable();

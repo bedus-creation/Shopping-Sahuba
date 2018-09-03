@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <div id="profile">
+        <div id="profile" style="background-image:url('{{optional($shop->coverImage)->link()}}')">
             <div class="profile-inner">
             </div>   
         </div>
@@ -8,7 +8,7 @@
     <div class="col-md-12" id="c-info">
         <div class="row">
             <div class="col-md-8 d-flex">
-                <div class="logo"></div>
+                <div class="logo" style="background-image:url('{{optional($shop->profileImage)->link()}}')"></div>
                 <div class="basic">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item name"><a href="{{url('shop/'.str_slug($shop->name,'-').'/'.$shop->id)}}"><span style="color: #fff;">{{$shop->name}}</span></a></li>
@@ -22,8 +22,7 @@
                 </div>
                 <div class="item"> 
                     <a href="https://twitter.com/intent/tweet?text=" style="background: #55ACEE;" class="btn text-center w-100"
-                        onclick="return !window.open(this.href, 'Twitter', 'width=640,height=580')"
-                        >
+                        onclick="return !window.open(this.href, 'Twitter', 'width=640,height=580')">
                         <i class="fab fa-twitter"></i>
                     </a>
                 </div>

@@ -1,6 +1,6 @@
 <div class="row">
         <div class="col-md-12">
-            <div id="profile">
+            <div id="profile" style="background-image:url('{{optional($product->user->coverImage)->link()}}')">
                 <div class="profile-inner">
                 </div>   
             </div>
@@ -8,7 +8,7 @@
         <div class="col-md-12" id="c-info">
             <div class="row">
                 <div class="col-md-8 d-flex">
-                    <div class="logo"></div>
+                    <div class="logo" style="background-image:url('{{optional($product->user->profileImage)->link()}}')"></div>
                     <div class="basic">
                         <ul class="list-group list-group-flush">
                         <li class="list-group-item name"><a href="{{url('shop/'.str_slug($product->user->name,'-').'/'.$product->user->id)}}"><span style="color: #fff;">{{$product->user->name}}</span></a></li>

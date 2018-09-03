@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','mobile','telephone'
+        'name', 'email', 'password','mobile','telephone','profile_image','cover_image'
     ];
 
     /**
@@ -38,4 +38,13 @@ class User extends Authenticatable
     public function profile_link(){
         return "/shop/".str_slug($this->name,'-').'/'.$this->id;
     }
+
+    public function profileImage(){
+        return $this->belongsTo('App\Models\Media','profile_image');
+    }
+
+    public function coverImage(){
+        return $this->belongsTo('App\Models\Media','cover_image');
+    }
+
 }

@@ -4,6 +4,7 @@
 @section('css')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="/css/bend-index.css">
+<link rel="stylesheet" href="/css/file.upload.css">
 <style>
   .g-active{
     color: #333;
@@ -35,6 +36,25 @@
                         <form action="{{url('shopping/settings')}}" method="POST">
                             @csrf
                             <div class="row">
+                                <div class="col-md-12 mb-4">
+                                    <div class=" bg-white">
+                                        <div id="profile" class="edit" style="background-image:url('{{optional(auth()->user()->coverImage)->link()}}')">
+                                            <div id="cover" class="btn btn-success float-right m-2" input-field="cover_image" data-value="{{optional(auth()->user()->coverImage)->id}}">Update Cover Image</div>
+                                        </div>
+                                        <div class="d-flex">
+                                        <div class="logo ledit" style="background-image:url('{{optional(auth()->user()->profileImage)->link()}}')">
+                                            <div id="update" input-field="profile_image" data-value="{{optional(auth()->user()->profileImage)->id}}" class="h-100 d-flex justify-content-center align-items-center" data-toggle="tooltip" data-placement="bottom" title="Update Profile Image">
+                                                <button class="btn btn-success" type="button"><i class="fas fa-camera-retro"></i></button>
+                                            </div>
+                                        </div>
+                                            <div class="basic">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="name list-group-item"><span style="color: red">{{auth()->user()->name}}</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-12">
                                     <div class="form-group row">
                                         <div class="col-md-3">
@@ -61,7 +81,7 @@
                                             <label class="float-right mb-0 pt-1 pb-1">Mobile</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="text" placeholder="Mobile Number" name="mobile" value="{{auth()->user()->mobile ?? ''}}" class="form-control">
+                                            <input type="text" name="mobile" value="{{auth()->user()->mobile}}" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -71,10 +91,11 @@
                                             <label class="float-right mb-0 pt-1 pb-1">Telephone</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="text" placeholder="Telephone" name="telephone" value="{{auth()->user()->telephone ?? '' }}" class="form-control">
+                                            <input type="text" name="telephone" value="{{auth()->user()->telephone}}" class="form-control">
                                         </div>
                                     </div>
                                 </div>
+    
                                 <div class="col-md-12">
                                     <div class="form-group row">
                                         <div class="col-md-3">
@@ -141,6 +162,7 @@
 
 
 @section('scripts')
+<script src="/js/file.upload.js"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
 <script>
@@ -159,9 +181,15 @@
 
     });
 
-
-    $('#productList').DataTable({
-        "scrollX": true
+    $('#cover').fileupload({
+		serverUploadUrl:'{{ route('medias.store') }}',
+		serverAllFileUrl:'{{ route('medias.index') }}'
     });
+    
+    $('#update').fileupload({
+		serverUploadUrl:'{{ route('medias.store') }}',
+		serverAllFileUrl:'{{ route('medias.index') }}'
+	});
+
 </script>
 @endsection

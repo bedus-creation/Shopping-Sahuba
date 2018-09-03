@@ -137,7 +137,6 @@
 
 
 @section('scripts')
-<script type="text/javascript" src="/js/file.upload.js"></script>
 <script src="/lib/bootstrap-select/js/bootstrap-select.min.js"></script>
 <script>
     $('#product').dropdown('toggle');

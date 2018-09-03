@@ -17,9 +17,10 @@
 		getAll: function () {
 			return JSON.parse(localStorage.files);
 		},
-		update: function (id, src) {
+		update: function (id, image) {
 			var data = model.getAll();
-			data[id].ImgSrc = env.baseUrl + src;
+			data[id].ImgSrc = image.base_url+JSON.parse(image.in_json).images.small;
+			data[id].ImgId=image.id;
 			data[id].type = "local";
 			data[id].status = "success";
 			localStorage.files = JSON.stringify(data);
@@ -42,9 +43,12 @@
 			// COntains bug on clicked.inputId
 			console.log(clicked);
 			
-			$('input[name=' + clicked.input + ']').val(model.getSelected(id).ImgSrc);
+			$('input[name=' + clicked.input + ']').val(model.getSelected(id).ImgId);
 			
-			$('#' + clicked.imageId).html('<img src="' + model.getSelected(id).ImgSrc + '" class="img-fluid">');
+			// $('#' + clicked.imageId).html('<img src="' + model.getSelected(id).ImgSrc + '" class="img-fluid">');
+			// 
+			$('#' + clicked.id).parent().css({ 'background':'url('+model.getSelected(id).ImgSrc+') no-repeat','height':'20rem' });
+			$('#' + clicked.imageId).html('');
 			return true;
 		},
 
@@ -92,7 +96,8 @@
 		 addMultipleFiles: function (data, env) {
 		 	data.data.forEach(function (item) {
 		 		model.add({
-		 			ImgSrc: env.baseUrl + item,
+					ImgSrc: item.url,
+					ImgId:item.id,
 		 			id: currentId,
 		 			type: 'server',
 		 			status: 'success'
@@ -128,10 +133,14 @@
 				},
 				success: function (data, textStatus, jqXHR) {
 					/*Update the src of local */
+					console.log(data);
+					console.log(textStatus);
+					console.log(jqXHR);
 					controller.updateSrc(data, env, currentId);
 					/*Set opacity to 1 */
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
+					console.log(jqXHR)
 					alert(errorThrown + textStatus);
 					if (jqXHR.responseText) {
 						errors = JSON.parse(jqXHR.responseText).errors
@@ -175,14 +184,10 @@
 				var temp = this;
 				temp.env = env;
 				var $div = $('#' + env.id);
-				var inputAppend = "<input name='" + env.input + "' type='hidden' value='"+env.value+"'>";
+				var inputAppend = "<input name='" + $div.attr('input-field') + "' type='hidden' value='"+env.value+"'>";
 				$div.parent().prepend(inputAppend);
-				inputAppend="<span id='"+env.imageId+"'>";
-				// Do not insert Image field id image data is not available
-				if(env.value!='')
-				{	
-					inputAppend+="<img src='"+env.value+"' class='img-fluid'>";
-				}
+				inputAppend="<span id='"+env.id+"-image'>";
+				
 				inputAppend+="</span>";
 
 				$div.parent().append(inputAppend);
@@ -190,6 +195,7 @@
 			var $result = $('#' + env.imageId);
 			$div.click(function () {
 				temp.env.id = $(this).attr('id');
+				temp.env.input = $(this).attr('input-field');
 				temp.env.imageId = $(this).attr('id') + '-image';
 				var raw = '<div class="overlay">' +
 				'</div><div class="hero">' +
@@ -226,7 +232,7 @@
 					// Implement File Validation
 
 					let form = new FormData();
-					form.append('image', file);
+					form.append('file', file);
 					var url = env.serverUploadUrl;
 					var reader = new FileReader();
 					reader.onload = function () {
@@ -341,8 +347,7 @@
 				env = $.extend({
 					baseUrl: "/",
 					id: $this.attr('id'),
-					value:(typeof $this.attr('data-url') == typeof undefined) ? '':$this.attr('data-url'),
-					input:'',
+					value:(typeof $this.attr('data-value') == typeof undefined) ? '':$this.attr('data-value'),
 					imageId: $this.attr('id') + '-image',
 					serverUploadUrl: '/',
 					serverAllFileUrl: ''

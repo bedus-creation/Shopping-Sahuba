@@ -24,6 +24,9 @@ class Media extends Model
 
 
     public function link(){
+        if($this==null){
+            return url('/img/profile.jpg');
+        }
         return $this->base_url.json_decode($this->in_json)->images->small ?? '';
     }
 }

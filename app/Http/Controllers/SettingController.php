@@ -9,19 +9,21 @@ use App\Models\ShopProfile;
 class SettingController extends Controller
 {
     public function general(){
-        auth()->user()->load('profile');
+        auth()->user()->load(['profile','profileImage','coverImage']);
+        // dd(auth()->user());
         return view('bend.setting.general');
     }
 
     public function store(Request $request){
 
-        
         User::find(auth()->user()->id)
             ->update([
                 'name'=>request('name'),
                 'email'=>request('email'),
                 'mobile'=>request('mobile'),
-                'telephone'=>request('telephone')
+                'telephone'=>request('telephone'),
+                'profile_image'=>request('profile_image'),
+                'cover_image'=>request('cover_image')
             ]);
         ShopProfile::updateOrCreate(
             ['user_id'=>auth()->user()->id],

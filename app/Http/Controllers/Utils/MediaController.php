@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Media;
+use App\Http\Resources\MediaResources;
 
 class MediaController extends Controller
 {
@@ -16,11 +17,12 @@ class MediaController extends Controller
      */
     public function index()
     {
-        $files = \File::Files('uploads/images');
-		foreach($files as $file) {
-			$name[]=$file->getPath()."/".$file->getFilename();
-		}
-		return response()->json(["data"=>$name]);
+        // $files = \File::Files('upload');
+		// foreach($files as $file) {
+		// 	$name[]=$file->getPath()."/".$file->getFilename();
+        // }
+        $files=MediaResources::Collection(Media::orderBy('id','desc')->limit(20)->get());
+		return response()->json(["data"=>$files]);
     }
 
     /**

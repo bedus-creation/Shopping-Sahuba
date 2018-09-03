@@ -1,7 +1,7 @@
 <div class=" bg-white">
-    <div id="profile"></div>
+    <div id="profile" style="background-image:url('{{optional(auth()->user()->coverImage)->link()}}')"></div>
     <div class="d-flex">
-    <div class="logo"></div>
+    <div class="logo" style="background-image:url('{{optional(auth()->user()->profileImage)->link()}}')"></div>
         <div class="basic">
             <ul class="list-group list-group-flush">
                 <li class="name list-group-item"><span style="color: red">{{auth()->user()->name}}</span></li>

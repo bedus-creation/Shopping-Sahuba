@@ -1,19 +1,27 @@
 #profile{
     height: 6rem;
-    background: url('/img/company-cover.jpeg');
     background-position: center !important;
     background-size: cover !important;
+    background-color: #333;
+}
+.edit{
+    height: 14rem !important;
 }
 .logo{
     margin-left:20px;
     margin-top: -2rem;
-    background: url('/img/profile.jpg') no-repeat;
     background-color: #000;
     height: 4rem;
     width: 5rem;
     background-position: calc(100% + 10px);
     background-size: cover !important;
     border-radius: 50%;
+    background-color: #868e96;
+}
+.ledit{
+    margin-top: -4rem !important;
+    height: 8rem !important;
+    width: 8rem !important;
 }
 a{
     color: #868e96;

@@ -17,7 +17,7 @@ a:hover{
     background-color: #000;
     height: 8rem;
     width: 8rem;
-    background-position: calc(100% + 10px);
+    background-position: center !important;
     background-size: cover !important;
     border-radius: 50%;
 }
@@ -38,7 +38,7 @@ a:hover{
 .profile-inner{
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);    
+    background: rgba(0, 0, 0, 0.3);    
 }
 .fab{
     color: #fff;
