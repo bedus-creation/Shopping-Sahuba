@@ -28,6 +28,14 @@ p.section_info{
   width: 8rem;
 }
 
+.top-user-img{
+  height: 2.2rem;
+  width: 2.2rem;
+  border-radius: 1.1rem;
+  background-position: center !important;
+  background-size: cover !important;
+}
+
 @media screen and (max-width:768px){
   .j-p-i{
     height: 4rem;
