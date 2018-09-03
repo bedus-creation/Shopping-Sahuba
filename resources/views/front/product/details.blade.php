@@ -12,9 +12,11 @@
 <meta property="og:type"                  content="product.item" /> 
 <meta property="og:url"                   content="{{url($product->product_link())}}" /> 
 <meta property="og:title"                 content="{{$product->name}}" /> 
-<meta property="og:image"                 content="{{$product->medias->first()->link()}}" /> 
+@if(($product->medias->first()!==null))
+<meta property="og:image"                 content="{{optional($product->medias->first())->link()}}" /> 
 <meta property="og:image:width" content="{{$product->medias->first()->size()->{'0'} ?? 300}}">
 <meta property="og:image:height"  content="{{$product->medias->first()->size()->{'1'} ?? 300}}">
+@endif
 <meta property="product:retailer_item_id" content="{{$product->id}}" /> 
 <meta property="product:price:amount"     content="{{$product->price->min ?? 0}}" /> 
 <meta property="product:price:currency"   content="NRS" /> 
@@ -30,7 +32,9 @@
         "@context": "http://schema.org/",
         "@type": "Product",
         "name": "{{$product->name}}",
+        @if(($product->medias->first()!==null))
         "image": "{{$product->medias->first()->link()}}",
+        @endif
         "brand": {
             "@type": "Thing",
             "name": "ACME"
