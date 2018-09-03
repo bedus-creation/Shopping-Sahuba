@@ -221,7 +221,7 @@
                                 </ul>
                                 <ul class="list-group mt-2">
                                     <li class="list-group-item font-weight-bold border-0">Product Details</li>
-                                    <li class="list-group-item">{{$product->details}}</li>
+                                    <li class="list-group-item">{!! $product->details !!}</li>
                                 </ul>
                             </div>
                         </div>
