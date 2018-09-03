@@ -24,6 +24,6 @@ class Media extends Model
 
 
     public function link(){
-        return $this->base_url.json_decode($this->in_json)->images->small ?? '';
+        return $this->base_url.json_decode($this->in_json)->images->small;
     }
 }
