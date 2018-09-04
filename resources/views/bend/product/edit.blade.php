@@ -1,9 +1,11 @@
 @extends('theme.shop.app')
 @include('utils.success-error')
+
 @section('css')
 <link rel="stylesheet" href="/css/bend-index.css">
 <link rel="stylesheet" href="/lib/bootstrap-select/css/bootstrap-select.css">
 <link rel="stylesheet" type="text/css" href="/css/file.upload.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -109,7 +111,7 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label>Describe Your Product</label>
-                          <textarea name="details" value="{{old('details')}}" type="text" class="form-control"  placeholder="Product Discription">{{$product->details}}</textarea>
+                          <textarea id="summernote" name="details" value="{{old('details')}}" type="text" class="form-control"  placeholder="Product Discription">{{$product->details}}</textarea>
                             <?php
                                 foreach ($product->medias as $key => $value) {
                                     $media_id[]=$value->id;
@@ -145,13 +147,20 @@
 
 
 @section('scripts')
-<script type="text/javascript" src="/js/file.upload.js"></script>
 <script src="/lib/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+
 <script>
     $('#product').dropdown('toggle');
     $('.selectpicker').selectpicker({
       style: 'btn-info',
       size: 4
+    });
+
+    $('#summernote').summernote({
+        placeholder: 'Details Goes Here',
+        tabsize: 2,
+        height: 200
     });
 
     Dropzone.autoDiscover = false;

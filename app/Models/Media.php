@@ -23,14 +23,14 @@ class Media extends Model
     }
 
 
-    public function link(){
+    public function link($type='small'){
         if($this==null){
             return url('/img/profile.jpg');
         }
 
-        $url=$this->base_url.json_decode($this->in_json)->images->small;
+        $url=$this->base_url.json_decode($this->in_json)->images->$type;
 
         return $url ==='' ? url('/img/profile.jpg') : $url;
-        
+
     }
 }

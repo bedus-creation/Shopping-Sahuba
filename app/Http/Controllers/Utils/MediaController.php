@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Media;
 use App\Http\Resources\MediaResources;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class MediaController extends Controller
 {
@@ -47,7 +48,23 @@ class MediaController extends Controller
         //     'file' => 'required|file|max:5000|mimes:' . $this->getAllowedFileTypes()
         // ]);
     
-        if ( $fileUid = $request->file->store('/upload', 'public') ) {
+        if ( $fileUid = $request->file->store('', 'public') ) {
+
+            $img = Image::make($request->file);
+
+            $big=$img->resize(600, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save('storage/upload/600-'.$fileUid);
+
+            
+            $medium=$img->resize(300, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save('storage/upload/300-'.$fileUid);
+            
+            $small=$img->resize(100, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save('storage/upload/100-'.$fileUid);
+
             return Media::create([
                 'type'=>'image',
                 'base_url'=>url('/'),
@@ -58,9 +75,9 @@ class MediaController extends Controller
                         'big'=>getimagesize($request->file),
                     ],
                     'images'=>[
-                        'small'=>Storage::url($fileUid),
-                        'medium'=>Storage::url($fileUid),
-                        'big'=>Storage::url($fileUid),
+                        'small'=>Storage::url('upload/100-'.$fileUid),
+                        'medium'=>Storage::url('upload/300-'.$fileUid),
+                        'big'=>Storage::url('upload/600-'.$fileUid),
                     ]
                 ]),
             ]);

@@ -6,8 +6,8 @@
     <div data-u="slides" style="cursor:default;position:absolute;top:0px;left:0px;width:980px; margin:0 auto;height:380px;overflow:hidden;">
         @foreach($product->medias as $item)
         <div data-p="170.00" class="text-center">
-            <img data-u="image" src="{{$item->base_url.json_decode($item->in_json)->images->big}}" />
-            <img data-u="thumb" src="{{$item->base_url.json_decode($item->in_json)->images->small}}" />
+            <img data-u="image" src="{{$item->link('big')}}" />
+            <img data-u="thumb" src="{{$item->link('big')}}" />
         </div>
         @endforeach
     </div>
