@@ -26,6 +26,13 @@ abstract class AbstractProvider implements ProviderContract
     protected $server;
 
     /**
+     * A hash representing the last requested user.
+     *
+     * @var string
+     */
+    protected $userHash;
+
+    /**
      * Create a new provider instance.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -64,7 +71,11 @@ abstract class AbstractProvider implements ProviderContract
             throw new InvalidArgumentException('Invalid request. Missing OAuth verifier.');
         }
 
-        $user = $this->server->getUserDetails($token = $this->getToken());
+        $token = $this->getToken();
+
+        $user = $this->server->getUserDetails(
+            $token, $this->shouldBypassCache($token->getIdentifier(), $token->getSecret())
+        );
 
         $instance = (new User)->setRaw($user->extra)
                 ->setToken($token->getIdentifier(), $token->getSecret());
@@ -89,7 +100,9 @@ abstract class AbstractProvider implements ProviderContract
         $tokenCredentials->setIdentifier($token);
         $tokenCredentials->setSecret($secret);
 
-        $user = $this->server->getUserDetails($tokenCredentials);
+        $user = $this->server->getUserDetails(
+            $tokenCredentials, $this->shouldBypassCache($token, $secret)
+        );
 
         $instance = (new User)->setRaw($user->extra)
             ->setToken($tokenCredentials->getIdentifier(), $tokenCredentials->getSecret());
@@ -122,6 +135,28 @@ abstract class AbstractProvider implements ProviderContract
     protected function hasNecessaryVerifier()
     {
         return $this->request->has('oauth_token') && $this->request->has('oauth_verifier');
+    }
+
+    /**
+     * Determine if the user information cache should be bypassed.
+     *
+     * @param  string  $token
+     * @param  string  $secret
+     * @return bool
+     */
+    protected function shouldBypassCache($token, $secret)
+    {
+        $newHash = sha1($token.'_'.$secret);
+
+        if (! empty($this->userHash) && $newHash !== $this->userHash) {
+            $this->userHash = $newHash;
+
+            return true;
+        }
+
+        $this->userHash = $this->userHash ?: $newHash;
+
+        return false;
     }
 
     /**
