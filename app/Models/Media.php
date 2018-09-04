@@ -27,6 +27,10 @@ class Media extends Model
         if($this==null){
             return url('/img/profile.jpg');
         }
-        return $this->base_url.json_decode($this->in_json)->images->small ?? '';
+
+        $url=$this->base_url.json_decode($this->in_json)->images->small;
+
+        return $url ==='' ? url('/img/profile.jpg') : $url;
+        
     }
 }

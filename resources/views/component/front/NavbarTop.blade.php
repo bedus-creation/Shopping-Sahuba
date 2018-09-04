@@ -37,8 +37,10 @@
                     <a class="nav-link p-0" href="#" data-target="profileMenus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         @guest
                         <i class="fas fa-user"></i>
-                        @else
+                        @elseif(auth()->user()->profileImage!==null)
                         <div class="top-user-img" style="background-image:url('{{optional(auth()->user()->profileImage)->link()}}')"></div>
+                        @else
+                        <i class="fas fa-user"></i>
                         @endguest
                     </a>
                     <div class="dropdown-menu" id="profileMenus" aria-labelledby="profileMenus">
