@@ -94,13 +94,19 @@
                             @foreach($users as $user)
                             <div class="media">
                                 <div class="mr-3">
-                                    <a href="{{$user->profile_link()}}" data-popup="lightbox">
+                                    <a href="{{$user->profile_link()}}" class="shop">
+                                        @if(optional($user->profileImage)->link()=='')
+                                        <i class="fas fa-user"></i>
+                                        @else
                                         <img src="{{optional($user->profileImage)->link()}}" style="width:50px;height:50px;" class="rounded-circle img-fluid" alt="">
+                                        @endif
                                     </a>
                                 </div>
 
                                 <div class="media-body">
-                                    <h6 class="mt-0 mb-0">{{$user->name}}</h6>
+                                    <a href="{{$user->profile_link()}}">
+                                        <h6 class="mt-0 mb-0">{{$user->name}}</h6> 
+                                    </a> 
                                     <span class="text-muted small">{{optional($user->profile)->address ?? ''}}</span>
                                 </div>
 
