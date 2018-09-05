@@ -15,7 +15,12 @@ class PageController extends Controller
     }
 
     public function shop($slug,$id){
-        $shop=User::where('id',$id)->with('products')->firstOrFail();
+        $shop=User::where('id',$id)
+            ->with('products.medias')
+            ->with('products.price')
+            ->with('coverImage')
+            ->with('profileImage')
+            ->firstOrFail();
         return view('front/shop/details',compact('shop'));
     }
     
