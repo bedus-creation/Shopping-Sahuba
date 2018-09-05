@@ -408,6 +408,8 @@ class ComposerStaticInit99085b8a5cf53c7055283fef0b57d909
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\ProductRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProductRequest.php',
         'App\\Http\\Resources\\MediaResources' => __DIR__ . '/../..' . '/app/Http/Resources/MediaResources.php',
+        'App\\Mail\\OrderShipped' => __DIR__ . '/../..' . '/app/Mail/OrderShipped.php',
+        'App\\Mail\\TestMail' => __DIR__ . '/../..' . '/app/Mail/TestMail.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\CategorySpecficDetailSchema' => __DIR__ . '/../..' . '/app/Models/CategorySpecficDetailSchema.php',
         'App\\Models\\Comment' => __DIR__ . '/../..' . '/app/Models/Comment.php',

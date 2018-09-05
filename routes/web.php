@@ -1,6 +1,5 @@
 <?php
 
-
 Route::get('/', 'PageController@index');
 Route::get('shop/{slug}/{id}', 'PageController@shop');
 Route::get('product/{slug}/{id}','PageController@product');
@@ -29,7 +28,9 @@ Route::group(['prefix'=>'shopping'],function(){
 
 
 Route::get('test', function () {
-   return view('test');
+    \App\Jobs\EmailJobs::dispatch();
+
+    return 'ok';
 });
 
 Auth::routes();

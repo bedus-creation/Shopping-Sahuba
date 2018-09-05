@@ -29,6 +29,8 @@ return array(
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Http\\Requests\\ProductRequest' => $baseDir . '/app/Http/Requests/ProductRequest.php',
     'App\\Http\\Resources\\MediaResources' => $baseDir . '/app/Http/Resources/MediaResources.php',
+    'App\\Mail\\OrderShipped' => $baseDir . '/app/Mail/OrderShipped.php',
+    'App\\Mail\\TestMail' => $baseDir . '/app/Mail/TestMail.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\CategorySpecficDetailSchema' => $baseDir . '/app/Models/CategorySpecficDetailSchema.php',
     'App\\Models\\Comment' => $baseDir . '/app/Models/Comment.php',
