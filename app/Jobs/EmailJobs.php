@@ -33,7 +33,7 @@ class EmailJobs implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to('ayutamang197@gmail.com')
+        Mail::to('tmgbedu@gmail.com')
             ->send(new TestMail());
     }
 
