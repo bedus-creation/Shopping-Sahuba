@@ -136,24 +136,6 @@ a.dropdown-item:hover{
 	font-size: 18px;
 	padding-top: 10px;
 }
-#menu li {
-	color: #fff;
-	background: #009cd8;
-}
-#menu{
-	position:relative;
-	border-width:10px;
-	
-}
-#menu:after{
-	content: '';
-	border-left: 20px solid transparent;
-	border-right: 20px solid transparent;
-	border-bottom: 20px solid #1e7ac5;
-	position:absolute;
-	top:-20px;
-	right:10px;
-}
 @media screen and (max-width: 768px){
 	.input-group{
 		width: 100% !important;

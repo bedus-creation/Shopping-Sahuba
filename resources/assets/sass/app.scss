@@ -36,6 +36,27 @@ p.section_info{
   background-size: cover !important;
 }
 
+// Right side menu exist on all pages
+
+#menu li {
+	color: #fff;
+	background: #009cd8;
+}
+#menu{
+	position:relative;
+	border-width:10px;
+	z-index: 10;
+}
+#menu:after{
+	content: '';
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-bottom: 20px solid #1e7ac5;
+	position:absolute;
+	top:-20px;
+	right:10px;
+}
+
 @media screen and (max-width:768px){
   .j-p-i{
     height: 4rem;
