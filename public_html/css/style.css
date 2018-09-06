@@ -55,6 +55,9 @@ p.navbar-cus{
 	padding: 10px;
 	background: #1d7ac5;;
 }
+.shop > .fa-user{
+	padding: 17px;
+}
 .top-toggler{
     font-size:18px;
     padding: 12px;
