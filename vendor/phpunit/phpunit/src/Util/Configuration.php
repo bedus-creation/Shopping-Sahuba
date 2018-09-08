@@ -27,6 +27,8 @@ use SebastianBergmann\FileIterator\Facade as FileIteratorFacade;
  * <phpunit backupGlobals="false"
  *          backupStaticAttributes="false"
  *          bootstrap="/path/to/bootstrap.php"
+ *          cacheResult="false"
+ *          cacheResultFile=".phpunit.result.cache"
  *          cacheTokens="false"
  *          columns="80"
  *          colors="false"
@@ -38,6 +40,7 @@ use SebastianBergmann\FileIterator\Facade as FileIteratorFacade;
  *          disableCodeCoverageIgnore="false"
  *          forceCoversAnnotation="false"
  *          processIsolation="false"
+ *          stopOnDefect="false"
  *          stopOnError="false"
  *          stopOnFailure="false"
  *          stopOnWarning="false"
@@ -65,6 +68,7 @@ use SebastianBergmann\FileIterator\Facade as FileIteratorFacade;
  *          reverseDefectList="false"
  *          registerMockObjectsFromTestArgumentsRecursively="false"
  *          executionOrder="default"
+ *          executionOrderDefects="default"
  *          resolveDependencies="false">
  *   <testsuites>
  *     <testsuite name="My Test Suite">
@@ -532,8 +536,8 @@ final class Configuration
         if (!empty($configuration['include_path'])) {
             \ini_set(
                 'include_path',
-                \implode(PATH_SEPARATOR, $configuration['include_path']) .
-                PATH_SEPARATOR .
+                \implode(\PATH_SEPARATOR, $configuration['include_path']) .
+                \PATH_SEPARATOR .
                 \ini_get('include_path')
             );
         }
@@ -589,6 +593,8 @@ final class Configuration
             if ($force || \getenv($name) === false) {
                 \putenv("{$name}={$value}");
             }
+
+            $value = \getenv($name);
 
             if (!isset($_ENV[$name])) {
                 $_ENV[$name] = $value;
@@ -710,6 +716,13 @@ final class Configuration
         if ($root->hasAttribute('processIsolation')) {
             $result['processIsolation'] = $this->getBoolean(
                 (string) $root->getAttribute('processIsolation'),
+                false
+            );
+        }
+
+        if ($root->hasAttribute('stopOnDefect')) {
+            $result['stopOnDefect'] = $this->getBoolean(
+                (string) $root->getAttribute('stopOnDefect'),
                 false
             );
         }
@@ -906,21 +919,45 @@ final class Configuration
             );
         }
 
+        if ($root->hasAttribute('cacheResult')) {
+            $result['cacheResult'] = $this->getBoolean(
+                (string) $root->getAttribute('cacheResult'),
+                false
+            );
+        }
+
+        if ($root->hasAttribute('cacheResultFile')) {
+            $result['cacheResultFile'] = $this->toAbsolutePath(
+                (string) $root->getAttribute('cacheResultFile')
+            );
+        }
+
         if ($root->hasAttribute('executionOrder')) {
-            switch ((string) $root->getAttribute('executionOrder')) {
-                case 'random':
-                    $result['executionOrder'] = TestSuiteSorter::ORDER_RANDOMIZED;
+            foreach (\explode(',', $root->getAttribute('executionOrder')) as $order) {
+                switch ($order) {
+                    case 'default':
+                        $result['executionOrder']        = TestSuiteSorter::ORDER_DEFAULT;
+                        $result['executionOrderDefects'] = TestSuiteSorter::ORDER_DEFAULT;
+                        $result['resolveDependencies']   = false;
 
-                    break;
+                        break;
+                    case 'reverse':
+                        $result['executionOrder'] = TestSuiteSorter::ORDER_REVERSED;
 
-                case 'reverse':
-                    $result['executionOrder'] = TestSuiteSorter::ORDER_REVERSED;
+                        break;
+                    case 'random':
+                        $result['executionOrder'] = TestSuiteSorter::ORDER_RANDOMIZED;
 
-                    break;
+                        break;
+                    case 'defects':
+                        $result['executionOrderDefects'] = TestSuiteSorter::ORDER_DEFECTS_FIRST;
 
-                default:
-                    $result['executionOrder'] = TestSuiteSorter::ORDER_DEFAULT;
+                        break;
+                    case 'depends':
+                        $result['resolveDependencies'] = true;
 
+                        break;
+                }
             }
         }
 
@@ -988,6 +1025,7 @@ final class Configuration
 
         $this->document->schemaValidate($xsdFilename);
         $this->errors = \libxml_get_errors();
+        \libxml_clear_errors();
         \libxml_use_internal_errors($original);
     }
 
@@ -1066,7 +1104,7 @@ final class Configuration
                 continue;
             }
 
-            $phpVersion         = PHP_VERSION;
+            $phpVersion         = \PHP_VERSION;
             $phpVersionOperator = '>=';
             $prefix             = '';
             $suffix             = 'Test.php';
@@ -1079,7 +1117,7 @@ final class Configuration
                 $phpVersionOperator = (string) $directoryNode->getAttribute('phpVersionOperator');
             }
 
-            if (!\version_compare(PHP_VERSION, $phpVersion, $phpVersionOperator)) {
+            if (!\version_compare(\PHP_VERSION, $phpVersion, $phpVersionOperator)) {
                 continue;
             }
 
@@ -1122,7 +1160,7 @@ final class Configuration
             }
 
             $file               = $file[0];
-            $phpVersion         = PHP_VERSION;
+            $phpVersion         = \PHP_VERSION;
             $phpVersionOperator = '>=';
 
             if ($fileNode->hasAttribute('phpVersion')) {
@@ -1133,7 +1171,7 @@ final class Configuration
                 $phpVersionOperator = (string) $fileNode->getAttribute('phpVersionOperator');
             }
 
-            if (!\version_compare(PHP_VERSION, $phpVersion, $phpVersionOperator)) {
+            if (!\version_compare(\PHP_VERSION, $phpVersion, $phpVersionOperator)) {
                 continue;
             }
 
@@ -1148,7 +1186,6 @@ final class Configuration
      * Otherwise, returns $default, which may be a string in rare cases.
      * See PHPUnit\Util\ConfigurationTest::testPHPConfigurationIsReadCorrectly
      *
-     * @param string      $value
      * @param bool|string $default
      *
      * @return bool|string
@@ -1257,7 +1294,7 @@ final class Configuration
             return $path;
         }
 
-        $file = \dirname($this->filename) . DIRECTORY_SEPARATOR . $path;
+        $file = \dirname($this->filename) . \DIRECTORY_SEPARATOR . $path;
 
         if ($useIncludePath && !\file_exists($file)) {
             $includePathFile = \stream_resolve_include_path($path);

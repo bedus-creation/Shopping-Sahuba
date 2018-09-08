@@ -145,7 +145,7 @@ class Event
     /**
      * Create a new event instance.
      *
-     * @param  \Illuminate\Console\Scheduling\Mutex  $mutex
+     * @param  \Illuminate\Console\Scheduling\EventMutex  $mutex
      * @param  string  $command
      * @return void
      */
@@ -693,7 +693,7 @@ class Event
     {
         return Carbon::instance(CronExpression::factory(
             $this->getExpression()
-        )->getNextRunDate($currentTime, $nth, $allowCurrentDate));
+        )->getNextRunDate($currentTime, $nth, $allowCurrentDate, $this->timezone));
     }
 
     /**

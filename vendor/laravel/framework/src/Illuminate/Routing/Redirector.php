@@ -147,7 +147,7 @@ class Redirector
      * Create a new redirect response to a named route.
      *
      * @param  string  $route
-     * @param  array   $parameters
+     * @param  mixed   $parameters
      * @param  int     $status
      * @param  array   $headers
      * @return \Illuminate\Http\RedirectResponse
@@ -160,8 +160,8 @@ class Redirector
     /**
      * Create a new redirect response to a controller action.
      *
-     * @param  string  $action
-     * @param  array   $parameters
+     * @param  string|array  $action
+     * @param  mixed   $parameters
      * @param  int     $status
      * @param  array   $headers
      * @return \Illuminate\Http\RedirectResponse

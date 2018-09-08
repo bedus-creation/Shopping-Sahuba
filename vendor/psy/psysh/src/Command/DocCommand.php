@@ -86,7 +86,7 @@ HELP
 
     private function getManualDoc($reflector)
     {
-        switch (get_class($reflector)) {
+        switch (\get_class($reflector)) {
             case 'ReflectionClass':
             case 'ReflectionObject':
             case 'ReflectionFunction':
@@ -101,6 +101,18 @@ HELP
                 $id = $reflector->class . '::$' . $reflector->name;
                 break;
 
+            case 'ReflectionClassConstant':
+            case 'Psy\Reflection\ReflectionClassConstant':
+                // @todo this is going to collide with ReflectionMethod ids
+                // someday... start running the query by id + type if the DB
+                // supports it.
+                $id = $reflector->class . '::' . $reflector->name;
+                break;
+
+            case 'Psy\Reflection\ReflectionConstant_':
+                $id = $reflector->name;
+                break;
+
             default:
                 return false;
         }
@@ -112,7 +124,7 @@ HELP
     {
         if ($db = $this->getApplication()->getManualDb()) {
             return $db
-                ->query(sprintf('SELECT doc FROM php_manual WHERE id = %s', $db->quote($id)))
+                ->query(\sprintf('SELECT doc FROM php_manual WHERE id = %s', $db->quote($id)))
                 ->fetchColumn(0);
         }
     }

@@ -143,6 +143,17 @@ class Mailer implements MailerContract, MailQueueContract
      * @param  mixed  $users
      * @return \Illuminate\Mail\PendingMail
      */
+    public function cc($users)
+    {
+        return (new PendingMail($this))->cc($users);
+    }
+
+    /**
+     * Begin the process of mailing a mailable class instance.
+     *
+     * @param  mixed  $users
+     * @return \Illuminate\Mail\PendingMail
+     */
     public function bcc($users)
     {
         return (new PendingMail($this))->bcc($users);
@@ -207,7 +218,7 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Send a new message using a view.
      *
-     * @param  string|array|MailableContract  $view
+     * @param  string|array|\Illuminate\Contracts\Mail\Mailable  $view
      * @param  array  $data
      * @param  \Closure|string  $callback
      * @return void
@@ -236,7 +247,7 @@ class Mailer implements MailerContract, MailQueueContract
         // message. This is primarily useful during local development in which each
         // message should be delivered into a single mail address for inspection.
         if (isset($this->to['address'])) {
-            $this->setGlobalTo($message);
+            $this->setGlobalToAndRemoveCcAndBcc($message);
         }
 
         // Next we will determine if the message should be sent. We give the developer
@@ -347,7 +358,7 @@ class Mailer implements MailerContract, MailQueueContract
      * @param  \Illuminate\Mail\Message  $message
      * @return void
      */
-    protected function setGlobalTo($message)
+    protected function setGlobalToAndRemoveCcAndBcc($message)
     {
         $message->to($this->to['address'], $this->to['name'], true);
         $message->cc(null, null, true);
@@ -357,7 +368,7 @@ class Mailer implements MailerContract, MailQueueContract
     /**
      * Queue a new e-mail message for sending.
      *
-     * @param  string|array|MailableContract  $view
+     * @param  string|array|\Illuminate\Contracts\Mail\Mailable  $view
      * @param  string|null  $queue
      * @return mixed
      */
@@ -400,7 +411,7 @@ class Mailer implements MailerContract, MailQueueContract
      * Queue a new e-mail message for sending after (n) seconds.
      *
      * @param  \DateTimeInterface|\DateInterval|int  $delay
-     * @param  string|array|MailableContract  $view
+     * @param  string|array|\Illuminate\Contracts\Mail\Mailable  $view
      * @param  string|null  $queue
      * @return mixed
      */

@@ -127,7 +127,7 @@
 
         <copy file="${basedir}/phpunit.xsd" tofile="${basedir}/build/phar/phpunit.xsd"/>
 
-        <exec executable="${basedir}/build/phar-manifest.php" output="${basedir}/build/phar/manifest.txt"/>
+        <exec executable="${basedir}/build/phar-manifest.php" output="${basedir}/build/phar/manifest.txt" failonerror="true"/>
 
         <copy file="${basedir}/vendor/phpunit/php-code-coverage/LICENSE" tofile="${basedir}/build/phar/php-code-coverage/LICENSE"/>
         <copy todir="${basedir}/build/phar/php-code-coverage">
@@ -326,12 +326,12 @@
             </fileset>
         </copy>
 
-        <exec executable="${basedir}/build/phar-version.php" outputproperty="_version">
+        <exec executable="${basedir}/build/phar-version.php" outputproperty="_version" failonerror="true">
             <arg value="${version}"/>
             <arg value="${type}"/>
         </exec>
 
-        <exec executable="${basedir}/build/tools/phpab" taskname="phpab">
+        <exec executable="${basedir}/build/tools/phpab" taskname="phpab" failonerror="true">
             <arg value="--all" />
             <arg value="--static" />
             <arg value="--once" />
@@ -348,7 +348,7 @@
         <copy file="${basedir}/build/binary-phar-autoload.php.in" tofile="${basedir}/build/binary-phar-autoload.php"/>
         <replace file="${basedir}/build/binary-phar-autoload.php" token="X.Y.Z" value="${_version}"/>
 
-        <exec executable="${basedir}/build/tools/phpab" taskname="phpab">
+        <exec executable="${basedir}/build/tools/phpab" taskname="phpab" failonerror="true">
             <arg value="--all" />
             <arg value="--nolower" />
             <arg value="--static" />
@@ -369,11 +369,22 @@
     </target>
 
     <target name="-phar-determine-version">
-        <exec executable="${basedir}/build/version.php" outputproperty="version" />
+        <exec executable="${basedir}/build/version.php" outputproperty="version" failonerror="true" />
     </target>
 
-    <target name="generate-project-documentation" depends="-phploc,-checkstyle,-phpmd,-phpunit">
+    <target name="generate-project-documentation" depends="-phploc,-checkstyle,-phpunit">
         <exec executable="${basedir}/build/tools/phpdox" dir="${basedir}/build" taskname="phpdox"/>
+    </target>
+
+    <target name="update-tools">
+        <exec executable="phive">
+            <arg value="--no-progress"/>
+            <arg value="update"/>
+        </exec>
+
+        <exec executable="${basedir}/build/tools/composer">
+            <arg value="self-update"/>
+        </exec>
     </target>
 
     <target name="-phploc" depends="prepare">
@@ -392,16 +403,6 @@
             <arg value="--dry-run"/>
             <arg value="fix"/>
             <arg value="--format=checkstyle"/>
-        </exec>
-    </target>
-
-    <target name="-phpmd" depends="prepare">
-        <exec executable="${basedir}/build/tools/phpmd" taskname="phpmd">
-            <arg path="${basedir}/src"/>
-            <arg value="xml"/>
-            <arg path="${basedir}/build/phpmd.xml"/>
-            <arg value="--reportfile"/>
-            <arg path="${basedir}/build/logfiles/pmd.xml"/>
         </exec>
     </target>
 

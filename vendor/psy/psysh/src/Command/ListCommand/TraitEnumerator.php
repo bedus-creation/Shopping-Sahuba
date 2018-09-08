@@ -23,7 +23,7 @@ class TraitEnumerator extends Enumerator
 {
     public function __construct(Presenter $presenter)
     {
-        @trigger_error('TraitEnumerator is no longer used', E_USER_DEPRECATED);
+        @\trigger_error('TraitEnumerator is no longer used', E_USER_DEPRECATED);
         parent::__construct($presenter);
     }
 
@@ -32,11 +32,6 @@ class TraitEnumerator extends Enumerator
      */
     protected function listItems(InputInterface $input, \Reflector $reflector = null, $target = null)
     {
-        // bail early if current PHP doesn't know about traits.
-        if (!function_exists('trait_exists')) {
-            return;
-        }
-
         // only list traits when no Reflector is present.
         //
         // @todo make a NamespaceReflector and pass that in for commands like:
@@ -54,7 +49,7 @@ class TraitEnumerator extends Enumerator
             return;
         }
 
-        $traits = $this->prepareTraits(get_declared_traits());
+        $traits = $this->prepareTraits(\get_declared_traits());
 
         if (empty($traits)) {
             return;
@@ -74,7 +69,7 @@ class TraitEnumerator extends Enumerator
      */
     protected function prepareTraits(array $traits)
     {
-        natcasesort($traits);
+        \natcasesort($traits);
 
         // My kingdom for a generator.
         $ret = [];

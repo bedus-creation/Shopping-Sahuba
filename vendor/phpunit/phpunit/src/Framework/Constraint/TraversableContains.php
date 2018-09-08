@@ -33,8 +33,6 @@ class TraversableContains extends Constraint
     private $value;
 
     /**
-     * @param mixed $value
-     *
      * @throws \PHPUnit\Framework\Exception
      */
     public function __construct($value, bool $checkForObjectIdentity = true, bool $checkForNonObjectIdentity = false)
@@ -53,7 +51,7 @@ class TraversableContains extends Constraint
      */
     public function toString(): string
     {
-        if (\is_string($this->value) && \strpos($this->value, PHP_EOL) !== false) {
+        if (\is_string($this->value) && \strpos($this->value, "\n") !== false) {
             return 'contains "' . $this->value . '"';
         }
 

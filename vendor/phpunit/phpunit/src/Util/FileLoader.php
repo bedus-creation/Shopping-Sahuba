@@ -29,7 +29,7 @@ final class FileLoader
     public static function checkAndLoad(string $filename): string
     {
         $includePathFilename = \stream_resolve_include_path($filename);
-        $localFile           = __DIR__ . DIRECTORY_SEPARATOR . $filename;
+        $localFile           = __DIR__ . \DIRECTORY_SEPARATOR . $filename;
 
         /**
          * @see https://github.com/sebastianbergmann/phpunit/pull/2751
@@ -38,7 +38,7 @@ final class FileLoader
 
         if (!$includePathFilename || !$isReadable || $includePathFilename === $localFile) {
             throw new Exception(
-                \sprintf('Cannot open file "%s".' . PHP_EOL, $filename)
+                \sprintf('Cannot open file "%s".' . "\n", $filename)
             );
         }
 

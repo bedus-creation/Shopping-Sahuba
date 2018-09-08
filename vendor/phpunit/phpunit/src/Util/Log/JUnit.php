@@ -101,8 +101,7 @@ class JUnit extends Printer implements TestListener
     /**
      * Constructor.
      *
-     * @param mixed $out
-     * @param bool  $reportUselessTests
+     * @param null|mixed $out
      *
      * @throws \PHPUnit\Framework\Exception
      */
@@ -364,10 +363,8 @@ class JUnit extends Printer implements TestListener
      *
      * This is a "hack" needed for the integration of
      * PHPUnit with Phing.
-     *
-     * @param mixed $flag
      */
-    public function setWriteDocument($flag): ?string
+    public function setWriteDocument(/*bool*/ $flag): void
     {
         if (\is_bool($flag)) {
             $this->writeDocument = $flag;
@@ -376,8 +373,6 @@ class JUnit extends Printer implements TestListener
 
     /**
      * Method which generalizes addError() and addFailure()
-     *
-     * @param mixed $type
      *
      * @throws \InvalidArgumentException
      */
@@ -388,12 +383,12 @@ class JUnit extends Printer implements TestListener
         }
 
         if ($test instanceof SelfDescribing) {
-            $buffer = $test->toString() . PHP_EOL;
+            $buffer = $test->toString() . "\n";
         } else {
             $buffer = '';
         }
 
-        $buffer .= TestFailure::exceptionToString($t) . PHP_EOL .
+        $buffer .= TestFailure::exceptionToString($t) . "\n" .
                    Filter::getFilteredStacktrace($t);
 
         $fault = $this->document->createElement(

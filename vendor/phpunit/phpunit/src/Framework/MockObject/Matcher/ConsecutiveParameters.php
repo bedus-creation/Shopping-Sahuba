@@ -37,8 +37,6 @@ class ConsecutiveParameters extends StatelessInvocation
     private $invocations = [];
 
     /**
-     * @param array $parameterGroups
-     *
      * @throws \PHPUnit\Framework\Exception
      */
     public function __construct(array $parameterGroups)
@@ -54,17 +52,12 @@ class ConsecutiveParameters extends StatelessInvocation
         }
     }
 
-    /**
-     * @return string
-     */
     public function toString(): string
     {
         return 'with consecutive parameters';
     }
 
     /**
-     * @param BaseInvocation $invocation
-     *
      * @throws \PHPUnit\Framework\ExpectationFailedException
      *
      * @return bool
@@ -89,16 +82,13 @@ class ConsecutiveParameters extends StatelessInvocation
     /**
      * Verify a single invocation
      *
-     * @param BaseInvocation $invocation
-     * @param int            $callIndex
+     * @param int $callIndex
      *
      * @throws ExpectationFailedException
      */
     private function verifyInvocation(BaseInvocation $invocation, $callIndex): void
     {
-        if (isset($this->parameterGroups[$callIndex])) {
-            $parameters = $this->parameterGroups[$callIndex];
-        } else {
+        if (!isset($this->parameterGroups[$callIndex])) {
             // no parameter assertion for this call index
             return;
         }
@@ -108,6 +98,8 @@ class ConsecutiveParameters extends StatelessInvocation
                 'Mocked method does not exist.'
             );
         }
+
+        $parameters = $this->parameterGroups[$callIndex];
 
         if (\count($invocation->getParameters()) < \count($parameters)) {
             throw new ExpectationFailedException(

@@ -5,7 +5,7 @@ namespace Illuminate\Hashing;
 use RuntimeException;
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
 
-class ArgonHasher implements HasherContract
+class ArgonHasher extends AbstractHasher implements HasherContract
 {
     /**
      * The default memory cost factor.
@@ -42,26 +42,17 @@ class ArgonHasher implements HasherContract
     }
 
     /**
-     * Get information about the given hashed value.
-     *
-     * @param  string  $hashedValue
-     * @return array
-     */
-    public function info($hashedValue)
-    {
-        return password_get_info($hashedValue);
-    }
-
-    /**
      * Hash the given value.
      *
      * @param  string  $value
      * @param  array  $options
      * @return string
+     *
+     * @throws \RuntimeException
      */
     public function make($value, array $options = [])
     {
-        $hash = password_hash($value, PASSWORD_ARGON2I, [
+        $hash = password_hash($value, $this->algorithm(), [
             'memory_cost' => $this->memory($options),
             'time_cost' => $this->time($options),
             'threads' => $this->threads($options),
@@ -75,6 +66,16 @@ class ArgonHasher implements HasherContract
     }
 
     /**
+     * Get the algorithm that should be used for hashing.
+     *
+     * @return int
+     */
+    protected function algorithm()
+    {
+        return PASSWORD_ARGON2I;
+    }
+
+    /**
      * Check the given plain value against a hash.
      *
      * @param  string  $value
@@ -84,11 +85,11 @@ class ArgonHasher implements HasherContract
      */
     public function check($value, $hashedValue, array $options = [])
     {
-        if (strlen($hashedValue) === 0) {
-            return false;
+        if ($this->info($hashedValue)['algoName'] !== 'argon2i') {
+            throw new RuntimeException('This password does not use the Argon2i algorithm.');
         }
 
-        return password_verify($value, $hashedValue);
+        return parent::check($value, $hashedValue, $options);
     }
 
     /**
@@ -100,7 +101,7 @@ class ArgonHasher implements HasherContract
      */
     public function needsRehash($hashedValue, array $options = [])
     {
-        return password_needs_rehash($hashedValue, PASSWORD_ARGON2I, [
+        return password_needs_rehash($hashedValue, $this->algorithm(), [
             'memory_cost' => $this->memory($options),
             'time_cost' => $this->time($options),
             'threads' => $this->threads($options),

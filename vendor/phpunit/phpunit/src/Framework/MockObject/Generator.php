@@ -58,7 +58,6 @@ class Generator
      *
      * @param string|string[] $type
      * @param array           $methods
-     * @param array           $arguments
      * @param string          $mockClassName
      * @param bool            $callOriginalConstructor
      * @param bool            $callOriginalClone
@@ -209,7 +208,6 @@ class Generator
      * the last parameter
      *
      * @param string $originalClassName
-     * @param array  $arguments
      * @param string $mockClassName
      * @param bool   $callOriginalConstructor
      * @param bool   $callOriginalClone
@@ -271,7 +269,6 @@ class Generator
      * `$mockedMethods` parameter.
      *
      * @param string $traitName
-     * @param array  $arguments
      * @param string $mockClassName
      * @param bool   $callOriginalConstructor
      * @param bool   $callOriginalClone
@@ -332,7 +329,6 @@ class Generator
      * Returns an object for the specified trait.
      *
      * @param string $traitName
-     * @param array  $arguments
      * @param string $traitClassName
      * @param bool   $callOriginalConstructor
      * @param bool   $callOriginalClone
@@ -402,42 +398,43 @@ class Generator
             \sort($type);
         }
 
-        if ($mockClassName === '') {
-            $key = \md5(
-                \is_array($type) ? \implode('_', $type) : $type .
-                \serialize($methods) .
-                \serialize($callOriginalClone) .
-                \serialize($cloneArguments) .
-                \serialize($callOriginalMethods)
+        if ($mockClassName !== '') {
+            return $this->generateMock(
+                $type,
+                $methods,
+                $mockClassName,
+                $callOriginalClone,
+                $callAutoload,
+                $cloneArguments,
+                $callOriginalMethods
             );
-
-            if (isset(self::$cache[$key])) {
-                return self::$cache[$key];
-            }
         }
-
-        $mock = $this->generateMock(
-            $type,
-            $methods,
-            $mockClassName,
-            $callOriginalClone,
-            $callAutoload,
-            $cloneArguments,
-            $callOriginalMethods
+        $key = \md5(
+            \is_array($type) ? \implode('_', $type) : $type .
+            \serialize($methods) .
+            \serialize($callOriginalClone) .
+            \serialize($cloneArguments) .
+            \serialize($callOriginalMethods)
         );
 
-        if (isset($key)) {
-            self::$cache[$key] = $mock;
+        if (!isset(self::$cache[$key])) {
+            self::$cache[$key] = $this->generateMock(
+                $type,
+                $methods,
+                $mockClassName,
+                $callOriginalClone,
+                $callAutoload,
+                $cloneArguments,
+                $callOriginalMethods
+            );
         }
 
-        return $mock;
+        return self::$cache[$key];
     }
 
     /**
      * @param string $wsdlFile
      * @param string $className
-     * @param array  $methods
-     * @param array  $options
      *
      * @throws RuntimeException
      *
@@ -451,7 +448,7 @@ class Generator
             );
         }
 
-        $options  = \array_merge($options, ['cache_wsdl' => WSDL_CACHE_NONE]);
+        $options  = \array_merge($options, ['cache_wsdl' => \WSDL_CACHE_NONE]);
         $client   = new SoapClient($wsdlFile, $options);
         $_methods = \array_unique($client->__getFunctions());
         unset($client);
@@ -491,13 +488,13 @@ class Generator
             }
         }
 
-        $optionsBuffer = 'array(';
+        $optionsBuffer = '[';
 
         foreach ($options as $key => $value) {
             $optionsBuffer .= $key . ' => ' . $value;
         }
 
-        $optionsBuffer .= ')';
+        $optionsBuffer .= ']';
 
         $classTemplate = $this->getTemplate('wsdl_class.tpl');
         $namespace     = '';
@@ -548,7 +545,6 @@ class Generator
      * @param array|string $type
      * @param bool         $callOriginalConstructor
      * @param bool         $callAutoload
-     * @param array        $arguments
      * @param bool         $callOriginalMethods
      * @param object       $proxyTarget
      * @param bool         $returnValueGeneration
@@ -838,8 +834,8 @@ class Generator
         );
 
         return [
-          'code'          => $classTemplate->render(),
-          'mockClassName' => $mockClassName['className']
+            'code'          => $classTemplate->render(),
+            'mockClassName' => $mockClassName['className']
         ];
     }
 
@@ -879,17 +875,15 @@ class Generator
         }
 
         return [
-          'className'         => $className,
-          'originalClassName' => $type,
-          'fullClassName'     => $fullClassName,
-          'namespaceName'     => $namespaceName
+            'className'         => $className,
+            'originalClassName' => $type,
+            'fullClassName'     => $fullClassName,
+            'namespaceName'     => $namespaceName
         ];
     }
 
     /**
-     * @param array $mockClassName
-     * @param bool  $isInterface
-     * @param array $additionalInterfaces
+     * @param bool $isInterface
      *
      * @return string
      */
@@ -930,9 +924,8 @@ class Generator
     }
 
     /**
-     * @param ReflectionMethod $method
-     * @param bool             $cloneArguments
-     * @param bool             $callOriginalMethods
+     * @param bool $cloneArguments
+     * @param bool $callOriginalMethods
      *
      * @throws \PHPUnit\Framework\MockObject\RuntimeException
      *
@@ -1084,8 +1077,6 @@ class Generator
     }
 
     /**
-     * @param ReflectionMethod $method
-     *
      * @return bool
      */
     private function canMockMethod(ReflectionMethod $method)
@@ -1108,8 +1099,7 @@ class Generator
     /**
      * Returns the parameters of a function or method.
      *
-     * @param ReflectionMethod $method
-     * @param bool             $forCall
+     * @param bool $forCall
      *
      * @throws RuntimeException
      *
@@ -1180,6 +1170,9 @@ class Generator
 
                         if ($value === null) {
                             $value = \var_export($parameter->getDefaultValue(), true);
+                        } elseif (!\defined($value)) {
+                            $rootValue = \preg_replace('/^.*\\\\/', '', $value);
+                            $value     = \defined($rootValue) ? $rootValue : $value;
                         }
 
                         $default = ' = ' . $value;
@@ -1208,7 +1201,7 @@ class Generator
      */
     private function getTemplate($template)
     {
-        $filename = __DIR__ . DIRECTORY_SEPARATOR . 'Generator' . DIRECTORY_SEPARATOR . $template;
+        $filename = __DIR__ . \DIRECTORY_SEPARATOR . 'Generator' . \DIRECTORY_SEPARATOR . $template;
 
         if (!isset(self::$templates[$filename])) {
             self::$templates[$filename] = new Text_Template($filename);

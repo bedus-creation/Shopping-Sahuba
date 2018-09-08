@@ -166,6 +166,8 @@ class Application extends SymfonyApplication implements ApplicationContract
      * @param  array  $parameters
      * @param  \Symfony\Component\Console\Output\OutputInterface|null  $outputBuffer
      * @return int
+     *
+     * @throws \Symfony\Component\Console\Exception\CommandNotFoundException
      */
     public function call($command, array $parameters = [], $outputBuffer = null)
     {
@@ -257,7 +259,7 @@ class Application extends SymfonyApplication implements ApplicationContract
     }
 
     /**
-     * Get the default input definitions for the applications.
+     * Get the default input definition for the application.
      *
      * This is used to add the --env option to every available command.
      *

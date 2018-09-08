@@ -2,7 +2,6 @@
 
 namespace Illuminate\Database\Schema\Grammars;
 
-use RuntimeException;
 use Illuminate\Support\Fluent;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -206,6 +205,17 @@ class PostgresGrammar extends Grammar
     }
 
     /**
+     * Compile the SQL needed to drop all views.
+     *
+     * @param  string  $views
+     * @return string
+     */
+    public function compileDropAllViews($views)
+    {
+        return 'drop view "'.implode('","', $views).'" cascade';
+    }
+
+    /**
      * Compile the SQL needed to retrieve all table names.
      *
      * @param  string  $schema
@@ -214,6 +224,17 @@ class PostgresGrammar extends Grammar
     public function compileGetAllTables($schema)
     {
         return "select tablename from pg_catalog.pg_tables where schemaname = '{$schema}'";
+    }
+
+    /**
+     * Compile the SQL needed to retrieve all view names.
+     *
+     * @param  string  $schema
+     * @return string
+     */
+    public function compileGetAllViews($schema)
+    {
+        return "select viewname from pg_catalog.pg_views where schemaname = '{$schema}'";
     }
 
     /**
@@ -703,11 +724,11 @@ class PostgresGrammar extends Grammar
      * Create the column definition for a spatial Geometry type.
      *
      * @param  \Illuminate\Support\Fluent  $column
-     * @throws \RuntimeException
+     * @return string
      */
     protected function typeGeometry(Fluent $column)
     {
-        throw new RuntimeException('The database driver in use does not support the Geometry spatial column type.');
+        return $this->formatPostGisType('geometry');
     }
 
     /**

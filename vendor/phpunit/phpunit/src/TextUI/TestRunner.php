@@ -7,7 +7,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace PHPUnit\TextUI;
 
 use PHPUnit\Framework\Error\Deprecated;
@@ -26,9 +25,12 @@ use PHPUnit\Runner\Filter\Factory;
 use PHPUnit\Runner\Filter\IncludeGroupFilterIterator;
 use PHPUnit\Runner\Filter\NameFilterIterator;
 use PHPUnit\Runner\Hook;
+use PHPUnit\Runner\NullTestResultCache;
+use PHPUnit\Runner\ResultCacheExtension;
 use PHPUnit\Runner\StandardTestSuiteLoader;
 use PHPUnit\Runner\TestHook;
 use PHPUnit\Runner\TestListenerAdapter;
+use PHPUnit\Runner\TestResultCache;
 use PHPUnit\Runner\TestSuiteLoader;
 use PHPUnit\Runner\TestSuiteSorter;
 use PHPUnit\Runner\Version;
@@ -59,7 +61,9 @@ use SebastianBergmann\Environment\Runtime;
 class TestRunner extends BaseTestRunner
 {
     public const SUCCESS_EXIT   = 0;
+
     public const FAILURE_EXIT   = 1;
+
     public const EXCEPTION_EXIT = 2;
 
     /**
@@ -99,7 +103,6 @@ class TestRunner extends BaseTestRunner
 
     /**
      * @param ReflectionClass|Test $test
-     * @param array                $arguments
      * @param bool                 $exit
      *
      * @throws \RuntimeException
@@ -152,8 +155,6 @@ class TestRunner extends BaseTestRunner
 
         $this->handleConfiguration($arguments);
 
-        $this->processSuiteFilters($suite, $arguments);
-
         if (isset($arguments['bootstrap'])) {
             $GLOBALS['__PHPUNIT_BOOTSTRAP'] = $arguments['bootstrap'];
         }
@@ -174,10 +175,24 @@ class TestRunner extends BaseTestRunner
             \mt_srand($arguments['randomOrderSeed']);
         }
 
-        if ($arguments['executionOrder'] !== TestSuiteSorter::ORDER_DEFAULT || $arguments['resolveDependencies']) {
-            $sorter = new TestSuiteSorter;
+        if ($arguments['cacheResult']) {
+            if (isset($arguments['cacheResultFile'])) {
+                $cache = new TestResultCache($arguments['cacheResultFile']);
+            } else {
+                $cache = new TestResultCache;
+            }
 
-            $sorter->reorderTestsInSuite($suite, $arguments['executionOrder'], $arguments['resolveDependencies']);
+            $this->extensions[] = new ResultCacheExtension($cache);
+        }
+
+        if ($arguments['executionOrder'] !== TestSuiteSorter::ORDER_DEFAULT || $arguments['executionOrderDefects'] !== TestSuiteSorter::ORDER_DEFAULT || $arguments['resolveDependencies']) {
+            $cache = $cache ?? new NullTestResultCache;
+
+            $cache->load();
+
+            $sorter = new TestSuiteSorter($cache);
+
+            $sorter->reorderTestsInSuite($suite, $arguments['executionOrder'], $arguments['resolveDependencies'], $arguments['executionOrderDefects']);
 
             unset($sorter);
         }
@@ -253,6 +268,10 @@ class TestRunner extends BaseTestRunner
             $result->stopOnSkipped(true);
         }
 
+        if ($arguments['stopOnDefect']) {
+            $result->stopOnDefect(true);
+        }
+
         if ($arguments['registerMockObjectsFromTestArgumentsRecursively']) {
             $result->setRegisterMockObjectsFromTestArgumentsRecursively(true);
         }
@@ -284,7 +303,7 @@ class TestRunner extends BaseTestRunner
         }
 
         $this->printer->write(
-            Version::getVersionString() . PHP_EOL
+            Version::getVersionString() . "\n"
         );
 
         self::$versionStringPrinted = true;
@@ -534,7 +553,7 @@ class TestRunner extends BaseTestRunner
             }
         }
 
-        $this->printer->write(PHP_EOL);
+        $this->printer->write("\n");
 
         if (isset($codeCoverage)) {
             $result->setCodeCoverage($codeCoverage);
@@ -554,6 +573,7 @@ class TestRunner extends BaseTestRunner
         $result->setTimeoutForLargeTests($arguments['timeoutForLargeTests']);
 
         if ($suite instanceof TestSuite) {
+            $this->processSuiteFilters($suite, $arguments);
             $suite->setRunTestInSeparateProcess($arguments['processIsolation']);
         }
 
@@ -591,7 +611,7 @@ class TestRunner extends BaseTestRunner
                     unset($writer);
                 } catch (CodeCoverageException $e) {
                     $this->printer->write(
-                        " failed\n" . $e->getMessage() . PHP_EOL
+                        " failed\n" . $e->getMessage() . "\n"
                     );
                 }
             }
@@ -609,7 +629,7 @@ class TestRunner extends BaseTestRunner
                     unset($writer);
                 } catch (CodeCoverageException $e) {
                     $this->printer->write(
-                        " failed\n" . $e->getMessage() . PHP_EOL
+                        " failed\n" . $e->getMessage() . "\n"
                     );
                 }
             }
@@ -635,7 +655,7 @@ class TestRunner extends BaseTestRunner
                     unset($writer);
                 } catch (CodeCoverageException $e) {
                     $this->printer->write(
-                        " failed\n" . $e->getMessage() . PHP_EOL
+                        " failed\n" . $e->getMessage() . "\n"
                     );
                 }
             }
@@ -653,7 +673,7 @@ class TestRunner extends BaseTestRunner
                     unset($writer);
                 } catch (CodeCoverageException $e) {
                     $this->printer->write(
-                        " failed\n" . $e->getMessage() . PHP_EOL
+                        " failed\n" . $e->getMessage() . "\n"
                     );
                 }
             }
@@ -692,7 +712,7 @@ class TestRunner extends BaseTestRunner
                     unset($writer);
                 } catch (CodeCoverageException $e) {
                     $this->printer->write(
-                        " failed\n" . $e->getMessage() . PHP_EOL
+                        " failed\n" . $e->getMessage() . "\n"
                     );
                 }
             }
@@ -751,14 +771,14 @@ class TestRunner extends BaseTestRunner
      */
     protected function runFailed(string $message): void
     {
-        $this->write($message . PHP_EOL);
+        $this->write($message . \PHP_EOL);
 
         exit(self::FAILURE_EXIT);
     }
 
     protected function write(string $buffer): void
     {
-        if (PHP_SAPI != 'cli' && PHP_SAPI != 'phpdbg') {
+        if (\PHP_SAPI != 'cli' && \PHP_SAPI != 'phpdbg') {
             $buffer = \htmlspecialchars($buffer);
         }
 
@@ -806,6 +826,18 @@ class TestRunner extends BaseTestRunner
                 $arguments['bootstrap'] = $phpunitConfiguration['bootstrap'];
             }
 
+            if (isset($phpunitConfiguration['cacheResult']) && !isset($arguments['cacheResult'])) {
+                $arguments['cacheResult'] = $phpunitConfiguration['cacheResult'];
+            }
+
+            if (isset($phpunitConfiguration['cacheResultFile']) && !isset($arguments['cacheResultFile'])) {
+                $arguments['cacheResultFile'] = $phpunitConfiguration['cacheResultFile'];
+            }
+
+            if (isset($phpunitConfiguration['cacheTokens']) && !isset($arguments['cacheTokens'])) {
+                $arguments['cacheTokens'] = $phpunitConfiguration['cacheTokens'];
+            }
+
             if (isset($phpunitConfiguration['cacheTokens']) && !isset($arguments['cacheTokens'])) {
                 $arguments['cacheTokens'] = $phpunitConfiguration['cacheTokens'];
             }
@@ -832,6 +864,10 @@ class TestRunner extends BaseTestRunner
 
             if (isset($phpunitConfiguration['processIsolation']) && !isset($arguments['processIsolation'])) {
                 $arguments['processIsolation'] = $phpunitConfiguration['processIsolation'];
+            }
+
+            if (isset($phpunitConfiguration['stopOnDefect']) && !isset($arguments['stopOnDefect'])) {
+                $arguments['stopOnDefect'] = $phpunitConfiguration['stopOnDefect'];
             }
 
             if (isset($phpunitConfiguration['stopOnError']) && !isset($arguments['stopOnError'])) {
@@ -928,6 +964,10 @@ class TestRunner extends BaseTestRunner
 
             if (isset($phpunitConfiguration['executionOrder']) && !isset($arguments['executionOrder'])) {
                 $arguments['executionOrder'] = $phpunitConfiguration['executionOrder'];
+            }
+
+            if (isset($phpunitConfiguration['executionOrderDefects']) && !isset($arguments['executionOrderDefects'])) {
+                $arguments['executionOrderDefects'] = $phpunitConfiguration['executionOrderDefects'];
             }
 
             if (isset($phpunitConfiguration['resolveDependencies']) && !isset($arguments['resolveDependencies'])) {
@@ -1116,6 +1156,7 @@ class TestRunner extends BaseTestRunner
         $arguments['backupStaticAttributes']                          = $arguments['backupStaticAttributes'] ?? null;
         $arguments['beStrictAboutChangesToGlobalState']               = $arguments['beStrictAboutChangesToGlobalState'] ?? null;
         $arguments['beStrictAboutResourceUsageDuringSmallTests']      = $arguments['beStrictAboutResourceUsageDuringSmallTests'] ?? false;
+        $arguments['cacheResult']                                     = $arguments['cacheResult'] ?? false;
         $arguments['cacheTokens']                                     = $arguments['cacheTokens'] ?? false;
         $arguments['colors']                                          = $arguments['colors'] ?? ResultPrinter::COLOR_DEFAULT;
         $arguments['columns']                                         = $arguments['columns'] ?? 80;
@@ -1130,6 +1171,7 @@ class TestRunner extends BaseTestRunner
         $arguments['excludeGroups']                                   = $arguments['excludeGroups'] ?? [];
         $arguments['failOnRisky']                                     = $arguments['failOnRisky'] ?? false;
         $arguments['failOnWarning']                                   = $arguments['failOnWarning'] ?? false;
+        $arguments['executionOrderDefects']                           = $arguments['executionOrderDefects'] ?? TestSuiteSorter::ORDER_DEFAULT;
         $arguments['groups']                                          = $arguments['groups'] ?? [];
         $arguments['processIsolation']                                = $arguments['processIsolation'] ?? false;
         $arguments['processUncoveredFilesFromWhitelist']              = $arguments['processUncoveredFilesFromWhitelist'] ?? false;
@@ -1148,6 +1190,7 @@ class TestRunner extends BaseTestRunner
         $arguments['stopOnRisky']                                     = $arguments['stopOnRisky'] ?? false;
         $arguments['stopOnSkipped']                                   = $arguments['stopOnSkipped'] ?? false;
         $arguments['stopOnWarning']                                   = $arguments['stopOnWarning'] ?? false;
+        $arguments['stopOnDefect']                                    = $arguments['stopOnDefect'] ?? false;
         $arguments['strictCoverage']                                  = $arguments['strictCoverage'] ?? false;
         $arguments['testdoxExcludeGroups']                            = $arguments['testdoxExcludeGroups'] ?? [];
         $arguments['testdoxGroups']                                   = $arguments['testdoxGroups'] ?? [];
@@ -1198,7 +1241,7 @@ class TestRunner extends BaseTestRunner
     private function writeMessage(string $type, string $message): void
     {
         if (!$this->messagePrinted) {
-            $this->write(PHP_EOL);
+            $this->write("\n");
         }
 
         $this->write(
