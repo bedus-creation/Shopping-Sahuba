@@ -1,4 +1,4 @@
-<div id="sidebar" class="dropdown-menu" aria-labelledby="sidebar">
+<div id="sidemenu-left" class="dropdown-menu" aria-labelledby="sidebar">
     <ul class="list-group">
         <li class="list-group-item">
             <a href="{{url('/')}}" class="nav-link">Home</a>

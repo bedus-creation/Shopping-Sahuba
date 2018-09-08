@@ -1,43 +1,33 @@
 #profile{
     height: 6rem;
-    background: url('/img/company-cover.jpeg');
     background-position: center !important;
     background-size: cover !important;
+    background-color: #333;
 }
-#profile logo{
-    height: 10rem;
+.edit{
+    height: 14rem !important;
 }
 .logo{
     margin-left:20px;
     margin-top: -2rem;
-    background: url('/img/profile.jpg') no-repeat;
     background-color: #000;
     height: 4rem;
     width: 5rem;
+    background-position: center !important ;
     background-size: cover !important;
     border-radius: 50%;
+    background-color: #868e96;
+}
+.ledit{
+    margin-top: -4rem !important;
+    height: 8rem !important;
+    width: 8rem !important;
 }
 a{
     color: #868e96;
 }
 .fa{
     color: #868e96;
-}
-.dropdown-menu-side{
-    position: relative !important;
-    position: absolute;
-    transform: translate3d(0px,0px, 0px) !important;
-    top: 0px;
-    left: 0px;
-    will-change: transform;
-    width: 100%;
-    margin-top: 0;
-    border: none;
-    border-left: 3px solid #868e96;
-    border-radius: unset;
-    margin-left: 0.5rem;
-    padding-top: 0;
-    padding-bottom: 0;
 }
 ul.list{
     padding-left: 0;
@@ -46,7 +36,7 @@ ul.list{
 }
 ul.list li{
     font-size: 16px;
-    padding: 5px 0 5px 40px;
+    padding: 5px 0 5px 30px;
 }
 ul.list li .fa {
     font-size: 18px;

@@ -141,7 +141,9 @@
 <script src="/lib/bootstrap-select/js/bootstrap-select.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 <script>
-    $('#product').dropdown('toggle');
+    
+    $('#product').collapse('show');
+
     $('.selectpicker').selectpicker({
       style: 'btn-info',
       size: 4

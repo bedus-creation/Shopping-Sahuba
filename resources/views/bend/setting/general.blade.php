@@ -167,19 +167,7 @@
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
 <script>
     
-    $('#setting').addClass('show');
-    $('#setting > a').attr("aria-expanded","true");
-    $('#setting > .dropdown-menu').addClass('show');
-    $('#setting .fa-angle-right').css({'transform':'rotate(90deg)'});
-    $('.dropdown').click(function(){
-
-        // $('.dropdown').removeClass('show');
-        // $('.dropdown > a').attr("aria-expanded","false");
-        // $('.dropdown > .dropdown-menu').removeClass('show');
-        $('.dropdown .fa-angle-right').css({'transform':'rotate(0deg)'});
-        $(this).children(' .fa-angle-right').css({'transform':'rotate(90deg)'});
-
-    });
+    $('#setting').collapse('show');
 
     $('#cover').fileupload({
 		serverUploadUrl:'{{ route('medias.store') }}',

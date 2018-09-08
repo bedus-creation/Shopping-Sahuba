@@ -8,6 +8,7 @@
                 </div>
                 <div class="card-body p-1">
                     <h6 class="card-title text-center f-85">{{$item->name}}</h6>
+                    <h6 class="card-title text-danger font-weight-bold text-center f-85">Rs. {{$item->price->min+0}}</h6>
                 </div>
             </div>
         </a>

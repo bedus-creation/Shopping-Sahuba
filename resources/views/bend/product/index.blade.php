@@ -83,7 +83,7 @@
 <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
 <script>
-    $('#product').dropdown('toggle');
+    $('#product').collapse('show');
     $('#productList').DataTable({
         "scrollX": true
     });
