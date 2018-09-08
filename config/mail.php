@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => "mail.sahuba.com",
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 587),
+    'port' => 465,
 
     /*
     |--------------------------------------------------------------------------
@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'encryption' => 'ssl',
 
     /*
     |--------------------------------------------------------------------------
@@ -84,9 +84,12 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
+    //'username' => env('MAIL_USERNAME'),
 
-    'password' => env('MAIL_PASSWORD'),
+    'username' => "admin@sahuba.com",
+
+    'password'=>"#sahuba123TamanG",
+    // 'password' => env('MAIL_PASSWORD'),
 
     /*
     |--------------------------------------------------------------------------
