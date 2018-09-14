@@ -112,8 +112,8 @@
                               <br>
                               <div id="dropZone" class="dropzone">
                                   <div class="dz-default dz-message">
-                                      <h3>{{ $title or  'Drop files here or click to upload.'}}</h3>
-                                      <p class="text-muted">{{ $desc or 'Any related files you can upload' }} <br>
+                                      <h3>{{'Drop files here or click to upload.'}}</h3>
+                                      <p class="text-muted">{{ $desc ?? 'Any related files you can upload' }} <br>
                                           <small>One file can be max {{ config('attachment.max_size', 0) / 1000 }} MB</small>
                                       </p>
                                   </div>
