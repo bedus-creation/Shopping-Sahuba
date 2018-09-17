@@ -13,7 +13,7 @@
 <meta property="og:url"                   content="{{url($product->product_link())}}" /> 
 <meta property="og:title"                 content="{{$product->name}}" /> 
 @if(($product->medias->first()!==null))
-<meta property="og:image"                 content="{{optional($product->medias->first())->link()}}" /> 
+<meta property="og:image"                 content="{{optional($product->medias->first())->link('medium')}}" /> 
 <meta property="og:image:width" content="{{$product->medias->first()->size()->{'0'} ?? 300}}">
 <meta property="og:image:height"  content="{{$product->medias->first()->size()->{'1'} ?? 300}}">
 @endif
@@ -33,7 +33,7 @@
         "@type": "Product",
         "name": "{{$product->name}}",
         @if(($product->medias->first()!==null))
-        "image": "{{$product->medias->first()->link()}}",
+        "image": "{{$product->medias->first()->link('medium')}}",
         @endif
         "brand": {
             "@type": "Thing",
