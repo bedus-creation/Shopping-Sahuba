@@ -21,7 +21,7 @@
                             onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')" style="background: #3B5998; width: 100px;" class="btn text-center w-100"><i class="fab fa-facebook-f"></i></a>     
                     </div>
                     <div class="item"> 
-                        <a href="https://twitter.com/intent/tweet?text={{$product->name}} {{url()->current()}}" style="background: #55ACEE;" class="btn text-center w-100"
+                        <a href="https://twitter.com/intent/tweet?text={{str_slug($product->name,' ')}} {{url()->current()}}" style="background: #55ACEE;" class="btn text-center w-100"
                             onclick="return !window.open(this.href, 'Twitter', 'width=640,height=580')"
                             >
                             <i class="fab fa-twitter"></i>
