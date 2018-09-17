@@ -113,6 +113,8 @@
                             <label>Describe Your Product</label>
                           <textarea id="summernote" name="details" value="{{old('details')}}" type="text" class="form-control"  placeholder="Product Discription">{{$product->details}}</textarea>
                             <?php
+                                $media_id=[];
+                                
                                 foreach ($product->medias as $key => $value) {
                                     $media_id[]=$value->id;
                                 }

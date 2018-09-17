@@ -22,9 +22,28 @@ class ProductTest extends TestCase
     }
 
     /** @test */
-    public function unauthenticated_user_cannot_access_login_form(){
+    public function authenticated_user_can_create_product(){
+
+        $this->withoutExceptionHandling();
+
+        $user=factory('App\User')->create();
+
+        $this->be($user);
+
+        $product=factory('App\Models\Product')->create([
+            'user_id'=>auth()->user()->id
+        ]);
+
+        $this->get('/shopping/products/'.$product->id.'/edit')
+            ->assertStatus(200);
+
+    }
+
+
+    /** @test */
+    public function unauthenticated_user_cannot_access_product_form(){
 
         $this->get('/shopping/products/create')
-            ->assertStatus(403);
+            ->assertStatus(500);
     }
 }

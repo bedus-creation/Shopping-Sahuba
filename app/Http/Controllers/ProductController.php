@@ -89,7 +89,8 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   $data= Product::where(['id'=>$id])
+    {   
+        $data= Product::where(['id'=>$id])
             ->with('medias')
             ->with('price')->first();
 

@@ -10,7 +10,9 @@ class PageController extends Controller
 {
     public function index(){
         $user= \App\User::all();
-        $data=Product::with('medias')->OrderBy('id','desc')->get();
+        $data=Product::with('medias')
+            ->with('price')
+            ->OrderBy('id','desc')->get();
         return view('welcome',['data'=>$data,'users'=>$user]);
     }
 
