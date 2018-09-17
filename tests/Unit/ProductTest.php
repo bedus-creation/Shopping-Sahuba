@@ -22,7 +22,7 @@ class ProductTest extends TestCase
     }
 
     /** @test */
-    public function authenticated_user_can_create_product(){
+    public function authenticated_user_can_edit_product(){
 
         $this->withoutExceptionHandling();
 
@@ -38,6 +38,26 @@ class ProductTest extends TestCase
             ->assertStatus(200);
 
     }
+
+    /** @test */
+    public function only_product_owner_can_edit_the_product(){
+
+        $user=factory('App\User')->create();
+
+        $this->be($user);
+
+        $product1=factory('App\Models\Product')->create([
+            'user_id'=>factory('App\User')->create()->id
+        ]);
+
+        $this->get('/shopping/products/'.$product1->id.'/edit')
+            ->assertStatus(403);
+
+        $product2=factory('App\Models\Product')->create(['user_id'=>auth()->user()->id]);
+
+        $this->get('/shopping/products/'.$product2->id.'/edit')
+            ->assertStatus(200);
+    } 
 
 
     /** @test */

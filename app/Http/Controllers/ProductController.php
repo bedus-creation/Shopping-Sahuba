@@ -7,6 +7,7 @@ use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use App\Models\Price;
+use App\Http\Requests\Product\EditRequest;
 
 
 class ProductController extends Controller
@@ -88,13 +89,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {   
-        $data= Product::where(['id'=>$id])
-            ->with('medias')
-            ->with('price')->first();
+        $this->authorize('update',$product);
 
-      return view('bend.product.edit', ['product'=>$data]);   
+        $data= $product->load('medias')->load('price')->first();
+
+        return view('bend.product.edit', ['product'=>$data]);   
     }
 
     /**
@@ -104,10 +105,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(EditRequest $request, Product $product)
     {
-
-        
+        $this->authorize('update',$product);
 
         Price::find($product->id)->update([
             'type'=>'fixed',
