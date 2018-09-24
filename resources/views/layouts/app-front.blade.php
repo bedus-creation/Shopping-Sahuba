@@ -29,6 +29,7 @@
     </head>
 <body>
     <div id="app">
+        @include('auth.modal.login')
         @include('component.front.NavbarTop')
         @yield('content')
     </div>

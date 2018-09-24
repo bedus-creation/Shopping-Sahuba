@@ -21,7 +21,7 @@
                         @guest
                             <p class="section">Account</p>
                             <li class="list-group-item">
-                                <a href="{{url('/login')}}">Login</a>
+                                <a href="#" onclick="event.preventDefault();$('#login-modal').modal('show');">Login</a>
                             </li>
                             <li class="list-group-item">
                                 <a href="{{url('/register')}}">Register</a>
