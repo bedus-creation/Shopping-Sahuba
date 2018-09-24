@@ -9,6 +9,16 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class ProductTest extends TestCase
 {
     use RefreshDatabase;
+
+    /** @test */
+    public function login_user_can_view_all_their_records(){
+
+        $this->be(factory('App\User')->create());
+
+        $this->get('/shopping/products')
+            ->assertStatus(200);
+
+    }
     
     /** @test */
     public function login_user_can_get_create_product_form()

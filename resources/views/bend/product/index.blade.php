@@ -58,10 +58,12 @@
                                     <td><span class="badge {{(date($item->expiry_date)<date("Y-m-d H:i:s"))? 'badge-danger':'badge-success'}}">{{$item->expiry_date}} </span></td>
                                     <td class="text-center">{{$item->views}}</td>
                                     <td class="text-center  text-nowrap" style="width:120px">
-                                    <a href="/shopping/products/{{$item->id}}/edit" class="btn btn-outline-info">
+                                        <a href="{{$item->product_link()}}" target="_blank" class="btn btn-outline-info">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="/shopping/products/{{$item->id}}/edit" class="btn btn-outline-primary">
                                             <i class="fas fa-pencil-alt"></i>
                                         </a>
-                                        &nbsp;
                                         <a href="#"  class="btn btn-outline-danger" onclick="#" data-toggle="modal" data-target="#exampleModal">
                                             <i class=" far fa-trash-alt"></i>
                                         </a>
