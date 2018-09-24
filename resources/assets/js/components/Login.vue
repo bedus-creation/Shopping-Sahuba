@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-10 mx-auto">
+            <div class="col-12 col-md-12 mx-auto">
                 <div class="card card-signin">
                     <div class="card-body">
                         <h5 class="card-title text-center">Sign In</h5>
