@@ -5,6 +5,9 @@
 <link rel="stylesheet" href="/lib/bootstrap-select/css/bootstrap-select.css">
 <link rel="stylesheet" type="text/css" href="/css/file.upload.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
+<style>
+    .note-editable { font-family: 'Roboto', sans-serif; font-size: 1rem !important; }
+</style>
 @endsection
 
 @section('content')
@@ -141,7 +144,6 @@
 <script src="/lib/bootstrap-select/js/bootstrap-select.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 <script>
-    
     $('#product').collapse('show');
 
     $('.selectpicker').selectpicker({
@@ -152,7 +154,21 @@
     $('#summernote').summernote({
         placeholder: 'Details Goes Here',
         tabsize: 2,
-        height: 200
+        height: 200,
+        toolbar: [
+            // [groupName, [list of button]]
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough']],
+            ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height',['height']],
+            ['table', ['table']],
+            ['view', ['fullscreen', 'codeview','help']]
+        ],
+        fontSizes: ['18','20','22','24', '36'],
+        fontNames: ["Roboto, sans-serif"],
     });
 
     Dropzone.autoDiscover = false;

@@ -4,7 +4,7 @@
     <div class="logo" style="background-image:url('{{optional(auth()->user()->profileImage)->link()}}')"></div>
         <div class="basic">
             <ul class="list-group list-group-flush">
-                <li class="name list-group-item"><span style="color: red">{{auth()->user()->name}}</span></li>
+                <li class="list-group-item pl-1 pr-1"><span style="color: red">{{auth()->user()->name}}</span></li>
             </ul>
         </div>
     </div>

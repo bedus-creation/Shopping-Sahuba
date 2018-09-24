@@ -109,11 +109,11 @@ a.dropdown-item:hover{
 
 #profileMenus{
 	background: #1d7ac5;
-	margin-left: -160px;
     width: 210px;
 	top: 55px;
-	z-index:2;
+	z-index:1111;
 	position: absolute;
+	right: 0;
 }
 #sidemenu-left .list-group-item{
 	background: #1d7ac5;
@@ -196,7 +196,6 @@ a.dropdown-item:hover{
 	}
 	#profileMenus{
 		top: 45px;
-		margin-left: -170px;
 	}
 	#menu:after{
 		right: 5px;
