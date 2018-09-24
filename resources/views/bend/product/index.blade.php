@@ -87,26 +87,6 @@
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
 <script>
     $('#product').collapse('show');
-    $('#summernote').summernote({
-        placeholder: 'Details Goes Here',
-        tabsize: 2,
-        height: 200,
-        toolbar: [
-            // [groupName, [list of button]]
-            ['style', ['bold', 'italic', 'underline', 'clear']],
-            ['font', ['strikethrough']],
-            ['fontname', ['fontname']],
-            ['fontsize', ['fontsize']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['height',['height']],
-            ['table', ['table']],
-            ['view', ['fullscreen', 'codeview','help']]
-        ],
-        fontSizes: ['18','20','22','24', '36'],
-        fontNames: ["Roboto, sans-serif"],
-    });
-
     $('#productList').DataTable({
         "scrollX": true
     });
