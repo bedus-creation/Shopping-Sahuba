@@ -158,11 +158,24 @@
       style: 'btn-info',
       size: 4
     });
-
     $('#summernote').summernote({
         placeholder: 'Details Goes Here',
         tabsize: 2,
-        height: 200
+        height: 200,
+        toolbar: [
+            // [groupName, [list of button]]
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough']],
+            ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height',['height']],
+            ['table', ['table']],
+            ['view', ['fullscreen', 'codeview','help']]
+        ],
+        fontSizes: ['18','20','22','24', '36'],
+        fontNames: ["Roboto, sans-serif"],
     });
 
     Dropzone.autoDiscover = false;
