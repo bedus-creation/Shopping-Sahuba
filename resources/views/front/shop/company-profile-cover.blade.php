@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12">
-        <div id="profile" style="background-image:url('{{optional($shop->coverImage)->link()}}')">
+        <div id="profile" style="background-image:url('{{optional($shop->coverImage)->link('big')}}')">
             <div class="profile-inner">
             </div>   
         </div>

@@ -28,7 +28,7 @@ class User extends Authenticatable
     ];
 
     public function products(){
-        return $this->hasMany('App\Models\Product');
+        return $this->hasMany('App\Models\Product')->orderBy('id','desc');
     }
 
     public function profile(){
