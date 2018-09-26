@@ -93,7 +93,7 @@ class ProductController extends Controller
     {   
         $this->authorize('update',$product);
 
-        $data= $product->load('medias')->load('price')->first();
+        $data= $product->load('medias')->load('price');
 
         return view('bend.product.edit', ['product'=>$data]);   
     }

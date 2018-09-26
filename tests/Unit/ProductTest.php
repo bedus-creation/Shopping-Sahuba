@@ -60,13 +60,17 @@ class ProductTest extends TestCase
             'user_id'=>factory('App\User')->create()->id
         ]);
 
+        
+        $product2=factory('App\Models\Product')->create(['user_id'=>auth()->user()->id]);
+
+        
         $this->get('/shopping/products/'.$product1->id.'/edit')
             ->assertStatus(403);
 
-        $product2=factory('App\Models\Product')->create(['user_id'=>auth()->user()->id]);
-
-        $this->get('/shopping/products/'.$product2->id.'/edit')
-            ->assertStatus(200);
+        $this->get('/shopping/products/'.$product2->id.'/edit') 
+            ->assertStatus(200)
+            ->assertSee($product2->name)
+            ->assertSee($product2->details);
     } 
 
 
