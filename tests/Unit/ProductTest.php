@@ -80,4 +80,32 @@ class ProductTest extends TestCase
         $this->get('/shopping/products/create')
             ->assertStatus(500);
     }
+
+    /** @test */
+    public function product_can_be_deleted(){
+
+        // $this->withoutExceptionHandling();
+
+        $user=factory('App\User')->create();
+
+        $this->be($user);
+
+        $product1=factory('App\Models\Product')->create([
+            'user_id'=>auth()->user()->id
+        ]);
+
+        $product2=factory('App\Models\Product')->create([
+            'user_id'=>factory('App\User')->create()->id
+        ]);
+
+
+        $this->call('DELETE','/shopping/products/'.$product1->id)
+            ->assertSessionHas('success');
+
+        $this->call('DELETE','/shopping/products/'.$product2->id)
+            ->assertStatus(403)
+            ->assertSessionMissing('success');
+
+
+    }
 }

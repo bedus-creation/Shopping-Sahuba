@@ -1,4 +1,6 @@
 @extends('theme.shop.app')
+@include('utils.success-error')
+
 
 @section('css')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
@@ -24,6 +26,7 @@
             <div class="bg-white">
                 <div class="card">
                     <div class="card-body">
+                            @yield('success-error')
                         <div class="card-title">
                         <div>
                             <span class="float-left"><strong class="btn font-weight-bold">Listing All Product</strong></span>
@@ -65,8 +68,12 @@
                                         <a href="/shopping/products/{{$item->id}}/edit" class="btn btn-outline-primary">
                                             <i class="fas fa-pencil-alt"></i>
                                         </a>
-                                        <a href="#"  class="btn btn-outline-danger" onclick="#" data-toggle="modal" data-target="#exampleModal">
+                                        <a href="#"  class="btn btn-outline-danger" onclick="event.preventDefault();$('#{{$item->id.'-delete'}}').submit();" data-toggle="modal" data-target="#exampleModal">
                                             <i class=" far fa-trash-alt"></i>
+                                            <form method="POST" id="{{$item->id.'-delete'}}" action="{{url('shopping/products/'.$item->id)}}">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
                                         </a>
                                     </td>
                                 </tr>
