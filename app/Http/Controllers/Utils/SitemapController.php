@@ -8,7 +8,7 @@ use App\Models\Product;
 class SitemapController extends Controller{
 
     public function generate(){
-        $products=Product::with('medias')->get();
+        $products=Product::with('medias')->orderBy('id','desc')->get();
         $shop=[];
         $category=[];
         $content = view('utils.sitemap', ["products"=>$products,'category'=>$category,'shop'=>$shop]);
