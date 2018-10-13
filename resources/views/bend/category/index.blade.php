@@ -30,7 +30,7 @@
                         <div class="card-title">
                         <div>
                             <span class="float-left"><strong class="btn font-weight-bold">Listing All Categories</strong></span>
-                            <span class="float-right"><a href="{{url('categories/create')}}" class="btn btn-info"><i class="fa fa-plus text-white"></i> <span class="d-none d-md-inline">&nbsp;Add New Category</span></a></span>
+                            <span class="float-right"><a href="{{url('categories/create')}}" class="btn btn-info"><i class="fa fa-bars text-white"></i> <span class="d-none d-md-inline">&nbsp;Add New Category</span></a></span>
                         </div>
                         </div>
                         <div class="clearfix"></div>

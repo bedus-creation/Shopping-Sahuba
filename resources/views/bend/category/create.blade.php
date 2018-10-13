@@ -19,8 +19,8 @@
                             @yield('success-error')
                         <div class="card-title">
                         <div>
-                            <span class="float-left"><strong class="btn font-weight-bold">Listing All Product</strong></span>
-                            <span class="float-right"><a href="{{url('categories/create')}}" class="btn btn-info"><i class="fa fa-plus text-white"></i> <span class="d-none d-md-inline">&nbsp;Add New Products</span></a></span>
+                            <span class="float-left"><strong class="btn font-weight-bold">Add New Category</strong></span>
+                            <span class="float-right"><a href="{{url('categories')}}" class="btn btn-info"><i class="fa fa-plus text-white"></i> <span class="d-none d-md-inline">&nbsp;List all Category</span></a></span>
                         </div>
                         </div>
                         <div class="clearfix"></div>
