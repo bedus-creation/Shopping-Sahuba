@@ -21,7 +21,7 @@
         </li>
         <li class="list-group-item">
             <div>
-                <a class="d-flex flex-row justify-content-between"  href="#product" data-toggle="collapse" aria-expanded="false">
+                <a class="d-flex flex-row justify-content-between"  href="#category" data-toggle="collapse" aria-expanded="false">
                     <div class="d-flex flex-row justify-content-start">
                         <div class=""><i class="fa fa-boxes"></i></div>
                         <div class="pl-3" style="cursor: pointer;">Categories</div>
@@ -31,7 +31,7 @@
                 <div class="collapse" id="category">
                     <ul class="list">
                         <li>
-                            <a href="{{url('/action/categories/create')}}" class="d-flex flex-row justify-content-between">
+                            <a href="{{url('categories/create')}}" class="d-flex flex-row justify-content-between">
                                 <div class="d-flex flex-row justify-content-start">
                                     <div class=""><i class="fa fa-plus"></i></div>
                                     <div class="pl-3" style="cursor: pointer;">Add Category</div>
@@ -39,7 +39,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{url('/shopping/products')}}" class="d-flex flex-row justify-content-between">
+                            <a href="{{url('categories')}}" class="d-flex flex-row justify-content-between">
                                 <div class="d-flex flex-row justify-content-start">
                                     <div class=""><i class="fa fa-chart-bar"></i></div>
                                     <div class="pl-3" style="cursor: pointer;">All Category</div>

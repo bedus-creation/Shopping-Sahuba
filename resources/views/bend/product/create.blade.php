@@ -177,7 +177,7 @@
     $("#dropZone").dropzone({
         addRemoveLinks: true,
         url: "{{ route('medias.store') }}",
-        maxFilesize: {{ isset($maxFileSize) ? $maxFileSize : config('attachment.max_size', 1000) / 1000 }},
+        maxFilesize: {{ isset($maxFileSize) ? $maxFileSize : config('attachment.max_size', 10000) / 1000 }},
         acceptedFiles: "{!! isset($acceptedFiles) ? $acceptedFiles : config('media.allowed') !!}",
         headers: {'X-CSRF-TOKEN': "{{ csrf_token() }}"},
         init: function () {  
