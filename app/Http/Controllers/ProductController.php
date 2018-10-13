@@ -8,6 +8,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use App\Models\Price;
 use App\Http\Requests\Product\EditRequest;
+use App\Models\Category;
 
 
 class ProductController extends Controller
@@ -40,7 +41,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('bend.product.create');   
+        $categories = Category::all();
+
+        return view('bend.product.create',compact('categories'));   
     }
 
     /**

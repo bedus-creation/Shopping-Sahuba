@@ -18,7 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->timestamps();
             $table->string('name');
             $table->enum('type',[0,1])->default(1);
-            $table->unsignedInteger('media_id');
+            $table->unsignedInteger('media_id')->nullable();
             $table->integer('parent')->default(0);
         });
     }

@@ -11,6 +11,12 @@ Route::group(['namespace'=>'Utils'], function () {
     Route::get('sitemap.xml','SitemapController@generate');
 });
 
+Route::resource('categories','Utils\CategoryController');
+
+
+Route::group(['prefix'=>'admin'],function(){
+    Route::get('/','Admin\AdminController@index');
+});
 
 Route::group(['prefix'=>'shopping'],function(){
     Route::get('/', function () {
