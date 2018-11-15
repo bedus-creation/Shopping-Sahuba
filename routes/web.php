@@ -1,5 +1,7 @@
 <?php
 
+use App\Mail\TestMail;
+
 Route::get('/', 'PageController@index');
 Route::get('shop/{slug}/{id}', 'PageController@shop');
 Route::get('product/{slug}/{id}','PageController@product');
@@ -38,7 +40,8 @@ Route::group(['middleware'=>['auth']],function(){
 
 
 Route::get('test', function () {
-    \App\Jobs\EmailJobs::dispatch();
+    return new TestMail();
+    // \App\Jobs\EmailJobs::dispatch();
 
     return 'ok';
 });

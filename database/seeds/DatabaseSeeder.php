@@ -11,10 +11,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory('App\User')->create([
-            'email'=>'tmgbedu@gmail.com',
-        ]);
+        // factory('App\User')->create([
+        //     'email'=>'tmgbedu@gmail.com',
+        // ]);
 
-        $this->call(ProductSeeder::class);
+        // $this->call(ProductSeeder::class);
     }
 }

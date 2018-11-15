@@ -151,6 +151,7 @@ return [
          * Package Service Providers...
          */
         Intervention\Image\ImageServiceProvider::class,
+        Folklore\GraphQL\ServiceProvider::class,
 
         /*
          * Application Service Providers...
