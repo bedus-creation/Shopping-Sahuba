@@ -81,11 +81,11 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Product Category</label>
-                                <select name="category_id" value="{{old('category_id')}}" class="selectpicker" data-width="100%" data-live-search="true">
-                                    <option value="1">Mobile</option>
-                                    <option value="4">Bike</option>
-                                    <option value="2">Laptop</option>
-                                    <option value="3">Land</option>
+                                <select name="category_id" class="selectpicker" data-width="100%" data-live-search="true">
+                                    <option>Select Categories</option>
+                                    @foreach ($categories as $item)
+                                    <option value="{{$item->id}}" {{($product->category_id==$item->id) ? 'selected':''}}>{{$item->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group">

@@ -96,9 +96,11 @@ class ProductController extends Controller
     {   
         $this->authorize('update',$product);
 
+        $categories = Category::all();
+
         $data= $product->load('medias')->load('price');
 
-        return view('bend.product.edit', ['product'=>$data]);   
+        return view('bend.product.edit', ['product'=>$data,'categories'=>$categories]);   
     }
 
     /**
