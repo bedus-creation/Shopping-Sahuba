@@ -11,7 +11,7 @@ http://localhost:8080/graphql?query={categories{name,products{id,name,price,imag
 
 ```
 
-Get the price details
+# Get the price details
 
 ```
 http://localhost:8080/graphql?query={products(id:1){id,name,price,details,images{url}}}
