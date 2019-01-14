@@ -1,3 +1,13 @@
+# Install
+composer install
+
+# seed database
+
+```
+php artisan migrate:fresh --seed
+```
+
+
 # URL to get products API
 
 ```
