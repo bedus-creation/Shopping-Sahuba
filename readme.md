@@ -1,5 +1,14 @@
+# &copy All rights reserved.
+
+Any redistribution or reproduction of part or all of the contents in any form is prohibited other than the following:
+
+you may download to a local hard disk extracts for your personal and non-commercial use only.
+
 # Install
+```
 composer install
+```
+
 
 # seed database
 
