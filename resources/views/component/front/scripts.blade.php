@@ -1,4 +1,11 @@
 <script src="{{url('/js/app.js')}}"></script>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4419475170841205",
+    enable_page_level_ads: true
+  });
+</script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-106586554-5"></script>
 <script>
