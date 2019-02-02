@@ -10,7 +10,7 @@ class PageController extends Controller
 {
     public function index()
     {
-        $user= User::limit(10)->OrderBy('id', 'desc')->get();
+        $user= User::limit(10)->get();
         $data=Product::with('medias')
             ->with('price')
             ->limit(20)
