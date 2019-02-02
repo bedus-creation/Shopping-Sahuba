@@ -6,9 +6,11 @@ use App\Utils\Role;
 
 trait HasRole
 {
-    public function createRole($role="shop")
+    public function createRole($role=["shop"])
     {
-        $role = Role::firstOrCreate(['name' =>ucfirst($role)]);
+        $role = collect($role)->map(function ($item) {
+            return Role::firstOrCreate(['name' =>ucfirst($item)])->id;
+        });
 
         $this->roles()->sync($role);
     }

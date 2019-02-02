@@ -21,6 +21,29 @@
         </li>
         <li class="list-group-item">
             <div>
+                <a class="d-flex flex-row justify-content-between"  href="#users" data-toggle="collapse" aria-expanded="false">
+                    <div class="d-flex flex-row justify-content-start">
+                        <div class=""><i class="fa fa-users"></i></div>
+                        <div class="pl-3" style="cursor: pointer;">Users</div>
+                    </div>
+                    <div class=""><i class="fa fa-angle-right"></i></div>
+                </a> 
+                <div class="collapse" id="users">
+                    <ul class="list">
+                        <li>
+                            <a href="{{url('admin/users')}}" class="d-flex flex-row justify-content-between">
+                                <div class="d-flex flex-row justify-content-start">
+                                    <div class=""><i class="fa fa-chart-bar"></i></div>
+                                    <div class="pl-3" style="cursor: pointer;">All Users</div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div>
                 <a class="d-flex flex-row justify-content-between"  href="#category" data-toggle="collapse" aria-expanded="false">
                     <div class="d-flex flex-row justify-content-start">
                         <div class=""><i class="fa fa-boxes"></i></div>
