@@ -8,7 +8,6 @@ Route::get('product/{slug}/{id}', 'PageController@product');
 Route::get('search/', 'SearchController@search');
 
 Route::group(['namespace'=>'Utils'], function () {
-    Route::get('/command/{command}', 'CommandController@command');
     Route::resource('medias', 'MediaController');
     Route::get('sitemap.xml', 'SitemapController@generate');
 });
@@ -16,7 +15,8 @@ Route::group(['namespace'=>'Utils'], function () {
 Route::resource('categories', 'Utils\CategoryController');
 
 
-Route::group(['prefix'=>'admin'], function () {
+Route::group(['prefix'=>'admin','middleware'=>['auth',"role:admin"]], function () {
+    Route::get('/command/{command}', 'CommandController@command');
     Route::get('/', 'Admin\AdminController@index');
     Route::resource('/users', 'Admin\UserController')->only(["index","edit","update"]);
 });

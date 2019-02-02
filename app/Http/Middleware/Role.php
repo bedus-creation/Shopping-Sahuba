@@ -13,20 +13,18 @@ class Role
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $guard = null)
     {
-        // public function handle($request, Closure $next, $guard = null)
-        
         $role = $guard ? $guard:'guest';
 
         $roles = explode('|', $role);
         
         $auth = auth()->user();
 
-        if (!in_array($auth->role->name, $roles)) {
-            return response('Unauthenticated.', 401);
+        if ($auth->hasRole($roles)) {
+            return $next($request);
         }
-
-        return $next($request);
+        
+        return response('Unauthenticated.', 401);
     }
 }
