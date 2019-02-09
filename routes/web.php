@@ -19,6 +19,7 @@ Route::group(['prefix'=>'admin','middleware'=>['auth',"role:admin"]], function (
     Route::get('/command/{command}', 'CommandController@command');
     Route::get('/', 'Admin\AdminController@index');
     Route::resource('/users', 'Admin\UserController')->only(["index","edit","update"]);
+    Route::get('jobs', 'System\JobsController');
 });
 
 Route::group(['prefix'=>'shopping'], function () {
@@ -29,16 +30,6 @@ Route::group(['prefix'=>'shopping'], function () {
     Route::get('settings', 'SettingController@general');
     Route::post('settings', 'SettingController@store');
 });
-
-// system level admin routes
-Route::group(['middleware'=>['auth']], function () {
-    Route::get('jobs', 'System\JobsController');
-});
-
-
-
-
-
 
 Route::get('test', function () {
     return new TestMail();
