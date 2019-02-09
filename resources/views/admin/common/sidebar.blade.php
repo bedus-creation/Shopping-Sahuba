@@ -73,5 +73,28 @@
                 </div>
             </div>
         </li>
+        <li class="list-group-item">
+            <div>
+                <a class="d-flex flex-row justify-content-between"  href="#jobs" data-toggle="collapse" aria-expanded="false">
+                    <div class="d-flex flex-row justify-content-start">
+                        <div class=""><i class="fa fas fa-shopping-basket"></i></div>
+                        <div class="pl-3" style="cursor: pointer;">Jobs</div>
+                    </div>
+                    <div class=""><i class="fa fa-angle-right"></i></div>
+                </a> 
+                <div class="collapse" id="jobs">
+                    <ul class="list">
+                        <li>
+                            <a href="{{url('admin/jobs')}}" class="d-flex flex-row justify-content-between">
+                                <div class="d-flex flex-row justify-content-start">
+                                    <div class=""><i class="fa fa-chart-bar"></i></div>
+                                    <div class="pl-3" style="cursor: pointer;">List</div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
     </ul>
 </div>

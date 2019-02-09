@@ -56,7 +56,7 @@
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->email}}</td>
                                     <td class="text-center  text-nowrap" style="width:120px">
-                                        <a href="#" target="_blank" class="btn btn-outline-info">
+                                        <a href="{{$item->profile_link()}}" target="_blank" class="btn btn-outline-info">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                         <a href="{{url('admin/users/'.$item->id.'/edit')}}" class="btn btn-outline-primary">

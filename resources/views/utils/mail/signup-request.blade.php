@@ -9,13 +9,11 @@ Sign Up
 @endcomponent
 
 # Features
-
 - Buy or Sell products
 - No products Limits
 - Shop Profile.
 - Comment section
 - It's Free, Forever.
-
 
 
 Thanks,<br>

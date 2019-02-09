@@ -28,6 +28,6 @@ class TestMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('utils.mail.test');
+        return $this->markdown('utils.mail.signup-request');
     }
 }
