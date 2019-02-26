@@ -35,7 +35,7 @@ class EmailJobs implements ShouldQueue
     public function handle()
     {
         $users = User::select('email')->get();
-        Mail::to($users->pluck('email'))
+        Mail::to($users->pluck('email')->toArray())
             ->send(new TestMail());
     }
 

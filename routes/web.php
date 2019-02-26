@@ -35,7 +35,7 @@ Route::get('test', function () {
     // return new TestMail();
     \App\Jobs\EmailJobs::dispatch();
 
-    // return 'ok';
+    return 'ok';
 });
 
 Auth::routes();
