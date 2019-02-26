@@ -10,6 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use App\Mail\TestMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use App\User;
 
 
 class EmailJobs implements ShouldQueue
@@ -33,12 +34,13 @@ class EmailJobs implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to('tmgbedu@gmail.com')
+        $users = User::select('email')->get();
+        Mail::to($users->pluck('email'))
             ->send(new TestMail());
     }
 
     public function failed(\Exception $exception)
     {
-        Log::info('QUEUE EXCEPTION', $exception);  
+        Log::info('QUEUE EXCEPTION', $exception);
     }
 }

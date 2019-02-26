@@ -7,7 +7,7 @@ Route::get('shop/{slug}/{id}', 'PageController@shop');
 Route::get('product/{slug}/{id}', 'PageController@product');
 Route::get('search/', 'SearchController@search');
 
-Route::group(['namespace'=>'Utils'], function () {
+Route::group(['namespace' => 'Utils'], function () {
     Route::resource('medias', 'MediaController');
     Route::get('sitemap.xml', 'SitemapController@generate');
 });
@@ -15,14 +15,14 @@ Route::group(['namespace'=>'Utils'], function () {
 Route::resource('categories', 'Utils\CategoryController');
 
 
-Route::group(['prefix'=>'admin','middleware'=>['auth',"role:admin"]], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', "role:admin"]], function () {
     Route::get('/command/{command}', 'CommandController@command');
     Route::get('/', 'Admin\AdminController@index');
-    Route::resource('/users', 'Admin\UserController')->only(["index","edit","update"]);
+    Route::resource('/users', 'Admin\UserController')->only(["index", "edit", "update"]);
     Route::get('jobs', 'System\JobsController');
 });
 
-Route::group(['prefix'=>'shopping'], function () {
+Route::group(['prefix' => 'shopping'], function () {
     Route::get('/', function () {
         return view('bend.page.index');
     });
@@ -32,10 +32,10 @@ Route::group(['prefix'=>'shopping'], function () {
 });
 
 Route::get('test', function () {
-    return new TestMail();
-    // \App\Jobs\EmailJobs::dispatch();
+    // return new TestMail();
+    \App\Jobs\EmailJobs::dispatch();
 
-    return 'ok';
+    // return 'ok';
 });
 
 Auth::routes();
