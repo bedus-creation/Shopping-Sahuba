@@ -16,10 +16,10 @@ class ProductController extends Controller
 
     protected $repository;
 
-    public function __construct(Product $repository){
+    public function __construct(Product $repository)
+    {
 
         $this->repository = $repository;
-
     }
 
 
@@ -30,8 +30,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $data=$this->repository->where('user_id',auth()->user()->id)->get();
-        return view('bend.product.index',['data'=>$data]);  
+        $data = $this->repository->where('user_id', auth()->user()->id)->get();
+        return view('bend.product.index', ['data' => $data]);
     }
 
     /**
@@ -43,7 +43,7 @@ class ProductController extends Controller
     {
         $categories = Category::all();
 
-        return view('bend.product.create',compact('categories'));   
+        return view('bend.product.create', compact('categories'));
     }
 
     /**
@@ -54,25 +54,25 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $price=Price::create([
-            'type'=>'fixed',
-            'min'=>$request->price,
+        $price = Price::create([
+            'type' => 'fixed',
+            'min' => $request->price,
         ]);
-        
+
         date_default_timezone_set('Asia/Kathmandu');
         $date = date('Y-m-d');
-        $date = date('Y-m-d', strtotime($date. ' + 90 days'));
+        $date = date('Y-m-d', strtotime($date . ' + 90 days'));
 
         $request->merge([
-            'price_id'=>$price->id,
-            'user_id'=>auth()->user()->id,
-            'expiry_date'=>$date
+            'price_id' => $price->id,
+            'user_id' => auth()->user()->id,
+            'expiry_date' => $date
         ]);
-        $product=$this->repository->create($request->all());
+        $product = $this->repository->create($request->all());
 
-        $product->medias()->attach(explode(',',$request->media_id));
-            
-        return redirect()->back()->with('success','Your Product Is added');
+        $product->medias()->attach(explode(',', $request->media_id));
+
+        return redirect()->back()->with('success', 'Your Product Is added');
     }
 
     /**
@@ -93,14 +93,14 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
-    {   
-        $this->authorize('update',$product);
+    {
+        $this->authorize('update', $product);
 
         $categories = Category::all();
 
-        $data= $product->load('medias')->load('price');
+        $data = $product->load('medias')->load('price');
 
-        return view('bend.product.edit', ['product'=>$data,'categories'=>$categories]);   
+        return view('bend.product.edit', ['product' => $data, 'categories' => $categories]);
     }
 
     /**
@@ -112,27 +112,26 @@ class ProductController extends Controller
      */
     public function update(EditRequest $request, Product $product)
     {
-        $this->authorize('update',$product);
+        $this->authorize('update', $product);
 
         Price::find($product->id)->update([
-            'type'=>'fixed',
-            'min'=>$request->price,
+            'type' => 'fixed',
+            'min' => $request->price,
         ]);
 
         $date = date('Y-m-d');
-        $date = date('Y-m-d', strtotime($date. ' + 30 days'));
+        $date = date('Y-m-d', strtotime($date . ' + 30 days'));
 
         $request->merge([
-            'user_id'=>auth()->user()->id,
-            'expiry_date'=>$date
+            'user_id' => auth()->user()->id,
+            'expiry_date' => $date
         ]);
 
         $product->update($request->all());
 
-        $product->medias()->sync(explode(',',$request->media_id));
+        $product->medias()->sync(explode(',', $request->media_id));
 
         return redirect()->back()->with('success', 'edited successfully');
-
     }
 
     /**
@@ -143,7 +142,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $this->authorize('update',$product);
+        $this->authorize('update', $product);
 
         $product->delete();
 

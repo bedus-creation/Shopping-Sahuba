@@ -12,7 +12,7 @@ class RoleTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -31,25 +31,25 @@ class RoleTest extends TestCase
         $user = factory(User::class)->make();
 
         $data = array_merge($user->toArray(), [
-            "password"=>"secret",
-            "password_confirmation"=>"secret"
+            "password" => "secret",
+            "password_confirmation" => "secret"
         ]);
 
         $this->post("register", $data);
 
         $this->assertDatabaseHas("users", $user->toArray());
 
-        $this->assertTrue(count(Role::all())==1);
+        $this->assertTrue(count(Role::all()) == 1);
     }
 
     /** @test */
     public function when_login_user_is_redirected_to_path_in_role_config_file()
     {
         $role = "shop";
-        $data = ["email"=>"tmgbedu@gmail.com"];
+        $data = ["email" => "tmgbedu@gmail.com"];
         $user = createUser($data, "shop");
-        $path = config('roles.'.$role.".path");
-        $this->post("login", array_merge($data, ["password"=>"secret"]))
+        $path = config('roles.' . $role . ".path");
+        $this->post("login", array_merge($data, ["password" => "secret"]))
             ->assertRedirect($path);
     }
 }
