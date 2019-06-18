@@ -14,10 +14,11 @@ class ProductController extends Controller
 
     protected $repository;
 
-    public function __construct(Product $repository){
+    public function __construct(Product $repository)
+    {
+        $this->middleware('verified');
 
         $this->repository = $repository;
-
     }
 
 
@@ -28,8 +29,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $data=$this->repository->where('user_id',auth()->user()->id)->get();
-        return view('bend.product.index',['data'=>$data]);  
+        $data = $this->repository->where('user_id', auth()->user()->id)->get();
+        return view('bend.product.index', ['data' => $data]);
     }
 
     /**
@@ -39,7 +40,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('bend.product.create');   
+        return view('bend.product.create');
     }
 
     /**
@@ -50,25 +51,25 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $price=Price::create([
-            'type'=>'fixed',
-            'min'=>$request->price,
+        $price = Price::create([
+            'type' => 'fixed',
+            'min' => $request->price,
         ]);
-        
+
         date_default_timezone_set('Asia/Kathmandu');
         $date = date('Y-m-d');
-        $date = date('Y-m-d', strtotime($date. ' + 90 days'));
+        $date = date('Y-m-d', strtotime($date . ' + 90 days'));
 
         $request->merge([
-            'price_id'=>$price->id,
-            'user_id'=>auth()->user()->id,
-            'expiry_date'=>$date
+            'price_id' => $price->id,
+            'user_id' => auth()->user()->id,
+            'expiry_date' => $date
         ]);
-        $product=$this->repository->create($request->all());
+        $product = $this->repository->create($request->all());
 
-        $product->medias()->attach(explode(',',$request->media_id));
-            
-        return redirect()->back()->with('success','Your Product Is added');
+        $product->medias()->attach(explode(',', $request->media_id));
+
+        return redirect()->back()->with('success', 'Your Product Is added');
     }
 
     /**
@@ -89,11 +90,12 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   $data= Product::where(['id'=>$id])
+    {
+        $data = Product::where(['id' => $id])
             ->with('medias')
             ->with('price')->first();
 
-      return view('bend.product.edit', ['product'=>$data]);   
+        return view('bend.product.edit', ['product' => $data]);
     }
 
     /**
@@ -106,27 +108,26 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
 
-        
+
 
         Price::find($product->id)->update([
-            'type'=>'fixed',
-            'min'=>$request->price,
+            'type' => 'fixed',
+            'min' => $request->price,
         ]);
 
         $date = date('Y-m-d');
-        $date = date('Y-m-d', strtotime($date. ' + 30 days'));
+        $date = date('Y-m-d', strtotime($date . ' + 30 days'));
 
         $request->merge([
-            'user_id'=>auth()->user()->id,
-            'expiry_date'=>$date
+            'user_id' => auth()->user()->id,
+            'expiry_date' => $date
         ]);
 
         $product->update($request->all());
 
-        $product->medias()->sync(explode(',',$request->media_id));
+        $product->medias()->sync(explode(',', $request->media_id));
 
         return redirect()->back()->with('success', 'edited successfully');
-
     }
 
     /**

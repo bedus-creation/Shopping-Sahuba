@@ -1,17 +1,11 @@
 let mix = require('laravel-mix');
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
- | file for the application as well as bundling up all the JS files.
- |
- */
 
 mix.js('resources/assets/js/app.js', 'public/js')
    .copy('public/js/app.js', 'public_html/js/app.js')
    .sass('resources/assets/sass/app.scss', 'public/css')
-   .copy('public/css/app.css','public_html/css/app.css');
+    .copy('public/css/app.css', 'public_html/css/app.css');
+
+// Dropzone
+mix.js('resources/lib/dropzone/app.js', 'public/lib/dropzone')
+    .copy('public/lib/dropzone', 'public_html/lib/dropzone');
