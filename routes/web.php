@@ -32,12 +32,6 @@ Route::group(['prefix' => 'shopping', 'middleware' => ['auth']], function () {
     Route::post('settings', 'SettingController@store');
 });
 
-// system level admin routes
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('jobs', 'System\JobsController');
-});
-
-
 
 
 

@@ -6,10 +6,10 @@ use App\Utils\Role;
 
 trait HasRole
 {
-    public function hasRole($roles=[])
+    public function hasRole($roles = [])
     {
         $data = array_intersect($roles, $this->getRoles());
-        return count($data)>0;
+        return count($data) > 0;
     }
 
     public function getRoles()
@@ -19,10 +19,10 @@ trait HasRole
         })->toArray();
     }
 
-    public function createRole($role=["shop"])
+    public function createRole($role = ["shop"])
     {
         $role = collect($role)->map(function ($item) {
-            return Role::firstOrCreate(['name' =>ucfirst($item)])->id;
+            return Role::firstOrCreate(['name' => ucfirst($item)])->id;
         });
 
         $this->roles()->sync($role);
@@ -35,6 +35,6 @@ trait HasRole
 
     public function redirectTo()
     {
-        return config('roles.'.$role.".path") ?? "shopping";
+        return config('roles.' . $role . ".path") ?? "shopping";
     }
 }
