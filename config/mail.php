@@ -86,9 +86,9 @@ return [
 
     //'username' => env('MAIL_USERNAME'),
 
-    'username' => "K.d!=Z1]DXT0",
+    'username' => "admin@sahuba.com",
 
-    'password' => "465",
+    'password' => "K.d!=Z1]DXT0",
     // 'password' => env('MAIL_PASSWORD'),
 
     /*
