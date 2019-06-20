@@ -1,7 +1,7 @@
 @component('mail::message')
-# Introduction
+# Thanks For registration.
 
-The body of your message.
+Please clink on this link to confirm your email.
 
 @component('mail::button', ['url' => ''])
 Button Text

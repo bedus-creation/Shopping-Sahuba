@@ -1,6 +1,7 @@
 <?php
 
 use App\Mail\TestMail;
+use App\Mail\Client\SignUpEmail;
 
 Route::get('/', 'PageController@index');
 Route::get('shop/{slug}/{id}', 'PageController@shop');
@@ -23,7 +24,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', "role:admin"]], func
     Route::get('jobs', 'System\JobsController');
 });
 
-Route::group(['prefix' => 'shopping', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'shopping', 'middleware' => ['auth', 'verified']], function () {
     Route::get('/', function () {
         return view('bend.page.index');
     });
@@ -38,8 +39,8 @@ Route::group(['prefix' => 'shopping', 'middleware' => ['auth']], function () {
 
 Route::get('test', function () {
     // return new TestMail();
-    \App\Jobs\EmailJobs::dispatch();
-
+    // \App\Jobs\EmailJobs::dispatch();
+    return new SignUpEmail();
     return 'ok';
 });
 

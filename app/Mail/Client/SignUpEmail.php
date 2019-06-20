@@ -19,7 +19,7 @@ class SignUpEmail extends Mailable
      *
      * @return void
      */
-    public function __construct($data, $message)
+    public function __construct($data = "", $message = "")
     {
         $this->data = $data;
         $this->message = $message;
@@ -32,6 +32,6 @@ class SignUpEmail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('utils.mail.signup');
+        return $this->markdown('utils.mail.sign-up');
     }
 }
