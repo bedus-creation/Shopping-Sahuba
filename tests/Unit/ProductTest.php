@@ -15,9 +15,7 @@ class ProductTest extends TestCase
     {
 
         $this->withoutExceptionHandling();
-
-        $user = factory('App\User')->create();
-
+        $user = factory('App\User')->create(['email_verified_at' => now()]);
         $this->be($user);
 
         $product = factory('App\Models\Product')->create([
@@ -32,7 +30,7 @@ class ProductTest extends TestCase
     public function only_product_owner_can_edit_the_product()
     {
 
-        $user = factory('App\User')->create();
+        $user = factory('App\User')->create(['email_verified_at' => now()]);
 
         $this->be($user);
 
@@ -58,7 +56,7 @@ class ProductTest extends TestCase
     public function product_can_be_deleted()
     {
         // $this->withoutExceptionHandling();
-        $user = factory('App\User')->create();
+        $user = factory('App\User')->create(['email_verified_at' => now()]);
         $this->be($user);
         $product1 = factory('App\Models\Product')->create([
             'user_id' => auth()->user()->id

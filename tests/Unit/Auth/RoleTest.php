@@ -10,7 +10,7 @@ use App\Utils\Role;
 
 class RoleTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
 
     public function setUp(): void
     {
@@ -28,7 +28,7 @@ class RoleTest extends TestCase
     /** @test */
     public function role_is_created_when_user_signUp()
     {
-        $user = factory(User::class)->make();
+        $user = factory(User::class)->make(['email' => $this->faker->word . '@gmail.com']);
 
         $data = array_merge($user->toArray(), [
             "password" => "secret",

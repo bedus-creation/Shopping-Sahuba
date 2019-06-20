@@ -14,7 +14,7 @@ class RouteTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->be(factory(User::class)->create());
+        $this->be(factory(User::class)->create(['email_verified_at' => now()]));
         $this->withoutExceptionHandling();
     }
 

@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Traits\HasPermission;
 use App\Traits\HasRole;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Jobs\Client\VerifyEmail;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -53,5 +54,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function coverImage()
     {
         return $this->belongsTo('App\Models\Media', 'cover_image');
+    }
+
+    public function sendEmailVerificationNotification()
+    {
+        VerifyEmail::dispatch($this);
     }
 }

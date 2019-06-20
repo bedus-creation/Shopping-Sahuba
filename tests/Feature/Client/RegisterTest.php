@@ -3,26 +3,31 @@
 namespace Tests\Feature\Client;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 use App\User;
-use App\Mail\SignUpEmail;
+use Illuminate\Support\Facades\Queue;
+use App\Jobs\Client\VerifyEmail as AppVerifyEmail;
+use Illuminate\Foundation\Testing\WithFaker;
 
 class RegisterTest extends TestCase
 {
 
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
 
     /** @test */
     public function email_is_sent_when_user_gets_signed_up()
     {
-        Mail::fake();
-        $this->be(factory(User::class)->create());
-        Mail::assertQueued(SignUpEmail::class, function ($email) {
-            return  $email->to(auth()->user()->email);
-        });
+        $this->withoutExceptionHandling();
+        Queue::fake();
+        $data = [
+            "email" => $this->faker->word . '@gmail.com',
+            "name" => $this->faker->name,
+            "password" => 'secret',
+            "password_confirmation" => 'secret'
+        ];
+        $this->post('register', $data);
+        Queue::assertPushed(AppVerifyEmail::class);
     }
 
     /** @test @dataProvider invalidSignupDataprovider */
@@ -39,6 +44,13 @@ class RegisterTest extends TestCase
             [
                 [
                     'email' => 'tmgbedu@gmail.com'
+                ]
+            ], [
+                [
+                    'email' => 'tmgbedu@asdf.com',
+                    "name" => "Bedram Tamang",
+                    "password" => 'secret',
+                    "password_confirmation" => 'secret'
                 ]
             ]
         ];
