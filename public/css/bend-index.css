@@ -1,0 +1,53 @@
+#profile{
+    height: 6rem;
+    background-position: center !important;
+    background-size: cover !important;
+    background-color: #333;
+}
+.edit{
+    height: 14rem !important;
+}
+.logo{
+    margin-left:10px;
+    margin-top: -2rem;
+    background-color: #000;
+    height: 5rem;
+    width: 5rem;
+    background-position: center !important ;
+    background-size: cover !important;
+    border-radius: 50%;
+    background-color: #868e96;
+}
+.ledit{
+    margin-top: -4rem !important;
+    height: 8rem !important;
+    width: 8rem !important;
+}
+a{
+    color: #868e96;
+}
+.fa{
+    color: #868e96;
+}
+ul.list{
+    padding-left: 0;
+    list-style-type: none;
+    padding-top: 10px;
+}
+ul.list li{
+    font-size: 16px;
+    padding: 5px 0 5px 30px;
+}
+ul.list li .fa {
+    font-size: 18px;
+}
+
+.g-active{
+    color: #333;
+}
+.g-active .fa {
+    color: #333;
+}
+a:focus{
+    outline: none;
+}
