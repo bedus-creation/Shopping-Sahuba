@@ -1,3 +1,5 @@
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=BKUUyKLsW5U)
+
 # &copy All rights reserved.
 
 Any redistribution or reproduction of part or all of the contents in any form is prohibited other than the following:
