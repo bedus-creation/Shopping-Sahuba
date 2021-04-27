@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 
 /**
  * Class ProductSeeder
- * 
+ *
  * @package Database\Seeders
  */
 class ProductSeeder extends Seeder

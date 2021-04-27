@@ -1,15 +1,17 @@
 <?php
 
 namespace App\GraphQL\Query;
+
 use Folklore\GraphQL\Support\Query;
 use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Facades\GraphQL;
 use App\Models\Product;
 
-class ProductsQuery extends Query{
+class ProductsQuery extends Query
+{
 
     protected $attributes = [
-        'name' => 'products'
+        'name' => 'products',
     ];
 
     public function type()
@@ -17,18 +19,20 @@ class ProductsQuery extends Query{
         return Type::listOf(GraphQL::type('Product'));
     }
 
-    public function args(){
+    public function args()
+    {
         return [
-            'id'=>['name'=>'id','type'=>Type::int()],
+            'id' => ['name' => 'id', 'type' => Type::int()],
         ];
     }
 
-    public function resolve($root, $args){
+    public function resolve($root, $args)
+    {
 
-        if (isset($args['id'])) {
-            return Product::where('id',$args['id'])->get();
+        if ( isset($args['id']) ) {
+            return Product::where('id', $args['id'])->get();
         }
-         
+
         return Product::with('medias')->with('price')->get();
     }
 }
