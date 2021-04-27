@@ -2,6 +2,8 @@
 
 use App\Mail\TestMail;
 use App\Mail\Client\SignUpEmail;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PageController@index');
 Route::get('shop/{slug}/{id}', 'PageController@shop');
@@ -16,14 +18,6 @@ Route::group(['namespace' => 'Utils'], function () {
 
 Route::resource('categories', 'Utils\CategoryController');
 
-
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', "role:admin"]], function () {
-    Route::get('/command/{command}', 'CommandController@command');
-    Route::get('/', 'Admin\AdminController@index');
-    Route::resource('/users', 'Admin\UserController')->only(["index", "edit", "update"]);
-    Route::get('jobs', 'System\JobsController');
-});
-
 Route::group(['prefix' => 'shopping', 'middleware' => ['auth', 'verified']], function () {
     Route::get('/', function () {
         return view('bend.page.index');
@@ -31,17 +25,6 @@ Route::group(['prefix' => 'shopping', 'middleware' => ['auth', 'verified']], fun
     Route::resource('/products', 'ProductController');
     Route::get('settings', 'SettingController@general');
     Route::post('settings', 'SettingController@store');
-});
-
-
-
-
-
-Route::get('test', function () {
-    // return new TestMail();
-    // \App\Jobs\EmailJobs::dispatch();
-    return new SignUpEmail();
-    return 'ok';
 });
 
 
