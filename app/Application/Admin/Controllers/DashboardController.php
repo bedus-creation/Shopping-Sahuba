@@ -2,7 +2,7 @@
 
 namespace App\Application\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
 
 /**
  * Class AdminController

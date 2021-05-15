@@ -1,17 +1,20 @@
 <?php
 namespace App\Jobs\Client;
 
-use App\User;
+use App\Domain\Users\Models\User;
+use Illuminate\Auth\Notifications\VerifyEmail as NotifyEmail;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Auth\Notifications\VerifyEmail as NotifyEmail;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class VerifyEmail implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     protected $user;
 

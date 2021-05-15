@@ -2,14 +2,13 @@
 
 namespace App\GraphQL\Query;
 
+use App\Models\Product;
+use Folklore\GraphQL\Support\Facades\GraphQL;
 use Folklore\GraphQL\Support\Query;
 use GraphQL\Type\Definition\Type;
-use Folklore\GraphQL\Support\Facades\GraphQL;
-use App\Models\Product;
 
 class ProductsQuery extends Query
 {
-
     protected $attributes = [
         'name' => 'products',
     ];
@@ -28,8 +27,7 @@ class ProductsQuery extends Query
 
     public function resolve($root, $args)
     {
-
-        if ( isset($args['id']) ) {
+        if (isset($args['id'])) {
             return Product::where('id', $args['id'])->get();
         }
 

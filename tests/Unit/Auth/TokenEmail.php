@@ -2,11 +2,8 @@
 
 namespace Tests\Unit\Auth;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\User;
-use App\Utils\Role;
+use Tests\TestCase;
 
 class TokenEmail extends TestCase
 {
@@ -22,9 +19,9 @@ class TokenEmail extends TestCase
     /** @test */
     public function tokenized_url_can_access_to_login_and_redirects_to_next()
     {
-        $token =str_random(20);
+        $token = str_random(20);
         $url = action('auth/email-authenticate', [
-            'token' => $token
+            'token' => $token,
         ]);
         dd($token);
 

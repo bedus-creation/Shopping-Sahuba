@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 /**
  * Class DashboardTest
- * 
+ *
  * @package Tests\Feature\Admin
  */
 class DashboardTest extends TestCase

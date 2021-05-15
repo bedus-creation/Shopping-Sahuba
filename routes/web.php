@@ -1,35 +1,36 @@
 <?php
 
-use App\Mail\TestMail;
-use App\Mail\Client\SignUpEmail;
+use App\Application\Front\Controllers\PageController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\Utils\CategoryController;
+use App\Http\Controllers\Utils\MediaController;
+use App\Http\Controllers\Utils\SitemapController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'PageController@index');
-Route::get('shop/{slug}/{id}', 'PageController@shop');
-Route::get('product/{slug}/{id}', 'PageController@product');
+Route::get('/', [PageController::class, "index"]);
+Route::get('shop/{slug}/{id}', [PageController::class, "shop"]);
+Route::get('product/{slug}/{id}', [PageController::class, "product"]);
 Route::get('search/', 'SearchController@search');
 
-Route::group(['namespace' => 'Utils'], function () {
-    Route::get('/command/{command}', 'CommandController@command');
-    Route::resource('medias', 'MediaController');
-    Route::get('sitemap.xml', 'SitemapController@generate');
-});
+Route::resource('medias', MediaController::class)->only(["index", "store", "destroy"]);
+Route::get('sitemap.xml', [SitemapController::class,"generate"]);
 
-Route::resource('categories', 'Utils\CategoryController');
+Route::resource('categories', CategoryController::class);
 
-Route::group(['prefix' => 'shopping', 'middleware' => ['auth', 'verified']], function () {
+Route::group(['prefix' => 'shopping', 'middleware' => ['auth']], function () {
     Route::get('/', function () {
         return view('bend.page.index');
     });
-    Route::resource('/products', 'ProductController');
-    Route::get('settings', 'SettingController@general');
-    Route::post('settings', 'SettingController@store');
+    Route::resource('/products', ProductController::class);
+    Route::get('settings', [SettingController::class, "general"]);
+    Route::post('settings', [SettingController::class, 'store']);
 });
 
 
 // Authentication
-Auth::routes(['verify' => true]);
+Auth::routes();
 
 Route::get('auth/email-authenticate/{token}', 'Auth\AuthController@authenticateEmail');
 Route::get('oauth/{driver}', 'Auth\SocialAuthController@redirectToProvider')->name('social.oauth');

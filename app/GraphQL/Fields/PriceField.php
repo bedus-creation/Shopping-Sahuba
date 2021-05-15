@@ -2,22 +2,22 @@
 
 namespace App\GraphQL\Fields;
 
-use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Field;
-use Folklore\GraphQL\Support\Facades\GraphQL;
+use GraphQL\Type\Definition\Type;
 
-
-class PriceField extends Field {
-    
+class PriceField extends Field
+{
     protected $attributes = [
-		'description' => 'A picture'
+        'description' => 'A picture',
     ];
 
-    public function type(){
+    public function type()
+    {
         return Type::string();
     }
     
-    public function resolve($root, $args){
+    public function resolve($root, $args)
+    {
         return 'Rs.'.$root->price->min;
     }
 }

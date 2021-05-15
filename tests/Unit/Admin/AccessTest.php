@@ -2,10 +2,16 @@
 
 namespace Tests\Unit\Admin;
 
-use Tests\TestCase;
+use Aammui\RolePermission\Exception\RoleDoesNotExistException;
+use App\Domain\Users\Enums\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\User;
+use Tests\TestCase;
 
+/**
+ * Class AccessTest
+ *
+ * @package Tests\Unit\Admin
+ */
 class AccessTest extends TestCase
 {
     use RefreshDatabase;
@@ -15,15 +21,21 @@ class AccessTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $this->be(createUser([], "admin"));
+        $this->be(createUser(Role::ADMIN));
 
         $this->get('admin')
             ->assertStatus(200);
+    }
 
-        auth()->logout();
+    /** @test */
+    public function user_with_no_roles_throws_exception()
+    {
+        $this->withoutExceptionHandling();
 
-        $this->be(factory(User::class)->create());
-        
+        $this->expectException(RoleDoesNotExistException::class);
+
+        $this->be(createUser([]));
+
         $this->get('admin')
             ->assertStatus(401);
     }

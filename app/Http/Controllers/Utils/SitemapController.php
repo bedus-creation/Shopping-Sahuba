@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers\Utils;
 
-use App\Http\Controllers\Controller;
-use App\Models\Product;
+use App\Core\Http\Controllers\Controller;
+use App\Domain\Inventory\Models\Product;
 
-class SitemapController extends Controller{
+/**
+ * Class SitemapController
+ * @package App\Http\Controllers\Utils
+ */
+class SitemapController extends Controller
+{
+    public function generate()
+    {
+        $products = Product::with('medias')->orderBy('id', 'desc')->get();
+        $shop = [];
+        $category = [];
+        $content = view('utils.sitemap', ["products" => $products, 'category' => $category, 'shop' => $shop]);
 
-    public function generate(){
-        $products=Product::with('medias')->orderBy('id','desc')->get();
-        $shop=[];
-        $category=[];
-        $content = view('utils.sitemap', ["products"=>$products,'category'=>$category,'shop'=>$shop]);
         return response($content, 200)
             ->header('Content-Type', 'text/xml');
     }
-
 }
