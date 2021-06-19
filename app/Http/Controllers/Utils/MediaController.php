@@ -46,7 +46,7 @@ class MediaController extends Controller
         //     'file' => 'required|file|max:5000|mimes:' . $this->getAllowedFileTypes()
         // ]);
 
-        if ( $fileUid = $request->file->store('', 'public') ) {
+        if ($fileUid = $request->file->store('', 'public')) {
             $img = Image::make($request->file);
 
             $big = $img->resize(600, null, function ($constraint) {
@@ -63,18 +63,18 @@ class MediaController extends Controller
             })->save('storage/upload/100-'.$fileUid);
 
             return Media::create([
-                'type'     => 'image',
+                'type' => 'image',
                 'base_url' => url('/'),
-                'in_json'  => json_encode([
-                    'sizes'  => [
-                        'small'  => getimagesize($request->file),
+                'in_json' => json_encode([
+                    'sizes' => [
+                        'small' => getimagesize($request->file),
                         'medium' => getimagesize($request->file),
-                        'big'    => getimagesize($request->file),
+                        'big' => getimagesize($request->file),
                     ],
                     'images' => [
-                        'small'  => Storage::url('upload/100-'.$fileUid),
+                        'small' => Storage::url('upload/100-'.$fileUid),
                         'medium' => Storage::url('upload/300-'.$fileUid),
-                        'big'    => Storage::url('upload/600-'.$fileUid),
+                        'big' => Storage::url('upload/600-'.$fileUid),
                     ],
                 ]),
             ]);

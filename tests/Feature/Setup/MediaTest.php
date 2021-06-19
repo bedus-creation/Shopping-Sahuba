@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Setup;
 
-use App\Domain\Users\Enums\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

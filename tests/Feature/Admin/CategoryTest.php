@@ -4,7 +4,6 @@ namespace Tests\Feature\Admin;
 
 use App\Domain\Inventory\Models\Category;
 use App\Domain\Users\Enums\Role;
-use App\Domain\Users\Models\User;
 use Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;

@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Client;
 
-use App\Domain\Inventory\Models\Product;
 use App\Domain\Users\Enums\Role;
 use Database\Factories\ProductFactory;
 use Database\Factories\UserFactory;
@@ -65,7 +64,7 @@ class ProductTest extends TestCase
     {
         $this->withExceptionHandling();
 
-        $product1 =ProductFactory::new()->currentUser()->create();
+        $product1 = ProductFactory::new()->currentUser()->create();
 
         $product2 = ProductFactory::new()->create();
 

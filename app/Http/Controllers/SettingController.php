@@ -29,21 +29,21 @@ class SettingController extends Controller
     {
         User::find(auth()->user()->id)
             ->update([
-                'name'          => request('name'),
-                'email'         => request('email'),
-                'mobile'        => request('mobile'),
-                'telephone'     => request('telephone'),
+                'name' => request('name'),
+                'email' => request('email'),
+                'mobile' => request('mobile'),
+                'telephone' => request('telephone'),
                 'profile_image' => request('profile_image'),
-                'cover_image'   => request('cover_image'),
+                'cover_image' => request('cover_image'),
             ]);
         ShopProfile::updateOrCreate(
             ['user_id' => auth()->user()->id],
             [
-                'info'           => $request->info,
-                'address'        => $request->address,
-                'opening_hours'  => $request->opening_hours,
+                'info' => $request->info,
+                'address' => $request->address,
+                'opening_hours' => $request->opening_hours,
                 'established_at' => $request->established_at,
-                'sologon'        => $request->sologon,
+                'sologon' => $request->sologon,
             ]
         );
 
