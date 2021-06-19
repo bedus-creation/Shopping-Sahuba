@@ -2,23 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\ProductRequest;
-use App\Models\Product;
-use Illuminate\Support\Facades\DB;
-use App\Models\Price;
+use App\Core\Http\Controllers\Controller;
+use App\Domain\Inventory\Models\Category;
+use App\Domain\Inventory\Models\Product;
 use App\Http\Requests\Product\EditRequest;
-use App\Models\Category;
-
+use App\Http\Requests\ProductRequest;
+use App\Models\Price;
 
 class ProductController extends Controller
 {
-
     protected $repository;
 
     public function __construct(Product $repository)
     {
-
         $this->repository = $repository;
     }
 
@@ -31,6 +27,7 @@ class ProductController extends Controller
     public function index()
     {
         $data = $this->repository->where('user_id', auth()->user()->id)->get();
+
         return view('bend.product.index', ['data' => $data]);
     }
 
@@ -66,7 +63,7 @@ class ProductController extends Controller
         $request->merge([
             'price_id' => $price->id,
             'user_id' => auth()->user()->id,
-            'expiry_date' => $date
+            'expiry_date' => $date,
         ]);
         $product = $this->repository->create($request->all());
 
@@ -124,7 +121,7 @@ class ProductController extends Controller
 
         $request->merge([
             'user_id' => auth()->user()->id,
-            'expiry_date' => $date
+            'expiry_date' => $date,
         ]);
 
         $product->update($request->all());

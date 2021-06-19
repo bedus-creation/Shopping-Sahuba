@@ -1,10 +1,11 @@
 <?php
 
-use App\User;
+use Database\Factories\UserFactory;
 
-function createUser($data=[], $role= "shop")
+function createUser($role = "shop", $data = [])
 {
-    $user = factory(User::class)->create($data);
-    $user->createRole($role);
+    $user = UserFactory::new()->create($data);
+    $user->addRole($role);
+
     return $user;
 }

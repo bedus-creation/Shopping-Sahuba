@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use App\Http\Controllers\Controller;
+use App\Core\Http\Controllers\Controller;
+use App\Domain\Users\Enums\Role;
+use App\Domain\Users\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use App\Jobs\Client\SignUpEmail;
 
+/**
+ * Class RegisterController
+ *
+ * @package App\Http\Controllers\Auth
+ */
 class RegisterController extends Controller
 {
     /*
@@ -53,7 +60,7 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255|',
             'email' => [
                 'required', 'email', 'max:255', 'unique:users',
-                'regex:/[A-Za-z0-9_.]+@+(gmail|yahoo)+\.com/i'
+                'regex:/[A-Za-z0-9_.]+@+(gmail|yahoo)+\.com/i',
             ],
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -62,18 +69,22 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
-     * @return \App\User
+     * @param array $data
+     *
+     * @return Builder|Model
      */
     protected function create(array $data)
     {
-        $user = User::create([
+        $user = User::query()->create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-        $user->createRole("shop");
+
+        $user->addRole(Role::SHOP);
+
         $user->sendEmailVerificationNotification();
+
         return $user;
     }
 }

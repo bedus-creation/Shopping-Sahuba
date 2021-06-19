@@ -2,34 +2,37 @@
 
 namespace App\Http\Controllers\Utils;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Core\Http\Controllers\Controller;
+use App\Domain\Inventory\Models\Category;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
+/**
+ * Class CategoryController
+ *
+ * @package App\Http\Controllers\Utils
+ */
 class CategoryController extends Controller
 {
     protected $repository;
 
     public function __construct(Category $repository)
     {
-        
         $this->middleware('auth')->except(['index','show']);
 
-        $this->repository=$repository;
-
+        $this->repository = $repository;
     }
-    
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index()
     {
         $data = $this->repository->all();
 
-        return view('bend.category.index',compact('data'));
-
+        return view('bend.category.index', compact('data'));
     }
 
     /**
@@ -52,7 +55,7 @@ class CategoryController extends Controller
     {
         $this->repository->create($request->all());
 
-        return redirect('categories')->with('success','Category Created successfully');
+        return redirect('categories')->with('success', 'Category Created successfully');
     }
 
     /**
@@ -74,7 +77,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('bend.category.edit',compact('category'));
+        return view('bend.category.edit', compact('category'));
     }
 
     /**
@@ -88,7 +91,7 @@ class CategoryController extends Controller
     {
         $category->update($request->all());
 
-        return redirect('categories')->with('success','Category has been updated');
+        return redirect('categories')->with('success', 'Category has been updated');
     }
 
     /**

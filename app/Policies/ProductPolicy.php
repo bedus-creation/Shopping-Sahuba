@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\Models\Product;
+use App\Domain\Inventory\Models\Product;
+use App\Domain\Users\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ProductPolicy
@@ -42,7 +42,7 @@ class ProductPolicy
      */
     public function update(User $user, Product $product)
     {
-        return $user->id==$product->user_id;
+        return $user->id == $product->user_id;
     }
 
     /**

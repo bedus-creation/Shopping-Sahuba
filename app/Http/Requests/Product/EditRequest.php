@@ -24,10 +24,10 @@ class EditRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required',
-            'condition'=>'required',
-            'negotiable'=>'required',
-            'price'=>'required'
+            'name' => 'required',
+            'condition' => 'required',
+            'negotiable' => 'required',
+            'price' => 'required',
         ];
     }
 }

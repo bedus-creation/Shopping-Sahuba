@@ -2,34 +2,43 @@
 
 namespace Tests\Feature\Client;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Domain\Users\Enums\Role;
+use Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\User;
+use Tests\Feature\Client\Traits\RouteDataProvider;
+use Tests\TestCase;
 
+/**
+ * Class RouteTest
+ *
+ * @package Tests\Feature\Client
+ */
 class RouteTest extends TestCase
 {
     use RefreshDatabase;
+    use RouteDataProvider;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->be(factory(User::class)->create(['email_verified_at' => now()]));
+
+        $user = UserFactory::new()->verified()->create();
+        $user->addRole(Role::SHOP);
+
+        $this->be($user);
+
         $this->withoutExceptionHandling();
     }
 
-    /** @test @dataProvider routeListProvider */
+    /**
+     * @dataProvider routeListProvider
+     *
+     * @test
+     */
     public function client_routes_gives_200_status_on_given_list($route)
     {
         $response = $this->get($route);
-        $response->assertStatus(200);
-    }
 
-    public function routeListProvider()
-    {
-        return [
-            ['shopping/products'],
-            ['shopping/products/create'],
-        ];
+        $response->assertStatus(200);
     }
 }
