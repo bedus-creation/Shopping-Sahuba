@@ -13,7 +13,7 @@ trait RouteDataProvider
     {
         return [
             ['/'],
-            ['/search']
+            ['/search'],
         ];
     }
 }

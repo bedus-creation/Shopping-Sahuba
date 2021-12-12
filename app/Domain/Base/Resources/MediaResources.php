@@ -17,7 +17,7 @@ class MediaResources extends JsonResource
     {
         return [
             'url' => $this->link($request->type ?? 'small'),
-            'id'  => $this->id,
+            'id' => $this->id,
         ];
     }
 }

@@ -34,7 +34,6 @@ class RouteTest extends TestCase
     {
         $response = $this->get($route);
         $response->assertStatus(200);
-
     }
 
     /** @test */
