@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Admin;
 
-use App\Domain\Inventory\Models\Category;
 use App\Domain\Users\Enums\Role;
+use Database\Factories\CategoryFactory;
 use Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -32,7 +32,7 @@ class CategoryTest extends TestCase
     /** @test */
     public function user_must_be_authenticate_to_add_edit_update_category()
     {
-        $category = factory(Category::class)->create();
+        $category = CategoryFactory::new()->create();
 
         $this->get('categories/create')
             ->assertStatus(200);
@@ -46,7 +46,7 @@ class CategoryTest extends TestCase
     {
         // $this->withoutExceptionHandling();
 
-        $category = factory(Category::class)->make();
+        $category = CategoryFactory::new()->create();
 
         $this->post('categories', $category->toArray())
             ->assertStatus(302);

@@ -2,12 +2,13 @@
 
 namespace App\Application\Client\Controllers;
 
+use App\Application\Client\Requests\ProductStoreRequest;
 use App\Application\Client\Requests\ProductUpdateRequest;
 use App\Core\Http\Controllers\Controller;
 use App\Domain\Inventory\Models\Category;
 use App\Domain\Inventory\Models\Product;
-use App\Http\Requests\ProductRequest;
-use App\Models\Price;
+use App\Domain\Inventory\Models\Price;
+use Illuminate\Http\RedirectResponse;
 
 class ProductController extends Controller
 {
@@ -44,12 +45,11 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @param ProductStoreRequest $request
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function store(ProductRequest $request)
+    public function store(ProductStoreRequest $request)
     {
         $price = Price::create([
             'type' => 'fixed',
@@ -65,6 +65,7 @@ class ProductController extends Controller
             'user_id' => auth()->user()->id,
             'expiry_date' => $date,
         ]);
+
         $product = $this->repository->create($request->all());
 
         $product->medias()->attach(explode(',', $request->media_id));
