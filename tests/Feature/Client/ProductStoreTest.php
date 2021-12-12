@@ -29,10 +29,10 @@ class ProductStoreTest extends TestCase
         $category = CategoryFactory::new()->create();
 
         $data = [
-            'name'        => $this->faker->name,
-            'condition'   => 0,
-            'negotiable'  => true,
-            'price'       => 300,
+            'name' => $this->faker->name,
+            'condition' => 0,
+            'negotiable' => true,
+            'price' => 300,
             "category_id" => $category->id,
         ];
 

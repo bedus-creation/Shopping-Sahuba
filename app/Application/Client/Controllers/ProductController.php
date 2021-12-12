@@ -6,8 +6,8 @@ use App\Application\Client\Requests\ProductStoreRequest;
 use App\Application\Client\Requests\ProductUpdateRequest;
 use App\Core\Http\Controllers\Controller;
 use App\Domain\Inventory\Models\Category;
-use App\Domain\Inventory\Models\Product;
 use App\Domain\Inventory\Models\Price;
+use App\Domain\Inventory\Models\Product;
 use Illuminate\Http\RedirectResponse;
 
 class ProductController extends Controller
