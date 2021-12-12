@@ -1,21 +1,23 @@
 <?php
 
+use App\Application\Auth\Controllers\LoginController;
+use App\Application\Auth\Controllers\RegisterController;
+use App\Application\Base\Controllers\MediaController;
+use App\Application\Client\Controllers\CategoryController;
+use App\Application\Client\Controllers\ProductController;
+use App\Application\Client\Controllers\SettingController;
 use App\Application\Front\Controllers\PageController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\Utils\CategoryController;
-use App\Http\Controllers\Utils\MediaController;
-use App\Http\Controllers\Utils\SitemapController;
-use Illuminate\Support\Facades\Auth;
+use App\Application\Front\Controllers\SearchController;
+use App\Application\Front\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, "index"]);
 Route::get('shop/{slug}/{id}', [PageController::class, "shop"]);
 Route::get('product/{slug}/{id}', [PageController::class, "product"]);
-Route::get('search/', 'SearchController@search');
+Route::get('search/', SearchController::class);
 
 Route::resource('medias', MediaController::class)->only(["index", "store", "destroy"]);
-Route::get('sitemap.xml', [SitemapController::class,"generate"]);
+Route::get('sitemap.xml', [SitemapController::class, "generate"]);
 
 Route::resource('categories', CategoryController::class);
 
@@ -30,7 +32,8 @@ Route::group(['prefix' => 'shopping', 'middleware' => ['auth']], function () {
 
 
 // Authentication
-Auth::routes();
+Route::post("/register", [RegisterController::class, "register"]);
+Route::post("/logout", [LoginController::class, "logout"])->name("logout");
 
 Route::get('auth/email-authenticate/{token}', 'Auth\AuthController@authenticateEmail');
 Route::get('oauth/{driver}', 'Auth\SocialAuthController@redirectToProvider')->name('social.oauth');

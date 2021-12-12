@@ -3,7 +3,7 @@
 namespace App\Core\Providers;
 
 use App\Domain\Inventory\Models\Product;
-use App\Policies\ProductPolicy;
+use App\Domain\Inventory\Policies\ProductPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider

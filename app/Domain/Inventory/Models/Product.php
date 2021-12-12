@@ -39,7 +39,7 @@ class Product extends Model
 
     public function medias()
     {
-        return $this->belongsToMany('App\Models\Media');
+        return $this->belongsToMany('App\Domain\Base\Models\Media');
     }
 
     public function user()
@@ -49,7 +49,7 @@ class Product extends Model
 
     public function price()
     {
-        return $this->belongsTo('App\Models\Price');
+        return $this->belongsTo(Price::class);
     }
 
     /**

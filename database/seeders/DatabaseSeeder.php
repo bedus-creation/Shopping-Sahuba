@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Database\Factories\UserFactory;
 use Illuminate\Database\Seeder;
 
 /**
@@ -19,8 +18,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        UserFactory::new()->create(['email' => 'admin@admin.com']);
+        $seeders = [
+            UserSeeder::class,
+            ProductSeeder::class,
+        ];
 
-        $this->call(ProductSeeder::class);
+        $this->call($seeders);
     }
 }
