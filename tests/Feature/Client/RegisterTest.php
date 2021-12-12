@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Client;
 
-use App\Jobs\Client\VerifyEmail as AppVerifyEmail;
+use App\Domain\Users\Jobs\VerifyEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Queue;
@@ -19,14 +19,16 @@ class RegisterTest extends TestCase
     {
         $this->withoutExceptionHandling();
         Queue::fake();
+        
         $data = [
             "email" => $this->faker->word.'@gmail.com',
             "name" => $this->faker->name,
             "password" => 'secret',
             "password_confirmation" => 'secret',
         ];
+
         $this->post('register', $data);
-        Queue::assertPushed(AppVerifyEmail::class);
+        Queue::assertPushed(VerifyEmail::class);
     }
 
     /**

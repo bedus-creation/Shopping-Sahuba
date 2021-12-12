@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Models\Media::class, function (Faker $faker) {
+$factory->define(\App\Domain\Base\Models\Media::class, function (Faker $faker) {
 
     $url = parse_url("https://loremflickr.com/640/480/all?random=".rand(1,100));
 

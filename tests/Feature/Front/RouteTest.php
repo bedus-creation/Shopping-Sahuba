@@ -33,8 +33,8 @@ class RouteTest extends TestCase
     public function client_routes_gives_200_status_on_given_list($route)
     {
         $response = $this->get($route);
-
         $response->assertStatus(200);
+
     }
 
     /** @test */

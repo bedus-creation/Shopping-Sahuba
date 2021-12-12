@@ -4,7 +4,7 @@ namespace App\Domain\Users\Models;
 
 use Aammui\RolePermission\Traits\HasRole;
 use App\Domain\Inventory\Models\Product;
-use App\Jobs\Client\VerifyEmail;
+use App\Domain\Users\Jobs\VerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -56,7 +56,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function profile()
     {
-        return $this->hasOne('App\Models\ShopProfile', 'user_id');
+        return $this->hasOne('App\Domain\Users\Models\ShopProfile', 'user_id');
     }
 
     public function profile_link()
@@ -66,12 +66,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function profileImage()
     {
-        return $this->belongsTo('App\Models\Media', 'profile_image');
+        return $this->belongsTo('App\Domain\Base\Models\Media', 'profile_image');
     }
 
     public function coverImage()
     {
-        return $this->belongsTo('App\Models\Media', 'cover_image');
+        return $this->belongsTo('App\Domain\Base\Models\Media', 'cover_image');
     }
 
     public function sendEmailVerificationNotification()

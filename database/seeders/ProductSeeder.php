@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Domain\Inventory\Models\Product;
 use Database\Factories\ProductFactory;
 use Illuminate\Database\Seeder;
 
@@ -23,7 +22,7 @@ class ProductSeeder extends Seeder
         $products = ProductFactory::new()->count(20)->create();
 
         foreach ($products as $item) {
-            $medias = factory('App\Models\Media', rand(1, 5))->create();
+            $medias = factory('App\Domain\Base\Models\Media', rand(1, 5))->create();
             $item->medias()->attach($medias);
         }
 
