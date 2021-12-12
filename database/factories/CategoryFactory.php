@@ -1,10 +1,24 @@
 <?php
 
-use Faker\Generator as Faker;
-use App\Domain\Inventory\Models\Category;
+namespace Database\Factories;
 
-$factory->define(Category::class, function (Faker $faker) {
-    return [
-        'name'=>$faker->word
-    ];
-});
+use App\Domain\Inventory\Models\Category;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class CategoryFactory extends Factory
+{
+    /**
+     * @var string
+     */
+    protected $model = Category::class;
+
+    /**
+     * @return array
+     */
+    public function definition(): array
+    {
+        return [
+            'name' => $this->faker->word,
+        ];
+    }
+}
